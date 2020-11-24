@@ -1,30 +1,28 @@
 <template>
-<v-app id="inspire">
-
-  <!-- START APP Bar -->
-    <NAVHeaderBar/>
-  <!-- END APP Bar -->
+  <v-app id="inspire">
+    <HeaderBar />
 
     <v-main>
-      Here's my Content!
-      <!--  -->
+      <Start />
     </v-main>
   </v-app>
 </template>
 <script>
 //import MyComponent from './components/MyComponent.vue';
-import NAVHeaderBar from './components/NAVHeaderBar.vue';
+import HeaderBar from "./components/Navigation/HeaderBar.vue";
+import Start from "./components/Main View/Start.vue";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
     //MyComponent,
-    NAVHeaderBar,
+    HeaderBar,
+    Start,
   },
 
-  data: () => ({ 
+  data: () => ({
     //
-    }),
+  }),
 };
 </script>
