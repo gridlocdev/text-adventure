@@ -8,7 +8,7 @@
         <h3>Test your might against the greatest of text adventures.</h3>
       </v-row>
       <v-row class="pa-md-5" align="center" justify="center">
-        <v-btn elevation="2" x-large color="primary"> Start </v-btn>
+        <v-btn elevation="2" x-large color="primary" class="animate__animated animate__pulse animate__infinite"> Start </v-btn>
       </v-row>
     </v-col>
   </v-container>
