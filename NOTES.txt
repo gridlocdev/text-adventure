@@ -1,3 +1,3 @@
-Objective: Figure out how to rotate between pages. 
-1. Create a button on the navigation bar (as the event emitter for now) to trigger rotating between active pages.
-2. Insert an attribute that says to increment a counter variable, and assign a page number to each individual component. Make sure that the components also are chill with having a value added as a parameter, because it might cause some syntactical errors. That page variable probably will need to be defined in the components themselves, but we'll see.
+Objective: 
+
+- Include VueX to persist some data. E.g. chapters completed, settings, etc
