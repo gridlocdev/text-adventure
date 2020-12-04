@@ -11,7 +11,11 @@ export default {
   },
   methods: {
     SetAnimatedClasses(look) {
-      // Set the classes on object
+      // Set the animation styling classes on object
+      // Accepted "look" Values: Scared, Emphasis, Happy, Tired
+
+      // <CustomText look="scared" text="I'm scared..." /> <br />
+
       look = look.toLowerCase();
       var classes;
 
