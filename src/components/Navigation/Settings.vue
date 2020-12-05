@@ -29,12 +29,13 @@
             </v-col>
             <v-col>
               <v-btn
-                class="ma-2"
+                class="ma-2 myClass"
                 color="grey lighten-3"
                 fab
-                @click="!item.toggle"
+                @click="triggerMethodFromMethodName(item.methodName)"
               >
-                <v-icon>{{ item.toggleOnIcon }}</v-icon>
+                <!-- item.toggle = !item.toggle; -->
+                <v-icon>{{ item.icon }}</v-icon>
               </v-btn>
             </v-col>
           </v-row>
@@ -56,12 +57,12 @@
               </h5>
             </v-col>
             <v-col>
-              <v-btn-toggle tile color="accent-3" group>
-                <v-btn value="left"> Slow </v-btn>
+              <v-btn-toggle v-model="item.activeBtnPosition" mandatory tile color="accent-3" group>
+                <v-btn @click="SetTextSpeed('Slow')" value="left"> Slow </v-btn>
 
-                <v-btn value="center"> Normal </v-btn>
+                <v-btn @click="SetTextSpeed('Normal')" value="center"> Normal </v-btn>
 
-                <v-btn value="right"> Fast </v-btn>
+                <v-btn @click="SetTextSpeed('Fast')" value="right"> Fast </v-btn>
               </v-btn-toggle>
             </v-col>
           </v-row>
@@ -79,34 +80,93 @@
 
 <script>
 export default {
-name: 'Settings',
-data: () => ({
-    settingsModal: false,
-    SettingsItems_Toggles: [
-      {
-        title: "Sound",
-        toggleOffIcon: "mdi-volume-off",
-        toggleOnIcon: "mdi-volume-high",
-        toggle: false,
-      },
-      {
-        title: "Dark Mode",
-        toggleOffIcon: "mdi-white-balance-sunny",
-        toggleOnIcon: "mdi-weather-night",
-        toggle: true,
-      },
-    ],
-    SettingsItems_ChoiceBtns: [
-      {
-        title: "Text Speed",
-        toggleOnIcon: "mdi-form-textbox",
-        currentIndex: 2,
-      },
-    ],
-})
+  name: "Settings",
+  data: function () {
+    return {
+      settingsModal: true,
+      SettingsItems_Toggles: [
+        {
+          title: "Sound",
+          icon: "mdi-volume-off",
+          methodName: "ToggleSound",
+          toggle: false,
+        },
+        {
+          title: "Dark Mode",
+          icon: "mdi-weather-night",
+          methodName: "ToggleDarkMode",
+          toggle: false,
+        },
+      ],
+      SettingsItems_ChoiceBtns: [
+        {
+          title: "Text Speed",
+          methodName: "SetTextSpeed",
+          textSpeed: "Normal",
+          activeBtnPosition: 'center'
+        },
+      ],
+    };
+  },
 
-}
+  methods: {
+    triggerMethodFromMethodName(methodName) {
+      this[methodName]();
+    },
+    SetPageIndex() {
+      // Set the application state PageIndex to "Settings"
+      this.$store.dispatch("SetPageIndex", this.$options.name);
+    },
+
+    ToggleSound() {
+      // Set the ViewModel as the data we need
+      var vm = this.SettingsItems_Toggles[0];
+      vm.toggle = !vm.toggle;
+
+      // Set the Icon of the ViewModel based on the Toggle value
+      switch (vm.toggle) {
+        case false:
+          vm.icon = "mdi-volume-off";
+          break;
+        case true:
+          vm.icon = "mdi-volume-high";
+          break;
+      }
+      // Update our AppState by calling the Action
+      this.$store.dispatch("ToggleSound", vm.toggle);
+    },
+    ToggleDarkMode() {
+      // Set the ViewModel as the data we need
+      var vm = this.SettingsItems_Toggles[1];
+      vm.toggle = !vm.toggle;
+
+      // Set the Icon of the ViewModel based on the Toggle value
+      switch (vm.toggle) {
+        case false:
+          vm.icon = "mdi-weather-night";
+          break;
+        case true:
+          vm.icon = "mdi-white-balance-sunny";
+          break;
+      }
+      // Update our AppState by calling the Action
+      this.$store.dispatch("ToggleDarkMode", vm.toggle);
+    },
+    SetTextSpeed(textSpeed) {
+      this.$store.dispatch("SetTextSpeed", textSpeed);
+    },
+  },
+  watch: {
+    settingsModal: function () {
+      // When the SettingsModal is opened, call SetPageIndex()
+      this.SetPageIndex();
+    },
+  },
+};
 </script>
 
-<style>
+<style scoped >
+.myClass:focus::before {
+  opacity: 0 !important;
+}
 </style>

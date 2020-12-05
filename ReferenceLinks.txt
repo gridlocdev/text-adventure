@@ -1,1 +1,6 @@
 // ICONS from: https://materialdesignicons.com/
+
+// How to create Dark Mode with VueX
+// https://stackoverflow.com/questions/62005958/vuetify-toggle-between-light-and-dark-theme-with-vuex
+
+// STYLE from: https://vuetifyjs.com/en/

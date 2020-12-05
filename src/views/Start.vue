@@ -28,5 +28,8 @@
 <script>
 export default {
   name: "Start",
+  mounted() {
+    this.$store.dispatch("SetPageIndex", this.$options.name);
+  },
 };
 </script>
