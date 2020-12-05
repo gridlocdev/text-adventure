@@ -5,6 +5,12 @@ import Prologue from '../views/Prologue.vue'
 
 Vue.use(VueRouter)
 
+// Catch error while navigating to same page as already on
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 const routes = [
   {
     path: '/',

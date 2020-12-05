@@ -83,7 +83,7 @@ export default {
   name: "Settings",
   data: function () {
     return {
-      settingsModal: true,
+      settingsModal: false,
       SettingsItems_Toggles: [
         {
           title: "Sound",
