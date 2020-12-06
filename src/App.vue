@@ -17,17 +17,26 @@ import HeaderBar from "./components/Navigation/HeaderBar.vue";
 
 export default {
   name: "App",
-
   components: {
     //MyComponent,
     HeaderBar,
   },
-
-  data: () => ({
-    //
-  }),
 };
 </script>
 
 <style>
+/* .v-btn--icon.theme--dark,
+.v-btn--fab.theme--dark {
+  color: red !important;
+} */
+/* .v-btn--fab.theme--dark {
+  background-color: blue !important;
+} */
+/* .v-btn--icon.theme--light, .v-btn--fab.theme--light{
+  color: red !important; 
+} */
+/* .v-btn--fab.theme--light {
+  background-color: #eeeeee !important;
+  border-color: #eeeeee !important;
+} */
 </style>

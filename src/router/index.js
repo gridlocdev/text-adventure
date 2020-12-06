@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Start from '../views/Start.vue'
 import Prologue from '../views/Prologue.vue'
+import Typewriter from '../components/Test/TypewriterView.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Prologue.vue')
+  },
+  {
+    path: '/typewriter',
+    name: Typewriter,
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../components/Test/TypewriterView.vue')
   }
 ]
 

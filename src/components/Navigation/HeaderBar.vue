@@ -50,7 +50,7 @@ export default {
     NavigationItems: [
       { title: "Home", icon: "mdi-arm-flex", routerLink: "./" },
       { title: "Prologue", icon: "mdi-lock", routerLink: "./prologue" },
-      { title: "Chapter 2", icon: "mdi-lock", routerLink: "./" },
+      { title: "TypewriterTest", icon: "mdi-lock", routerLink: "./typewriter" },
       { title: "Chapter 3", icon: "mdi-lock", routerLink: "./" },
     ],
 

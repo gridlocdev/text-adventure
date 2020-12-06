@@ -8,7 +8,7 @@ export default new Vuex.Store({
     PageIndex: 'Start',
     Sound: false,
     DarkMode: false,
-    TextSpeed: 'Normal'
+    TextSpeed: 100,
   },
   mutations: {
     SetPageIndex(state, pageIndex) {

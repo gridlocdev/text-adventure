@@ -23,14 +23,13 @@
             no-gutters
           >
             <v-col class="col-5">
-              <h5 class="font-weight-medium">
+              <h4 class="font-weight-medium">
                 {{ item.title }}
-              </h5>
+              </h4>
             </v-col>
             <v-col>
               <v-btn
                 class="ma-2 myClass"
-                color="grey lighten-3"
                 fab
                 @click="triggerMethodFromMethodName(item.methodName)"
               >
@@ -52,17 +51,25 @@
             no-gutters
           >
             <v-col class="col-5">
-              <h5 class="font-weight-medium">
+              <h4 class="font-weight-medium">
                 {{ item.title }}
-              </h5>
+              </h4>
             </v-col>
             <v-col>
-              <v-btn-toggle v-model="item.activeBtnPosition" mandatory tile color="accent-3" group>
-                <v-btn @click="SetTextSpeed('Slow')" value="left"> Slow </v-btn>
+              <v-btn-toggle
+                v-model="item.activeBtnPosition"
+                mandatory
+                tile
+                color="accent-3"
+                group
+              >
+                <v-btn @click="SetTextSpeed(150)" value="left"> Slow </v-btn>
 
-                <v-btn @click="SetTextSpeed('Normal')" value="center"> Normal </v-btn>
+                <v-btn @click="SetTextSpeed(100)" value="center">
+                  Normal
+                </v-btn>
 
-                <v-btn @click="SetTextSpeed('Fast')" value="right"> Fast </v-btn>
+                <v-btn @click="SetTextSpeed(50)" value="right"> Fast </v-btn>
               </v-btn-toggle>
             </v-col>
           </v-row>
@@ -103,7 +110,7 @@ export default {
           title: "Text Speed",
           methodName: "SetTextSpeed",
           textSpeed: "Normal",
-          activeBtnPosition: 'center'
+          activeBtnPosition: "center",
         },
       ],
     };
@@ -140,6 +147,7 @@ export default {
       var vm = this.SettingsItems_Toggles[1];
       vm.toggle = !vm.toggle;
 
+      this.$vuetify.theme.dark = vm.toggle;
       // Set the Icon of the ViewModel based on the Toggle value
       switch (vm.toggle) {
         case false:
@@ -151,6 +159,7 @@ export default {
       }
       // Update our AppState by calling the Action
       this.$store.dispatch("ToggleDarkMode", vm.toggle);
+
     },
     SetTextSpeed(textSpeed) {
       this.$store.dispatch("SetTextSpeed", textSpeed);
