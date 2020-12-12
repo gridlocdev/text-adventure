@@ -51,7 +51,7 @@ export default {
       { title: "Home", icon: "mdi-arm-flex", routerLink: "./" },
       { title: "Prologue", icon: "mdi-lock", routerLink: "./prologue" },
       { title: "TypewriterTest", icon: "mdi-lock", routerLink: "./typewriter" },
-      { title: "Chapter 3", icon: "mdi-lock", routerLink: "./" },
+      { title: "ChoicePageTest", icon: "mdi-lock", routerLink: "./choice" },
     ],
 
     right: null,
