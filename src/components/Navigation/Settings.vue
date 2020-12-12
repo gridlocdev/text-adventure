@@ -63,11 +63,9 @@
                 color="accent-3"
                 group
               >
-                <v-btn @click="SetTextSpeed(150)" value="left"> Slow </v-btn>
+                <v-btn @click="SetTextSpeed(110)" value="left"> Slow </v-btn>
 
-                <v-btn @click="SetTextSpeed(100)" value="center">
-                  Normal
-                </v-btn>
+                <v-btn @click="SetTextSpeed(90)" value="center"> Normal </v-btn>
 
                 <v-btn @click="SetTextSpeed(50)" value="right"> Fast </v-btn>
               </v-btn-toggle>
@@ -159,7 +157,6 @@ export default {
       }
       // Update our AppState by calling the Action
       this.$store.dispatch("ToggleDarkMode", vm.toggle);
-
     },
     SetTextSpeed(textSpeed) {
       this.$store.dispatch("SetTextSpeed", textSpeed);

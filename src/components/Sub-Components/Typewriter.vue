@@ -14,7 +14,7 @@
 export default {
   name: "Typewriter",
   props: {
-    text: String      
+    text: String,
   },
   data: function () {
     return {
@@ -25,13 +25,35 @@ export default {
     };
   },
   methods: {
-    type: function () {
-      // Type() takes the text passed into this.fullText, and 
-      // console.log(this.$store.state.TextSpeed);
-      setInterval(() => {
-        this.currentText += this.fullText.charAt(this.charIndex);
+    delay: function (ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    },
+    type: async function () {
+      // Type() takes the text passed into this.fullText, and
+      
+      // While loop iterating over every character in the text string.
+      while (this.charIndex < this.fullText.length) {
+        var currentLetter = this.fullText.charAt(this.charIndex);
+
+        this.currentText += currentLetter;
+        
+        // Apply conditional delay based on the character typed
+        switch (currentLetter) {
+          case ".":
+          case "?":
+          case "!":
+            await this.delay(this.TextSpeed * 3);
+            break;
+          case ",":
+            await this.delay(this.TextSpeed * 2);
+            break;
+          default:
+            await this.delay(this.TextSpeed);
+            break;
+        }
+        // Move to the next letter
         this.charIndex++;
-      }, this.TextSpeed);
+      }
     },
   },
   mounted() {
