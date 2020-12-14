@@ -1,7 +1,23 @@
 <template>
   <v-container>
-    <typewriter :key="text[textIndex]" v-bind:text="text[textIndex]" />
-    <v-btn primary @click="this.clickMe"> <v-icon>mdi-arrow-right</v-icon> </v-btn>
+    <typewriter
+      :key="text[textIndex]"
+      v-bind:text="text[textIndex]"
+      v-on:finished-typing="makeVisible()"
+    />
+
+    <v-btn
+      :key="this.visible"
+      v-show="this.visible"
+      :bottom="true"
+      :right="true"
+      :absolute="true"
+      class="animate__animated animate__fadeIn pa-7 mr-5"
+      primary
+      @click="this.clickMe"
+    >
+      <v-icon>mdi-arrow-right</v-icon>
+    </v-btn>
   </v-container>
 </template>
 
@@ -14,10 +30,11 @@ export default {
   data: function () {
     return {
       textIndex: 0,
+      visible: false,
       text: [
-        "I am message 1. I. Am. Message. ONEEEEE!!!!.",
-        "The FitnessGram PACER Test is a multistage aerobic capacity test that progressively gets more difficult as it continues.The test is used to measure a student's aerobic capacity as part of the FitnessGram assessment. Students run back and forth as many times as they can, each lap signaled by a beep sound. The test get progressively faster as it continues until the student reaches their max lap score. The PACER Test score is combined in the FitnessGram software with scores for muscular strength, endurance, flexibility and body composition to determine whether a student is in the Healthy Fitness Zone™ or the Needs Improvement Zone™.",
-        "I am text three.",
+        "You wake up to the prodding of one of the King’s servants. “Wake up, Hero. The King requires your counsel immediately! Come with me”",
+        "You hurriedly meander through the town market following the servant, over the moat, and through the castle walls into the King’s throne room. As you enter, you hear a familiar boisterous voice.",
+        "“Welcome hero. We seem to have another problem on our hands, our scaly friend in the mountains has been causing quite the ruckus. This is causing our fellow people of Hamelot a great dismay, and I need you to take care of it.” the King proclaims. ",
       ],
     };
   },
@@ -31,7 +48,14 @@ export default {
         //console.log(this.textIndex);
       }
     },
+    makeVisible() {
+      console.log("I've been hit!");
+      this.visible = true;
+    },
   },
+  // mounted() {
+  //   this.$refs.typewriter.$on("finished-typing");
+  // },
 };
 </script>
 

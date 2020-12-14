@@ -1,3 +1,33 @@
 Objective: 
 
-- Include VueX to persist some data. E.g. chapters completed, settings, etc
+Create a sequencer component. 
+
+The sequencer component will:
+- Have a Intro component
+- Have a set of storyText components and Choice components
+- Have a set of End Chapter components
+- Will Loop through these when a button is pressed
+
+params for Sequencer component's sub objects. These will be added through data() on the parent Sequencer component.
+
+Intro: 
+- HeaderText
+- SubText
+
+TypewriterView: 
+- Array of text objects
+
+ChoiceView: 
+- Text 
+- Choice 1
+- Choice 2
+
+GameOverView: 
+- Text 
+
+
+
+Next steps: 
+
+- Create a "GameOver" component, it does the same thing as the TypewriterView component, except that it displays some extra fancy stuff to let you know that your game is over.
+- - GameOver component can have two options. "End Game" and "Return to Last Choice"

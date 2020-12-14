@@ -7,22 +7,28 @@
         </h1>
       </v-card>
     </v-row>
-    <v-row class="ma-10" align="center" justify="center">
-      <v-col class="ms-10 animate__animated animate__flipInX">
+    <v-row class="ma-10">
+      <v-col
+        align="center"
+        justify="center"
+        class="ms-10 animate__animated animate__flipInX"
+      >
         <v-btn
           elevation="2"
           x-large
-          color="dark"
           class="animate__animated animate__pulse animate__infinite"
         >
           {{ choice1 }}
         </v-btn></v-col
       >
-      <v-col class="ms-10 animate__animated animate__flipInX">
+      <v-col
+        align="center"
+        justify="center"
+        class="ms-10 animate__animated animate__flipInX"
+      >
         <v-btn
           elevation="2"
           x-large
-          color="dark"
           class="animate__animated animate__pulse animate__infinite"
         >
           {{ choice2 }}

@@ -23,7 +23,7 @@
           v-for="item in NavigationItems"
           :key="item.title"
           link
-          @click="$router.push(item.routerLink)"
+          @click="navigateTo(item.routerLink)"
         >
           <v-list-item-icon>
             <v-icon style="fill: green">{{ item.icon }}</v-icon>
@@ -52,9 +52,20 @@ export default {
       { title: "Prologue", icon: "mdi-lock", routerLink: "./prologue" },
       { title: "TypewriterTest", icon: "mdi-lock", routerLink: "./typewriter" },
       { title: "ChoicePageTest", icon: "mdi-lock", routerLink: "./choice" },
+      { title: "Intro", icon: "mdi-lock", routerLink: "./intro" },
+      { title: "Game Over", icon: "mdi-lock", routerLink: "./gameover" },
     ],
 
     right: null,
   }),
+  methods: {
+    navigateTo(routerLink) {
+      if (routerLink == "." + this.$route.path) {
+        this.drawer = !this.drawer;
+      } else {
+        this.$router.push(routerLink);
+      }
+    },
+  },
 };
 </script>
