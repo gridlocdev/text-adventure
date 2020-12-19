@@ -1,33 +1,27 @@
-Objective: 
+Next Steps: 
 
-Create a sequencer component. 
+- Create an Ending component.
 
-The sequencer component will:
-- Have a Intro component
-- Have a set of storyText components and Choice components
-- Have a set of End Chapter components
-- Will Loop through these when a button is pressed
+- Create events that emit from each sub-component: Intro, Typewriter, ChoiceSection, Ending
+: Once this event emitted was received by the Sequencer component, have it update its data appropriately to match what it was sent.
 
-params for Sequencer component's sub objects. These will be added through data() on the parent Sequencer component.
+- Add a method to the Sequencer component to create a skeleton of the chapter timeline
+: Loop through the jsonPayload and count the number of each instance of the base components. 
+: 
 
-Intro: 
-- HeaderText
-- SubText
+const inputJSON = JSON.parse(this.jsonPayload);
+      const chapterJSON = inputJSON.MainSections[0];
 
-TypewriterView: 
-- Array of text objects
+      // Loop through the JSON to find our pre-defined elements.
 
-ChoiceView: 
-- Text 
-- Choice 1
-- Choice 2
-
-GameOverView: 
-- Text 
-
-
-
-Next steps: 
-
-- Create a "GameOver" component, it does the same thing as the TypewriterView component, except that it displays some extra fancy stuff to let you know that your game is over.
-- - GameOver component can have two options. "End Game" and "Return to Last Choice"
+      for (const section in chapterJSON) {
+        if (section.includes("Intro")) {
+          console.log("Introduction: " + section);
+        } else if (section.includes("TextSection")) {
+          console.log("TextSection: " + section);
+        } else if (section.includes("ChoiceSection")) {
+          console.log("ChoiceSection: " + section);
+        } else if (section.includes("Ending")) {
+          console.log("Ending: " + section);
+        }
+      }

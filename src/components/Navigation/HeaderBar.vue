@@ -49,11 +49,12 @@ export default {
     drawer: null,
     NavigationItems: [
       { title: "Home", icon: "mdi-arm-flex", routerLink: "./" },
-      { title: "Prologue", icon: "mdi-lock", routerLink: "./prologue" },
+      { title: "Sequencer", icon: "mdi-lock", routerLink: "./sequencer" },
       { title: "TypewriterTest", icon: "mdi-lock", routerLink: "./typewriter" },
       { title: "ChoicePageTest", icon: "mdi-lock", routerLink: "./choice" },
       { title: "Intro", icon: "mdi-lock", routerLink: "./intro" },
       { title: "Game Over", icon: "mdi-lock", routerLink: "./gameover" },
+      { title: "Chapter 1", icon: "mdi-lock", routerLink: "./chapter1" },
     ],
 
     right: null,

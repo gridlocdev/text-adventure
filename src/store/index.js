@@ -11,35 +11,35 @@ export default new Vuex.Store({
     TextSpeed: 50,
   },
   mutations: {
-    SetPageIndex(state, pageIndex) {
+    setPageIndex(state, pageIndex) {
       state.PageIndex = pageIndex;
-      console.log("(State) pageIndex: "+ pageIndex);
+      console.log("(State) pageIndex: " + pageIndex);
     },
-    ToggleSound(state, soundToggle) {
+    toggleSound(state, soundToggle) {
       state.Sound = soundToggle;
-      console.log("(State) soundToggle: "+ soundToggle);
+      console.log("(State) soundToggle: " + soundToggle);
     },
-    ToggleDarkMode(state, darkModeToggle) {
+    toggleDarkMode(state, darkModeToggle) {
       state.DarkMode = darkModeToggle;
-      console.log("(State) darkModeToggle: "+ darkModeToggle);
+      console.log("(State) darkModeToggle: " + darkModeToggle);
     },
-    SetTextSpeed(state, textSpeed) {
+    setTextSpeed(state, textSpeed) {
       state.TextSpeed = textSpeed;
-      console.log("(State) textSpeed: "+ textSpeed);
+      console.log("(State) textSpeed: " + textSpeed);
     }
   },
   actions: {
-    SetPageIndex(context, pageIndex) {
-      context.commit('SetPageIndex', pageIndex);
+    setPageIndex(context, pageIndex) {
+      context.commit('setPageIndex', pageIndex);
     },
-    ToggleSound(context, soundToggle) {
-      context.commit('ToggleSound', soundToggle);
+    toggleSound(context, soundToggle) {
+      context.commit('toggleSound', soundToggle);
     },
-    ToggleDarkMode(context, darkModeToggle) {
-      context.commit('ToggleDarkMode', darkModeToggle);
+    toggleDarkMode(context, darkModeToggle) {
+      context.commit('toggleDarkMode', darkModeToggle);
     },
-    SetTextSpeed(context, textSpeed) {
-      context.commit('SetTextSpeed', textSpeed);
+    setTextSpeed(context, textSpeed) {
+      context.commit('setTextSpeed', textSpeed);
     }
   },
   modules: {

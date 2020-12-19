@@ -1,11 +1,14 @@
 <template>
   <v-container>
-    <v-row class="animate__animated animate__zoomIn" align="center" justify="center">
-      <h1 style="letter-spacing: 0.2em;">GAME OVER</h1>
-      
+    <v-row
+      class="animate__animated animate__zoomIn"
+      align="center"
+      justify="center"
+    >
+      <h1 style="letter-spacing: 0.2em">GAME OVER</h1>
     </v-row>
     <v-row class="ma-10" align="center" justify="center">
-      <typewriter v-bind:text="this.text" />
+      <typewriter v-bind:text="this.text" :showNextButton="false" />
     </v-row>
     <v-row class="ma-10">
       <v-col
@@ -13,18 +16,20 @@
         justify="center"
         class="ms-10 animate__animated animate__zoomIn"
       >
-        <v-btn color="primary" elevation="2" x-large> Return </v-btn></v-col
+        <v-btn color="primary" elevation="2" x-large @click="$router.go(-1)">
+          Return
+        </v-btn></v-col
       >
       <v-col
         align="center"
         justify="center"
         class="ms-10 animate__animated animate__zoomIn"
       >
-        <v-btn color="error" elevation="2" x-large> End Game </v-btn></v-col
+        <v-btn color="error" elevation="2" x-large @click="$router.push('./')">
+          End Game
+        </v-btn></v-col
       >
     </v-row>
-
-    
   </v-container>
 </template>
 
@@ -41,9 +46,7 @@ export default {
 </script>
 
 <style scoped>
-
 .animate__animated {
   animation-duration: 0.5s;
 }
-
 </style>

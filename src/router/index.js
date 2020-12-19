@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Start from '../views/Start.vue'
-import Prologue from '../views/Prologue.vue'
 import IntroView from '../components/Test/IntroView.vue'
 import TypewriterView from '../components/Test/TypewriterView.vue'
 import ChoiceView from '../components/Test/ChoiceView.vue'
 import GameOverView from '../components/Test/GameOverView.vue'
+import Sequencer from '../components/Test/Sequencer.vue'
+import Chapter1 from '../views/Chapter1.vue'
 
 Vue.use(VueRouter)
 
@@ -22,12 +23,12 @@ const routes = [
     component: Start
   },
   {
-    path: '/prologue',
-    name: Prologue,
+    path: '/sequencer',
+    name: Sequencer,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Prologue.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Test/Sequencer.vue')
   },
   {
     path: '/intro',
@@ -60,7 +61,16 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../components/Test/GameOverView.vue')
-  }
+  },
+  {
+    path: '/chapter1',
+    name: Chapter1,
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Chapter1.vue')
+  },
+  
 ]
 
 const router = new VueRouter({

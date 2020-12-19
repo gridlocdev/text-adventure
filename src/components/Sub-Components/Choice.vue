@@ -14,6 +14,7 @@
         class="ms-10 animate__animated animate__flipInX"
       >
         <v-btn
+          @click="answerChoice(1)"
           elevation="2"
           x-large
           class="animate__animated animate__pulse animate__infinite"
@@ -27,6 +28,7 @@
         class="ms-10 animate__animated animate__flipInX"
       >
         <v-btn
+          @click="answerChoice(2)"
           elevation="2"
           x-large
           class="animate__animated animate__pulse animate__infinite"
@@ -44,6 +46,17 @@ export default {
     text: String,
     choice1: String,
     choice2: String,
+    correctChoice: String,
+  },
+  methods: {
+    answerChoice(answerChoice) {
+      if (answerChoice == this.correctChoice) {
+        console.log("Success!");
+        
+      } else {
+        console.log("FAILED. TRY AGAIN BOOMER.");
+      }
+    },
   },
 };
 </script>

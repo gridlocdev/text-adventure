@@ -29,7 +29,7 @@
 export default {
   name: "Start",
   mounted() {
-    this.$store.dispatch("SetPageIndex", this.$options.name);
+    this.$store.dispatch("setPageIndex", this.$options.name);
   },
 };
 </script>

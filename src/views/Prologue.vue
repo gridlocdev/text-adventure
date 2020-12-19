@@ -19,7 +19,7 @@
 export default {
   name: "Prologue",
   mounted() {
-    this.$store.dispatch("SetPageIndex", this.$options.name);
+    this.$store.dispatch("setPageIndex", this.$options.name);
   },
 };
 </script>

@@ -10,6 +10,19 @@
         {{ this.fullText }}
       </h2>
     </v-card>
+
+    <v-btn
+      :key="this.nextButtonVisible"
+      v-show="this.nextButtonVisible"
+      :bottom="true"
+      :right="true"
+      :absolute="true"
+      class="animate__animated animate__fadeIn pa-7 mr-5"
+      primary
+      @click="emitIncrementSequence()"
+    >
+      <v-icon>mdi-arrow-right</v-icon>
+    </v-btn>
   </v-container>
 </template>
 
@@ -18,6 +31,10 @@ export default {
   name: "Typewriter",
   props: {
     text: String,
+    showNextButton: {
+      type: Boolean,
+      default: true,
+    },
   },
   data: function () {
     return {
@@ -26,6 +43,7 @@ export default {
       fullText: this.text,
       TextSpeed: 0,
       typing: Boolean,
+      nextButtonVisible: false,
     };
   },
   methods: {
@@ -61,7 +79,14 @@ export default {
         this.charIndex++;
       }
       this.typing = false;
-      this.$emit('finished-typing');
+
+      // Check if it should render the next button
+      if (this.showNextButton == true) {
+        this.nextButtonVisible = true;
+      }
+    },
+    emitIncrementSequence() {
+      this.$emit("incrementSequence");
     },
   },
   mounted() {

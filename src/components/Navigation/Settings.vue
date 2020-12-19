@@ -63,11 +63,11 @@
                 color="accent-3"
                 group
               >
-                <v-btn @click="SetTextSpeed(110)" value="left"> Slow </v-btn>
+                <v-btn @click="setTextSpeed(110)" value="left"> Slow </v-btn>
 
-                <v-btn @click="SetTextSpeed(90)" value="center"> Normal </v-btn>
+                <v-btn @click="setTextSpeed(90)" value="center"> Normal </v-btn>
 
-                <v-btn @click="SetTextSpeed(50)" value="right"> Fast </v-btn>
+                <v-btn @click="setTextSpeed(50)" value="right"> Fast </v-btn>
               </v-btn-toggle>
             </v-col>
           </v-row>
@@ -93,20 +93,20 @@ export default {
         {
           title: "Sound",
           icon: "mdi-volume-off",
-          methodName: "ToggleSound",
+          methodName: "toggleSound",
           toggle: false,
         },
         {
           title: "Dark Mode",
           icon: "mdi-weather-night",
-          methodName: "ToggleDarkMode",
+          methodName: "toggleDarkMode",
           toggle: false,
         },
       ],
       SettingsItems_ChoiceBtns: [
         {
           title: "Text Speed",
-          methodName: "SetTextSpeed",
+          methodName: "setTextSpeed",
           textSpeed: "Normal",
           activeBtnPosition: "center",
         },
@@ -118,12 +118,12 @@ export default {
     triggerMethodFromMethodName(methodName) {
       this[methodName]();
     },
-    SetPageIndex() {
+    setPageIndex() {
       // Set the application state PageIndex to "Settings"
-      this.$store.dispatch("SetPageIndex", this.$options.name);
+      this.$store.dispatch("setPageIndex", this.$options.name);
     },
 
-    ToggleSound() {
+    toggleSound() {
       // Set the ViewModel as the data we need
       var vm = this.SettingsItems_Toggles[0];
       vm.toggle = !vm.toggle;
@@ -138,9 +138,9 @@ export default {
           break;
       }
       // Update our AppState by calling the Action
-      this.$store.dispatch("ToggleSound", vm.toggle);
+      this.$store.dispatch("toggleSound", vm.toggle);
     },
-    ToggleDarkMode() {
+    toggleDarkMode() {
       // Set the ViewModel as the data we need
       var vm = this.SettingsItems_Toggles[1];
       vm.toggle = !vm.toggle;
@@ -156,16 +156,16 @@ export default {
           break;
       }
       // Update our AppState by calling the Action
-      this.$store.dispatch("ToggleDarkMode", vm.toggle);
+      this.$store.dispatch("toggleDarkMode", vm.toggle);
     },
-    SetTextSpeed(textSpeed) {
-      this.$store.dispatch("SetTextSpeed", textSpeed);
+    setTextSpeed(textSpeed) {
+      this.$store.dispatch("setTextSpeed", textSpeed);
     },
   },
   watch: {
     settingsModal: function () {
       // When the SettingsModal is opened, call SetPageIndex()
-      this.SetPageIndex();
+      this.setPageIndex();
     },
   },
 };

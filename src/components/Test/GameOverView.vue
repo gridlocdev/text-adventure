@@ -1,8 +1,10 @@
 <template>
   <v-row>
-  <v-col>
-    <GameOver text="The robber takes your arm, and mugs you instead." />
-  </v-col>
+    <v-col>
+      <GameOver
+        text="The robber takes your arm, and mugs you instead."
+      />
+    </v-col>
   </v-row>
 </template>
 
