@@ -5,7 +5,7 @@ import IntroView from '../components/Test/IntroView.vue'
 import TypewriterView from '../components/Test/TypewriterView.vue'
 import ChoiceView from '../components/Test/ChoiceView.vue'
 import GameOverView from '../components/Test/GameOverView.vue'
-import Sequencer from '../components/Test/Sequencer.vue'
+import EndingView from '../components/Test/EndingView.vue'
 import Chapter1 from '../views/Chapter1.vue'
 
 Vue.use(VueRouter)
@@ -23,12 +23,12 @@ const routes = [
     component: Start
   },
   {
-    path: '/sequencer',
-    name: Sequencer,
+    path: '/ending',
+    name: EndingView,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Test/Sequencer.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Test/EndingView.vue')
   },
   {
     path: '/intro',
@@ -70,7 +70,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Chapter1.vue')
   },
-  
+
 ]
 
 const router = new VueRouter({

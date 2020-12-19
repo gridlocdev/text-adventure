@@ -19,7 +19,7 @@
       :absolute="true"
       class="animate__animated animate__fadeIn pa-7 mr-5"
       primary
-      @click="emitIncrementSequence()"
+      @click="emitMoveToNextTextChunk()"
     >
       <v-icon>mdi-arrow-right</v-icon>
     </v-btn>
@@ -85,8 +85,8 @@ export default {
         this.nextButtonVisible = true;
       }
     },
-    emitIncrementSequence() {
-      this.$emit("incrementSequence");
+    emitMoveToNextTextChunk() {
+      this.$emit("nextTextChunk");
     },
   },
   mounted() {

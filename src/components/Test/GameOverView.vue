@@ -2,7 +2,7 @@
   <v-row>
     <v-col>
       <GameOver
-        text="The robber takes your arm, and mugs you instead."
+        :text="this.$store.state.GameOverText"
       />
     </v-col>
   </v-row>

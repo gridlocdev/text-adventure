@@ -37,7 +37,7 @@ export default {
           );
           // Wait for the 3000ms for fadeOut to end, and emit an event.
           setTimeout(() => {
-            this.$emit("intro-fade-ended");
+            this.$emit("incrementSequence");
           }, 3000);
         }
       }, 3000);

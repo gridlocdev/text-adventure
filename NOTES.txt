@@ -5,9 +5,9 @@ Next Steps:
 - Create events that emit from each sub-component: Intro, Typewriter, ChoiceSection, Ending
 : Once this event emitted was received by the Sequencer component, have it update its data appropriately to match what it was sent.
 
-- Add a method to the Sequencer component to create a skeleton of the chapter timeline
-: Loop through the jsonPayload and count the number of each instance of the base components. 
-: 
+- In the Sequencer, create the conditional that
+: Updates the data
+: Sets the view state of the sequence component type
 
 const inputJSON = JSON.parse(this.jsonPayload);
       const chapterJSON = inputJSON.MainSections[0];

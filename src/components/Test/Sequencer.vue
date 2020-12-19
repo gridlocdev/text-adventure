@@ -5,7 +5,10 @@
       <!-- <Typewriter
         text="The squire clues you in. “Now that that part is out of the way, there are two paths you can take to the Dragon’s mountain. You can take the short route, brave the rough terrain on your steed through the Valley, and arrive in a matter of days; or you can take the unreasonably complicated and long route through the Bridge and the Forest!”"
       /> -->
-      <typewriter-view :text="['Text 1', 'Text 2']"/>
+      <typewriter-view
+        @incrementSequence="incrementSequence()"
+        :text="['Text 1', 'Text 2']"
+      />
       <!-- <Choice
         text="A hooded man is in the alleyway nearest you. You see he's stolen a woman's purse! What do you do next?"
         choice1="Chase Him"
@@ -22,7 +25,7 @@
 </template>
 
 <script>
-import TypewriterView from './TypewriterView.vue';
+import TypewriterView from "./TypewriterView.vue";
 // The Sequencer component should take in every component inside of it, and set a priority for what gets displayed. I've got the same thing already right now with the other thing.
 
 //import Choice from "../Sub-Components/Choice.vue";
@@ -31,7 +34,7 @@ import TypewriterView from './TypewriterView.vue';
 export default {
   name: "Sequencer",
   components: {
-    TypewriterView
+    TypewriterView,
     // Choice,
     // Typewriter,
   },
@@ -67,6 +70,10 @@ export default {
     };
   },
   methods: {
+    incrementSequence() {
+      console.log("I've incremented the SequenceIndex. " + this.sequenceIndex);
+      this.sequenceIndex++;
+    },
     setInitialComponentDataFromJsonImportProp() {
       // Sets the starting data for the Sequencer's components' content
       const inputJSON = JSON.parse(this.jsonPayload);
@@ -142,6 +149,7 @@ export default {
       this.Ending.subText = subText;
     },
     createChapterTimeline() {
+      console.log("JSONPAYLOAD: " + this.jsonPayload)
       const inputJSON = JSON.parse(this.jsonPayload);
       const chapterJSON = inputJSON.MainSections[0];
 
@@ -175,10 +183,17 @@ export default {
     this.createChapterTimeline();
     this.setInitialComponentDataFromJsonImportProp();
 
-    // this.$slots.chapterContent = `aaaaaaaa`;
-    // this.dynamicComponentContent = `<Choice text="A hooded man is in the alleyway nearest you. You see he's stolen a woman's purse! What do you do next?" choice1="Chase Him" choice2="Run Away" correctChoice="2"/>`;
-    // this.LogMyKeys();
   },
+  // watch: {
+  //   jsonPayload: {
+  //     immediate: true,
+  //     handler(val) {
+  //       console.log("Watch jsonPayload has been hit.");
+  //       this.jsonPayload = val;
+  //       this.setInitialComponentDataFromJsonImportProp();
+  //     },
+  //   },
+  // },
 };
 </script>
 

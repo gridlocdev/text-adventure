@@ -4,8 +4,8 @@
       :key="text[textIndex]"
       v-bind:text="text[textIndex]"
       v-on:finished-typing="makeVisible()"
+      @nextTextChunk="nextTextChunk()"
     />
-
   </v-container>
 </template>
 
@@ -16,7 +16,7 @@ export default {
     Typewriter,
   },
   props: {
-    text: Array
+    text: Array,
   },
   data: function () {
     return {
@@ -25,11 +25,13 @@ export default {
     };
   },
   methods: {
-    clickMe: function () {
+    nextTextChunk() {
       if (this.textIndex < this.text.length - 1) {
         this.textIndex++;
         //console.log(this.textIndex);
       } else {
+        console.log("Completed Text Sequence!");
+        this.$emit("incrementSequence");
         this.textIndex = 0;
         //console.log(this.textIndex);
       }
