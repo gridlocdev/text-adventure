@@ -10,11 +10,17 @@ export default new Vuex.Store({
     DarkMode: false,
     TextSpeed: 50,
     ChapterIconList: ['mdi-crown-outline', 'mdi-bridge', 'mdi-sword-cross', 'mdi-wizard-hat', 'mdi-image-filter-hdr'],
+    SuccessText: 'You mug the robber!',
     GameOverText: 'The robber mugs u',
     CurrentChapter: 1,
-    NumberOfChapters: 5
+    NumberOfChapters: 5,
+    SequencerIndex: 0
   },
   mutations: {
+    setSequencerIndex(state, number) {
+      state.SequencerIndex = number;
+      console.log("(State) SequencerIndex: " + number);
+    },
     setNumberOfChapters(state, number) {
       state.ChapterIconList = number;
       console.log("(State) CurrentChapter: " + number);
@@ -26,6 +32,10 @@ export default new Vuex.Store({
     setCurrentChapter(state, number) {
       state.CurrentChapter = number;
       console.log("(State) CurrentChapter: " + number);
+    },
+    setSuccessText(state, text) {
+      state.SuccessText = text;
+      console.log("(State) SuccessText: " + text);
     },
     setGameOverText(state, text) {
       state.GameOverText = text;
@@ -49,6 +59,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setSequencerIndex(context, number) {
+      context.commit('setSequencerIndex', number);
+    },
     setNumberOfChapters(context, number) {
       context.commit('setCurrentChapter', number);
     },
@@ -57,6 +70,9 @@ export default new Vuex.Store({
     },
     setCurrentChapter(context, number) {
       context.commit('setCurrentChapter', number);
+    },
+    setSuccessText(context, text) {
+      context.commit('setSuccessText', text);
     },
     setGameOverText(context, text) {
       context.commit('setGameOverText', text);

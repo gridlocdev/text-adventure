@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Start from '../views/Start.vue'
 import IntroView from '../components/Test/IntroView.vue'
-import TypewriterView from '../components/Test/TypewriterView.vue'
+import SuccessView from '../components/Test/SuccessView.vue'
 import ChoiceView from '../components/Test/ChoiceView.vue'
 import GameOverView from '../components/Test/GameOverView.vue'
 import EndingView from '../components/Test/EndingView.vue'
@@ -39,12 +39,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../components/Test/IntroView.vue')
   },
   {
-    path: '/typewriter',
-    name: TypewriterView,
+    path: '/success',
+    name: SuccessView,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Test/TypewriterView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Test/SuccessView.vue')
   },
   {
     path: '/choice',

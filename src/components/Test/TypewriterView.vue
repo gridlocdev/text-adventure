@@ -31,6 +31,7 @@ export default {
         //console.log(this.textIndex);
       } else {
         console.log("Completed Text Sequence!");
+        this.$store.state.SequenceIndex++;
         this.$emit("incrementSequence");
         this.textIndex = 0;
         //console.log(this.textIndex);

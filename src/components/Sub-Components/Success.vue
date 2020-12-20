@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-row
-      class="animate__animated animate__zoomIn"
+      class="animate__animated animate__fadeInDown"
       align="center"
       justify="center"
     >
-      <h1 style="letter-spacing: 0.2em">GAME OVER</h1>
+      <h1 style="letter-spacing: 0.15em">Success!</h1>
     </v-row>
     <v-row class="ma-10" align="center" justify="center">
       <typewriter :text="this.text" :showNextButton="false" />
@@ -14,19 +14,17 @@
       <v-col
         align="center"
         justify="center"
-        class="ms-10 animate__animated animate__zoomIn"
+        class="animate__animated animate__zoomIn"
       >
-        <v-btn color="primary" elevation="2" x-large @click="$router.go(-1)">
-          Return
-        </v-btn></v-col
-      >
-      <v-col
-        align="center"
-        justify="center"
-        class="ms-10 animate__animated animate__zoomIn"
-      >
-        <v-btn color="error" elevation="2" x-large @click="$router.push('./')">
-          End Game
+        <v-btn
+          x-large
+          style="animation-duration: 1s"
+          class="animate__animated animate__infinite animate__pulse"
+          color="primary"
+          elevation="2"
+          @click="$router.push('./chapter1')"
+        >
+          Continue
         </v-btn></v-col
       >
     </v-row>
@@ -45,17 +43,22 @@ export default {
     };
   },
   methods: {
-    updateGameOverText() {
-      this.text = this.$store.state.GameOverText;
+    clickContinue() {
+      this.$emit("incrementSequence");
+      this.$store.state.SequenceIndex++;
+      this.$router.push("./chapter1");
+    },
+    updateSuccessText() {
+      this.text = this.$store.state.SuccessText;
     },
   },
   created: function () {
-    this.updateGameOverText();
+    this.updateSuccessText();
   },
   watch: {
     text: function () {
       // When the SettingsModal is opened, call SetPageIndex()
-      this.updateGameOverText();
+      this.updateSuccessText();
     },
   },
 };

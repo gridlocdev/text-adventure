@@ -37,6 +37,7 @@ export default {
           );
           // Wait for the 3000ms for fadeOut to end, and emit an event.
           setTimeout(() => {
+            this.$store.state.SequenceIndex++;
             this.$emit("incrementSequence");
           }, 3000);
         }

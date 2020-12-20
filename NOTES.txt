@@ -1,7 +1,5 @@
 Next Steps: 
 
-- Create an Ending component.
-
 - Create events that emit from each sub-component: Intro, Typewriter, ChoiceSection, Ending
 : Once this event emitted was received by the Sequencer component, have it update its data appropriately to match what it was sent.
 

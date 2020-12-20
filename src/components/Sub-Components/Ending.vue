@@ -9,6 +9,7 @@
         <v-row style="width: 70%">
           <v-col :key="item.id" v-for="item in chapterIconMasterList">
             <v-btn
+              :ripple="false"
               :key="item.id"
               :color="item.color"
               v-bind="btnProps"
@@ -22,34 +23,6 @@
               </v-icon>
             </v-btn>
           </v-col>
-
-          <!-- <v-col
-            style="--animate-duration: 1.75s"
-            class="animate__animated animate__infinite animate__pulse"
-            ><v-btn depressed elevation="2" fab tile
-              ><v-icon>mdi-crown-outline</v-icon></v-btn
-            ></v-col
-          >
-          <v-col
-            ><v-btn depressed elevation="2" fab tile color="success"
-              ><v-icon>mdi-bridge</v-icon></v-btn
-            ></v-col
-          >
-          <v-col
-            ><v-btn depressed elevation="2" fab tile
-              ><v-icon>mdi-sword-cross</v-icon></v-btn
-            ></v-col
-          >
-          <v-col
-            ><v-btn depressed elevation="2" fab tile
-              ><v-icon>mdi-wizard-hat</v-icon></v-btn
-            ></v-col
-          >
-          <v-col
-            ><v-btn depressed elevation="2" fab tile
-              ><v-icon>mdi-image-filter-hdr</v-icon></v-btn
-            ></v-col
-          > -->
         </v-row>
       </v-col>
     </v-row>
@@ -80,56 +53,29 @@ export default {
         //   color: "",
         // },
       ],
-      predefinedBtnProps: {
-        xs: {
-          color: "green",
-          "x-small": true,
-        },
-        sm: {
-          color: "blue",
-          small: true,
-        },
-        md: {
-          color: "yellow",
-        },
-        lg: {
-          color: "red",
-          large: true,
-        },
-        xl: {
-          color: "purple",
-          "x-large": true,
-        },
-      },
     };
   },
   computed: {
     btnProps() {
-      //console.log(this.$vuetify.breakpoint.name);
+      // This function adds a prop to all the buttons to resize based on viewport width.
       let props = {};
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          //props.color = "green";
           props["md"] = true;
           break;
         case "sm":
-          //props.color = "blue";
           props["large"] = true;
           break;
         case "md":
-          //props.color = "yellow";
           props["x-large"] = true;
           break;
         case "lg":
-          //props.color = "green";
           props["x-large"] = true;
           break;
         case "xl":
-          //props.color = "purple";
           props["x-large"] = true;
           break;
         default:
-        //props.color = "red";
       }
       return props;
     },
@@ -173,7 +119,6 @@ export default {
             name: this.$store.state.ChapterIconList[i],
             color: "primary",
           });
-          console.log("true" + i);
         } else {
           // If the chapter has not been played, sets no color for that button.
           this.chapterIconMasterList.push({

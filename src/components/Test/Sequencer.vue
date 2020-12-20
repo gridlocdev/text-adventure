@@ -1,10 +1,6 @@
 <template v-slot:btn>
   <v-row>
-    <!-- <v-btn @click="sequenceIndex++"> Add 1 to Sequence </v-btn> -->
     <v-col>
-      <!-- <Typewriter
-        text="The squire clues you in. “Now that that part is out of the way, there are two paths you can take to the Dragon’s mountain. You can take the short route, brave the rough terrain on your steed through the Valley, and arrive in a matter of days; or you can take the unreasonably complicated and long route through the Bridge and the Forest!”"
-      /> -->
       <typewriter-view
         @incrementSequence="incrementSequence()"
         :text="['Text 1', 'Text 2']"
@@ -15,11 +11,6 @@
         choice2="Run Away"
         correctChoice="2"
       /> -->
-
-      <!-- <span id="displayJSONhere">
-        {{ JSON.parse(jsonPayload) }}
-      </span> -->
-      <!-- <slot name="chapterContent">This is default if nothing shows up here.</slot> -->
     </v-col>
   </v-row>
 </template>
@@ -36,7 +27,6 @@ export default {
   components: {
     TypewriterView,
     // Choice,
-    // Typewriter,
   },
   props: {
     // It's JSON, but Vue doesn't want me to pass JSON through props.
@@ -72,6 +62,7 @@ export default {
   methods: {
     incrementSequence() {
       console.log("I've incremented the SequenceIndex. " + this.sequenceIndex);
+      this.$store.state.SequenceIndex++;
       this.sequenceIndex++;
     },
     setInitialComponentDataFromJsonImportProp() {
@@ -104,18 +95,18 @@ export default {
     },
     setSequencerIntroData(title, subText) {
       // Sets the Sequencer's data for Intro
-      console.log(`setSequencerIntroData(
-        ${title}, 
-      ${subText}
-      )`);
+      // console.log(`setSequencerIntroData(
+      //   ${title},
+      // ${subText}
+      // )`);
       this.Intro.title = title;
       this.Intro.subText = subText;
     },
     setSequencerTextSectionData(text) {
       // Sets the Sequencer's data for the TextSections
-      console.log(`setSequencerTextSectionData(
-        ${text}
-        )`);
+      // console.log(`setSequencerTextSectionData(
+      //   ${text}
+      //   )`);
       this.TextSection.text = text;
     },
     setSequencerChoiceSectionData(
@@ -126,13 +117,13 @@ export default {
       gameOverText
     ) {
       // Sets the Sequencer's data for the ChoiceSections
-      console.log(`setSequencerChoiceSectionData(
-        ${text},
-        ${choice1},
-        ${choice2},
-        ${correctChoice},
-        ${gameOverText}
-       )`);
+      // console.log(`setSequencerChoiceSectionData(
+      //   ${text},
+      //   ${choice1},
+      //   ${choice2},
+      //   ${correctChoice},
+      //   ${gameOverText}
+      //  )`);
       this.ChoiceSection.text = text;
       this.ChoiceSection.choices.choice1 = choice1;
       this.ChoiceSection.choices.choice2 = choice2;
@@ -141,15 +132,15 @@ export default {
     },
     setSequencerEndingData(title, subText) {
       // Sets the Sequencer's data for the Ending
-      console.log(`setSequencerEndingData(
-        ${title},
-        ${subText},
-       )`);
+      // console.log(`setSequencerEndingData(
+      //   ${title},
+      //   ${subText},
+      //  )`);
       this.Ending.title = title;
       this.Ending.subText = subText;
     },
     createChapterTimeline() {
-      console.log("JSONPAYLOAD: " + this.jsonPayload)
+      // console.log("JSONPAYLOAD: " + this.jsonPayload)
       const inputJSON = JSON.parse(this.jsonPayload);
       const chapterJSON = inputJSON.MainSections[0];
 
@@ -158,19 +149,19 @@ export default {
 
       var i = 0;
       for (const section in chapterJSON) {
-        console.log(i);
+        //console.log(i);
         if (section.includes("Intro")) {
           timeline.push([i, "Intro"]);
-          console.log("Introduction: " + section);
+          //console.log("Introduction: " + section);
         } else if (section.includes("TextSection")) {
           timeline.push([i, "TextSection"]);
-          console.log("TextSection: " + section);
+          //console.log("TextSection: " + section);
         } else if (section.includes("ChoiceSection")) {
           timeline.push([i, "ChoiceSection"]);
-          console.log("ChoiceSection: " + section);
+          //console.log("ChoiceSection: " + section);
         } else if (section.includes("Ending")) {
           timeline.push([i, "Ending"]);
-          console.log("Ending: " + section);
+          //console.log("Ending: " + section);
         }
         i++;
       }
@@ -182,18 +173,7 @@ export default {
     // Call a function with all the current state's data
     this.createChapterTimeline();
     this.setInitialComponentDataFromJsonImportProp();
-
   },
-  // watch: {
-  //   jsonPayload: {
-  //     immediate: true,
-  //     handler(val) {
-  //       console.log("Watch jsonPayload has been hit.");
-  //       this.jsonPayload = val;
-  //       this.setInitialComponentDataFromJsonImportProp();
-  //     },
-  //   },
-  // },
 };
 </script>
 
