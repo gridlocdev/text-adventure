@@ -26,24 +26,22 @@ export default {
   },
   methods: {
     nextTextChunk() {
+      // Advances to the next text chunk in the list of text to display.
       if (this.textIndex < this.text.length - 1) {
         this.textIndex++;
-        //console.log(this.textIndex);
       } else {
-        console.log("Completed Text Sequence!");
-        this.$store.state.SequenceIndex++;
+        this.$store.dispatch(
+          "setSequencerIndex",
+          this.$store.state.SequencerIndex + 1
+        );
         this.$emit("incrementSequence");
         this.textIndex = 0;
-        //console.log(this.textIndex);
       }
     },
     makeVisible() {
       this.visible = true;
     },
   },
-  // mounted() {
-  //   this.$refs.typewriter.$on("finished-typing");
-  // },
 };
 </script>
 

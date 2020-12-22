@@ -20,9 +20,9 @@
           x-large
           style="animation-duration: 1s"
           class="animate__animated animate__infinite animate__pulse"
-          color="primary"
+          color="success"
           elevation="2"
-          @click="$router.push('./chapter1')"
+          @click="clickContinue()"
         >
           Continue
         </v-btn></v-col
@@ -45,7 +45,10 @@ export default {
   methods: {
     clickContinue() {
       this.$emit("incrementSequence");
-      this.$store.state.SequenceIndex++;
+      this.$store.dispatch(
+        "setSequencerIndex",
+        this.$store.state.SequencerIndex + 1
+      );
       this.$router.push("./chapter1");
     },
     updateSuccessText() {

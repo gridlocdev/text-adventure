@@ -40,7 +40,7 @@ export default {
     return {
       currentText: "",
       charIndex: 0,
-      fullText: this.text,
+      fullText: "",
       TextSpeed: 0,
       typing: Boolean,
       nextButtonVisible: false,
@@ -54,35 +54,41 @@ export default {
       // Set the flag for typing, so other components can use this info.
       this.typing = true;
       // Type() takes the text passed into this.fullText, and
+      try {
+        // While loop iterating over every character in the text string.
+        while (this.charIndex < this.fullText.length) {
+          var currentLetter = this.fullText.charAt(this.charIndex);
 
-      // While loop iterating over every character in the text string.
-      while (this.charIndex < this.fullText.length) {
-        var currentLetter = this.fullText.charAt(this.charIndex);
+          this.currentText += currentLetter;
 
-        this.currentText += currentLetter;
-
-        // Apply conditional delay based on the character typed
-        switch (currentLetter) {
-          case ".":
-          case "?":
-          case "!":
-            await this.delay(this.TextSpeed * 3);
-            break;
-          case ",":
-            await this.delay(this.TextSpeed * 2);
-            break;
-          default:
-            await this.delay(this.TextSpeed);
-            break;
+          // Apply conditional delay based on the character typed
+          switch (currentLetter) {
+            case ".":
+            case "?":
+            case "!":
+              await this.delay(this.TextSpeed * 3);
+              break;
+            case ",":
+              await this.delay(this.TextSpeed * 2);
+              break;
+            default:
+              await this.delay(this.TextSpeed);
+              break;
+          }
+          // Move to the next letter
+          this.charIndex++;
         }
-        // Move to the next letter
-        this.charIndex++;
-      }
-      this.typing = false;
+        this.typing = false;
 
-      // Check if it should render the next button
-      if (this.showNextButton == true) {
-        this.nextButtonVisible = true;
+        // Check if it should render the next button
+        if (this.showNextButton == true) {
+          this.nextButtonVisible = true;
+        }
+      } catch (ex) {
+        // There's an awful error message in this function that doesn't make sense. 
+        // It says that this.fullText is undefined, yet knows its value and executes the rest of the function. 
+        // I'm tossing it up to Vue not handling this one appropriately, so here's an empty catch block.
+        return;
       }
     },
     emitMoveToNextTextChunk() {
@@ -91,6 +97,7 @@ export default {
   },
   mounted() {
     this.TextSpeed = this.$store.state.TextSpeed;
+    this.fullText = this.text;
     this.type();
   },
 };

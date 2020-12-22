@@ -1,6 +1,5 @@
 <template>
   <v-container id="fadeOutContainer">
-    
     <v-row class="ma-10" align="center" justify="center">
       <v-card class="pa-10" elevation="5">
         <h1 class="animate__animated animate__fadeIn">
@@ -49,21 +48,18 @@ export default {
     choice2: String,
     correctChoice: String,
     gameOverText: String,
+    successText: String,
   },
   methods: {
     answerChoice(answerChoice) {
       if (answerChoice == this.correctChoice) {
-        this.fadeOutAndNavigate("./chapter1");
-        this.$store.state.SequenceIndex++;
-        this.$emit("incrementSequence");
-        console.log("Success!");
+        this.$router.push("./success");
       } else {
         // emit an event for the Sequencer to re-route to gameover
         this.$emit("GameOver", this.gameOverText);
         this.$store.state.GameOverText = this.gameOverText;
-        this.fadeOutAndNavigate("./gameover");
-        console.log(this.$store.state.GameOverText);
-        console.log("FAILED. TRY AGAIN BOOMER.");
+
+        this.$router.push("./gameover");
       }
     },
     fadeOutAndNavigate(routerLink) {
@@ -81,6 +77,10 @@ export default {
         this.$router.push(routerLink);
       }, 1500);
     },
+  },
+  activated: function () {
+    this.$store.dispatch("setGameOverText", this.gameOverText);
+    this.$store.dispatch("setSuccessText", this.successText);
   },
 };
 </script>

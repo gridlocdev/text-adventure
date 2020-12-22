@@ -12,7 +12,7 @@
       </v-row>
       <v-row class="pa-md-5" align="center" justify="center">
         <v-btn
-          @click="$router.push('prologue')"
+          @click="$router.push('./chapter1')"
           elevation="2"
           x-large
           color="primary"

@@ -36,11 +36,12 @@ export default {
               choicesMetadata: {
                 correctChoice: "1",
                 gameOverText: "You cut his hand. GAMEOVER",
+                successText: "He hands you the sword, good job!",
               },
             },
             TextSection2: [
               {
-                text: "I am text one.",
+                text: "EEEEEEEEEEEEEEI am text one.",
               },
               {
                 text: "I am text two.",
@@ -58,6 +59,7 @@ export default {
               choicesMetadata: {
                 correctChoice: "1",
                 gameOverText: "You cut his hand. GAMEOVER",
+                successText: "He hands you the sword, good job!",
               },
             },
             Ending: {

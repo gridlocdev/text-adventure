@@ -16,8 +16,8 @@
         justify="center"
         class="ms-10 animate__animated animate__zoomIn"
       >
-        <v-btn color="primary" elevation="2" x-large @click="$router.go(-1)">
-          Return
+        <v-btn color="primary" elevation="2" x-large @click="clickTryAgain()">
+          Try Again
         </v-btn></v-col
       >
       <v-col
@@ -25,8 +25,13 @@
         justify="center"
         class="ms-10 animate__animated animate__zoomIn"
       >
-        <v-btn color="error" elevation="2" x-large @click="$router.push('./')">
-          End Game
+        <v-btn
+          color="error"
+          elevation="2"
+          x-large
+          @click="clickRestartChapter()"
+        >
+          Restart Chapter
         </v-btn></v-col
       >
     </v-row>
@@ -47,6 +52,13 @@ export default {
   methods: {
     updateGameOverText() {
       this.text = this.$store.state.GameOverText;
+    },
+    clickTryAgain() {
+      this.$router.go(-1);
+    },
+    clickRestartChapter() {
+      this.$store.dispatch("resetChapter");
+      this.$router.push("./");
     },
   },
   created: function () {

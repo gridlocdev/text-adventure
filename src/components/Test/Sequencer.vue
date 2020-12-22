@@ -1,32 +1,76 @@
 <template v-slot:btn>
   <v-row>
     <v-col>
-      <typewriter-view
+      <Intro
+        v-if="this.sequenceIndexComponentType == 'Intro'"
+        :title="this.Intro.title"
+        :subText="this.Intro.subText"
+      ></Intro>
+      <TypewriterView
+        v-if="this.sequenceIndexComponentType == 'TextSection'"
         @incrementSequence="incrementSequence()"
-        :text="['Text 1', 'Text 2']"
+        :text="this.TextSection.textArray"
       />
-      <!-- <Choice
-        text="A hooded man is in the alleyway nearest you. You see he's stolen a woman's purse! What do you do next?"
-        choice1="Chase Him"
-        choice2="Run Away"
-        correctChoice="2"
-      /> -->
+
+      <Choice
+        v-if="this.sequenceIndexComponentType == 'ChoiceSection'"
+        :text="this.ChoiceSection.text"
+        :choice1="this.ChoiceSection.choices.choice1"
+        :choice2="this.ChoiceSection.choices.choice2"
+        :correctChoice="this.ChoiceSection.choicesMetadata.correctChoice"
+        :gameOverText="this.ChoiceSection.choicesMetadata.gameOverText"
+        :successText="this.ChoiceSection.choicesMetadata.successText"
+      />
+      <Ending
+        v-if="this.sequenceIndexComponentType == 'Ending'"
+        Header="Chapter Complete!"
+        SubText="Chapter 1 is compolete."
+      ></Ending>
     </v-col>
   </v-row>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
+import Intro from "../Sub-Components/Intro.vue";
 import TypewriterView from "./TypewriterView.vue";
+import Choice from "../Sub-Components/Choice.vue";
+import Ending from "../Sub-Components/Ending.vue";
 // The Sequencer component should take in every component inside of it, and set a priority for what gets displayed. I've got the same thing already right now with the other thing.
 
-//import Choice from "../Sub-Components/Choice.vue";
 //import Typewriter from "../Sub-Components/Typewriter.vue";
 
 export default {
   name: "Sequencer",
+  computed: mapState(["SequencerIndex", "ResetChapter"]),
+  watch: {
+    SequencerIndex(newValue, oldValue) {
+      // When the SequencerIndex is updated, show the correct component and update its data.
+      this.sequenceIndex = newValue;
+      this.sequenceIndexComponentType = this.chapterTimeline[
+        this.sequenceIndex
+      ][1];
+      this.advanceChapterTimeline();
+      console.log(
+        `Updating Chapter Component Index from ${oldValue} to ${newValue}`
+      );
+    },
+    ResetChapter(newValue, oldValue) {
+      // When the Chapter reset flag is true, reset the chapter's data
+      if (oldValue == true) {
+        this.setInitialComponentDataFromJsonImportProp();
+        this.$store.dispatch("setSequencerIndex", 0);
+      } else {
+        this.$store.state.ResetChapter = false;
+      }
+    },
+  },
   components: {
+    Intro,
     TypewriterView,
-    // Choice,
+    Choice,
+    Ending,
   },
   props: {
     // It's JSON, but Vue doesn't want me to pass JSON through props.
@@ -35,33 +79,36 @@ export default {
   data: function () {
     return {
       sequenceIndex: 0,
+      sequenceIndexComponentType: "",
+      chapterTimeline: [],
       endSequence: false,
+      chapterJSON: {},
       Intro: {
-        title: String,
-        subText: String,
+        title: "",
+        subText: "",
       },
       TextSection: {
-        text: String,
+        textArray: [],
       },
       ChoiceSection: {
         choices: {
-          choice1: String,
-          choice2: String,
+          choice1: "",
+          choice2: "",
         },
         choicesMetadata: {
-          correctChoice: Number,
-          gameOverText: String,
+          correctChoice: "",
+          gameOverText: "",
+          successText: "",
         },
       },
       Ending: {
-        title: String,
-        subText: String,
+        title: "",
+        subText: "",
       },
     };
   },
   methods: {
     incrementSequence() {
-      console.log("I've incremented the SequenceIndex. " + this.sequenceIndex);
       this.$store.state.SequenceIndex++;
       this.sequenceIndex++;
     },
@@ -76,7 +123,9 @@ export default {
         chapterJSON.Intro.subText
       );
       // Sets data for the TextSections
-      this.setSequencerTextSectionData(chapterJSON.TextSection1[0].text);
+      this.setSequencerTextSectionData(
+        JSON.parse(JSON.stringify(chapterJSON.TextSection1))
+      );
 
       // Sets data for the ChoiceSections
       this.setSequencerChoiceSectionData(
@@ -84,7 +133,8 @@ export default {
         chapterJSON.ChoiceSection1.choices.choice1,
         chapterJSON.ChoiceSection1.choices.choice2,
         chapterJSON.ChoiceSection1.choicesMetadata.correctChoice,
-        chapterJSON.ChoiceSection1.choicesMetadata.gameOverText
+        chapterJSON.ChoiceSection1.choicesMetadata.gameOverText,
+        chapterJSON.ChoiceSection1.choicesMetadata.successText
       );
 
       // Sets data for the Ending
@@ -94,85 +144,147 @@ export default {
       );
     },
     setSequencerIntroData(title, subText) {
-      // Sets the Sequencer's data for Intro
-      // console.log(`setSequencerIntroData(
-      //   ${title},
-      // ${subText}
-      // )`);
       this.Intro.title = title;
       this.Intro.subText = subText;
     },
-    setSequencerTextSectionData(text) {
-      // Sets the Sequencer's data for the TextSections
-      // console.log(`setSequencerTextSectionData(
-      //   ${text}
-      //   )`);
-      this.TextSection.text = text;
+    setSequencerTextSectionData(inputJSON) {
+      // The following block converts the Input json to an Array.
+      var textArray = [];
+
+      for (var item in Object.keys(inputJSON)) {
+        textArray.push(inputJSON[item].text.toString());
+      }
+
+      // Set the textArray to the component's data, so it can be displayed in the TypewriterView sequence.
+      this.TextSection.textArray = textArray;
     },
     setSequencerChoiceSectionData(
       text,
       choice1,
       choice2,
       correctChoice,
-      gameOverText
+      gameOverText,
+      successText
     ) {
       // Sets the Sequencer's data for the ChoiceSections
-      // console.log(`setSequencerChoiceSectionData(
-      //   ${text},
-      //   ${choice1},
-      //   ${choice2},
-      //   ${correctChoice},
-      //   ${gameOverText}
-      //  )`);
       this.ChoiceSection.text = text;
       this.ChoiceSection.choices.choice1 = choice1;
       this.ChoiceSection.choices.choice2 = choice2;
       this.ChoiceSection.choicesMetadata.correctChoice = correctChoice;
       this.ChoiceSection.choicesMetadata.gameOverText = gameOverText;
+      this.ChoiceSection.choicesMetadata.successText = successText;
     },
     setSequencerEndingData(title, subText) {
       // Sets the Sequencer's data for the Ending
-      // console.log(`setSequencerEndingData(
-      //   ${title},
-      //   ${subText},
-      //  )`);
       this.Ending.title = title;
       this.Ending.subText = subText;
     },
     createChapterTimeline() {
-      // console.log("JSONPAYLOAD: " + this.jsonPayload)
+      // Creates an array that includes the sequence of component names, and the json attribute's name
       const inputJSON = JSON.parse(this.jsonPayload);
       const chapterJSON = inputJSON.MainSections[0];
+
+      this.chapterJSON = chapterJSON;
 
       // Loop through the JSON to create our Timeline (To show and hide elements)
       var timeline = [];
 
       var i = 0;
-      for (const section in chapterJSON) {
-        //console.log(i);
-        if (section.includes("Intro")) {
-          timeline.push([i, "Intro"]);
-          //console.log("Introduction: " + section);
-        } else if (section.includes("TextSection")) {
-          timeline.push([i, "TextSection"]);
-          //console.log("TextSection: " + section);
-        } else if (section.includes("ChoiceSection")) {
-          timeline.push([i, "ChoiceSection"]);
-          //console.log("ChoiceSection: " + section);
-        } else if (section.includes("Ending")) {
-          timeline.push([i, "Ending"]);
-          //console.log("Ending: " + section);
+      for (const sectionName in chapterJSON) {
+        if (sectionName.includes("Intro")) {
+          timeline.push([i, "Intro", sectionName]);
+        } else if (sectionName.includes("TextSection")) {
+          timeline.push([i, "TextSection", sectionName]);
+        } else if (sectionName.includes("ChoiceSection")) {
+          timeline.push([i, "ChoiceSection", sectionName]);
+        } else if (sectionName.includes("Ending")) {
+          timeline.push([i, "Ending", sectionName]);
         }
         i++;
       }
+      this.chapterTimeline = timeline;
       console.log(timeline);
+    },
+    advanceChapterTimeline() {
+      // In this method:
+      // Take the timeline's 2nd index (section name), and pull the appropriate data from the JSON.
+
+      var sectionName = this.chapterTimeline[this.sequenceIndex][2];
+      var sectionType = this.chapterTimeline[this.sequenceIndex][1];
+      console.log("AdvanceTimeline() SWITCH HIT:");
+      switch (sectionType) {
+        case "Intro":
+          // Sets data for Intro
+          this.setSequencerIntroData(
+            this.chapterJSON[sectionName].title,
+            this.chapterJSON[sectionName].subText
+          );
+          console.log(
+            "AdvanceTimeline() (Intro): " + this.chapterJSON[sectionName].title,
+            this.chapterJSON[sectionName].subText
+          );
+          //this.Intro = this.chapterJSON[sectionName];
+          break;
+        case "TextSection":
+          // Sets data for the TextSections
+          this.setSequencerTextSectionData(
+            JSON.parse(JSON.stringify(this.chapterJSON[sectionName]))
+          );
+          console.log(
+            "AdvanceTimeline() (TextSection): " +
+              JSON.parse(JSON.stringify(this.chapterJSON[sectionName]))
+          );
+          break;
+        case "ChoiceSection":
+          // Sets data for the ChoiceSections
+          this.setSequencerChoiceSectionData(
+            this.chapterJSON[sectionName].text,
+            this.chapterJSON[sectionName].choices.choice1,
+            this.chapterJSON[sectionName].choices.choice2,
+            this.chapterJSON[sectionName].choicesMetadata.correctChoice,
+            this.chapterJSON[sectionName].choicesMetadata.gameOverText,
+            this.chapterJSON[sectionName].choicesMetadata.successText
+          );
+          console.log(
+            "AdvanceTimeline() (ChoiceSection): " +
+              this.chapterJSON[sectionName].text,
+            this.chapterJSON[sectionName].choices.choice1,
+            this.chapterJSON[sectionName].choices.choice2,
+            this.chapterJSON[sectionName].choicesMetadata.correctChoice,
+            this.chapterJSON[sectionName].choicesMetadata.gameOverText,
+            this.chapterJSON[sectionName].choicesMetadata.successText
+          );
+          break;
+        case "Ending":
+          // Sets data for the Ending
+          this.setSequencerEndingData(
+            this.chapterJSON[sectionName].title,
+            this.chapterJSON[sectionName].subText
+          );
+          console.log(
+            "AdvanceTimeline() (Ending): " +
+              this.chapterJSON[sectionName].title,
+            this.chapterJSON[sectionName].subText
+          );
+          break;
+        default:
+          console.log(
+            "Not sure how you got here, looks like something's broken."
+          );
+          break;
+      }
+
+      console.log("advanceChapterTimeline() hit.");
     },
   },
   mounted() {
     // When mounted, display the first set of data.
-    // Call a function with all the current state's data
     this.createChapterTimeline();
     this.setInitialComponentDataFromJsonImportProp();
+    this.sequenceIndexComponentType = this.chapterTimeline[
+      this.sequenceIndex
+    ][1];
+    console.log("SequenceIndex: " + this.sequenceIndex);
   },
 };
 </script>

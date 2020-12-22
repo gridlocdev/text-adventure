@@ -3,7 +3,9 @@
     <HeaderBar />
     <v-main>
       <v-container fluid fill-height>
-        <router-view />
+        <keep-alive>
+          <router-view />
+        </keep-alive>
       </v-container>
     </v-main>
   </v-app>

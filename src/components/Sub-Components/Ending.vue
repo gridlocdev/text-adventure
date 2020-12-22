@@ -99,7 +99,7 @@ export default {
             this.$emit("endChapter");
           }, 3000);
         }
-      }, 5500);
+      }, 4000);
     },
     setEndingButtonGlow() {
       setTimeout(() => {
@@ -130,15 +130,13 @@ export default {
     },
   },
   errorCaptured(error) {
-    console.log(
-      "haha. I've caught the error, but done nothing about it.",
-      error
-    );
+    console.log("Error occured in Ending component: " + error);
   },
   mounted() {
     // Sets the list of icons on this component to an array stored in the Application store.
     this.importIconListFromState();
-
+  },
+  activated() {
     // Updates the Page Index
     this.$store.dispatch("setPageIndex", this.$options.name);
 

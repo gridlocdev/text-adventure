@@ -8,15 +8,20 @@ export default new Vuex.Store({
     PageIndex: 'Start',
     Sound: false,
     DarkMode: false,
-    TextSpeed: 50,
+    TextSpeed: 10,
     ChapterIconList: ['mdi-crown-outline', 'mdi-bridge', 'mdi-sword-cross', 'mdi-wizard-hat', 'mdi-image-filter-hdr'],
     SuccessText: 'You mug the robber!',
     GameOverText: 'The robber mugs u',
     CurrentChapter: 1,
     NumberOfChapters: 5,
-    SequencerIndex: 0
+    SequencerIndex: 0,
+    ResetChapter: false,
   },
   mutations: {
+    resetChapter(state) {
+      state.ResetChapter = true;
+      console.log("(State) ResetChapter: " + "true");
+    },
     setSequencerIndex(state, number) {
       state.SequencerIndex = number;
       console.log("(State) SequencerIndex: " + number);
@@ -59,6 +64,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    resetChapter(context) {
+      context.commit("resetChapter")
+    },
     setSequencerIndex(context, number) {
       context.commit('setSequencerIndex', number);
     },

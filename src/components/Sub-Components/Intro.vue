@@ -6,11 +6,11 @@
   >
     <v-col>
       <v-row align="center" justify="center">
-        <h1>{{ Header }}</h1>
+        <h1>{{ title }}</h1>
       </v-row>
 
       <v-row align="center" justify="center">
-        {{ SubText }}
+        {{ subText }}
       </v-row>
     </v-col>
   </v-container>
@@ -20,8 +20,8 @@
 export default {
   name: "Intro",
   props: {
-    Header: String,
-    SubText: String,
+    title: String,
+    subText: String,
   },
   methods: {
     initFadeOut() {
@@ -37,7 +37,10 @@ export default {
           );
           // Wait for the 3000ms for fadeOut to end, and emit an event.
           setTimeout(() => {
-            this.$store.state.SequenceIndex++;
+            this.$store.dispatch(
+              "setSequencerIndex",
+              this.$store.state.SequencerIndex + 1
+            );
             this.$emit("incrementSequence");
           }, 3000);
         }
@@ -45,12 +48,9 @@ export default {
     },
   },
   errorCaptured(error) {
-    console.log(
-      "haha. I've caught the error, but done nothing about it.",
-      error
-    );
+    console.log("Error occured in Intro component: " + error);
   },
-  mounted() {
+  activated() {
     this.$store.dispatch("setPageIndex", this.$options.name);
     this.initFadeOut();
   },

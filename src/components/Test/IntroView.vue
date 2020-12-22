@@ -1,14 +1,12 @@
 <template>
-  <Intro Header="Prologue" SubText="Hello World! I am Prologue." />
+  <Intro title="Prologue" subText="Hello World! I am Prologue." />
 </template>
 
 <script>
 import Intro from "../Sub-Components/Intro.vue";
 export default {
   components: { Intro },
-  mounted() {
-    
-  },
+  mounted() {},
 };
 </script>
 
