@@ -33,13 +33,10 @@
 <script>
 import { mapState } from "vuex";
 
-import Intro from "../Sub-Components/Intro.vue";
+import Intro from "../Content/Intro.vue";
 import TypewriterView from "./TypewriterView.vue";
-import Choice from "../Sub-Components/Choice.vue";
-import Ending from "../Sub-Components/Ending.vue";
-// The Sequencer component should take in every component inside of it, and set a priority for what gets displayed. I've got the same thing already right now with the other thing.
-
-//import Typewriter from "../Sub-Components/Typewriter.vue";
+import Choice from "../Content/Choice.vue";
+import Ending from "../Content/Ending.vue";
 
 export default {
   name: "Sequencer",
@@ -223,7 +220,6 @@ export default {
             "AdvanceTimeline() (Intro): " + this.chapterJSON[sectionName].title,
             this.chapterJSON[sectionName].subText
           );
-          //this.Intro = this.chapterJSON[sectionName];
           break;
         case "TextSection":
           // Sets data for the TextSections

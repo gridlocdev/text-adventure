@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Typewriter from "../Sub-Components/Typewriter";
+import Typewriter from "../Content/Typewriter";
 export default {
   components: {
     Typewriter,

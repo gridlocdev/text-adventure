@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Sequencer from "../components/Test/Sequencer.vue";
+import Sequencer from "../components/ContentContainers/Sequencer.vue";
 export default {
   name: "Chapter1",
   components: { Sequencer },

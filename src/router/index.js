@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Start from '../views/Start.vue'
-import IntroView from '../components/Test/IntroView.vue'
-import SuccessView from '../components/Test/SuccessView.vue'
-import ChoiceView from '../components/Test/ChoiceView.vue'
-import GameOverView from '../components/Test/GameOverView.vue'
-import EndingView from '../components/Test/EndingView.vue'
+import Intro from '../components/Content/Intro.vue'
+import Success from '../components/Content/Success.vue'
+import Choice from '../components/Content/Choice.vue'
+import GameOver from '../components/Content/GameOver.vue'
+import Ending from '../components/Content/Ending.vue'
 import Chapter1 from '../views/Chapter1.vue'
 
 Vue.use(VueRouter)
@@ -24,43 +24,43 @@ const routes = [
   },
   {
     path: '/ending',
-    name: EndingView,
+    name: Ending,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Test/EndingView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Content/Ending.vue')
   },
   {
     path: '/intro',
-    name: IntroView,
+    name: Intro,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Test/IntroView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Content/Intro.vue')
   },
   {
     path: '/success',
-    name: SuccessView,
+    name: Success,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Test/SuccessView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Content/Success.vue')
   },
   {
     path: '/choice',
-    name: ChoiceView,
+    name: Choice,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Test/ChoiceView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Content/Choice.vue')
   },
   {
     path: '/gameover',
-    name: GameOverView,
+    name: GameOver,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Test/GameOverView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/Content/GameOver.vue')
   },
   {
     path: '/chapter1',

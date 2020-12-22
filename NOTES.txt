@@ -7,6 +7,7 @@ Next Steps:
 : Remove all components from the Router except for Home and Chapter 1
 : Re-organize my Components, remove the "Test" folder and hierarchy the others
 
+
 - Create the ChapterSequencer component: 
 : Sets the Route for the chapters. 
 : Takes in the full JSON and sends just the chapter's JSON to the Sequencer.
@@ -14,3 +15,6 @@ Next Steps:
 
 - Create and add the Sound Effects
 - Modify the Light and Dark mode appearance
+
+- Documentation: 
+: In each component, at the top, list what the component does in a comment.
