@@ -8,7 +8,7 @@
       <h1 style="letter-spacing: 0.2em">GAME OVER</h1>
     </v-row>
     <v-row class="ma-10" align="center" justify="center">
-      <typewriter :text="this.text" :showNextButton="false" />
+      <typewriter :key="this.text" :text="this.text" :showNextButton="false" />
     </v-row>
     <v-row class="ma-10">
       <v-col
@@ -60,6 +60,9 @@ export default {
       this.$store.dispatch("resetChapter");
       this.$router.push("./");
     },
+  },
+  activated() {
+    this.updateGameOverText();
   },
   created: function () {
     this.updateGameOverText();

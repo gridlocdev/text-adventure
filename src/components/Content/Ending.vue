@@ -28,11 +28,11 @@
     </v-row>
     <v-col>
       <v-row align="center" justify="center">
-        <h1>{{ Header }}</h1>
+        <h1>{{ title }}</h1>
       </v-row>
 
       <v-row align="center" justify="center">
-        {{ SubText }}
+        {{ subText }}
       </v-row>
     </v-col>
   </v-container>
@@ -42,8 +42,8 @@
 export default {
   name: "Ending",
   props: {
-    Header: String,
-    SubText: String,
+    title: String,
+    subText: String,
   },
   data: function () {
     return {
@@ -135,6 +135,10 @@ export default {
   mounted() {
     // Sets the list of icons on this component to an array stored in the Application store.
     this.importIconListFromState();
+
+    if (this._inactive != true) {
+      this.startFadeInOutAnimation();
+    }
   },
   activated() {
     // Updates the Page Index

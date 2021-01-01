@@ -8,7 +8,7 @@
       <h1 style="letter-spacing: 0.15em">Success!</h1>
     </v-row>
     <v-row class="ma-10" align="center" justify="center">
-      <typewriter :text="this.text" :showNextButton="false" />
+      <typewriter :key="this.text" :text="this.text" :showNextButton="false" />
     </v-row>
     <v-row class="ma-10">
       <v-col
@@ -49,13 +49,16 @@ export default {
         "setSequencerIndex",
         this.$store.state.SequencerIndex + 1
       );
-      this.$router.push("./chapter1");
+      this.$router.push("./chapterSequencer");
     },
     updateSuccessText() {
       this.text = this.$store.state.SuccessText;
     },
   },
   created: function () {
+    this.updateSuccessText();
+  },
+  activated() {
     this.updateSuccessText();
   },
   watch: {

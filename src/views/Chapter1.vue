@@ -18,7 +18,7 @@ export default {
             },
             TextSection1: [
               {
-                text: "You wake up.",
+                text: "Youe wake up.",
               },
               {
                 text: "The servant takes you to the castle.",
@@ -51,15 +51,15 @@ export default {
               },
             ],
             ChoiceSection2: {
-              text: "What should you do?",
+              text: "What should you dooooo?",
               choices: {
                 choice1: "Option 1",
                 choice2: "Option 2",
               },
               choicesMetadata: {
                 correctChoice: "1",
-                gameOverText: "You cut his hand. GAMEOVER",
-                successText: "He hands you the sword, good job!",
+                gameOverText: "GameOver for Choice section 2!",
+                successText: "Success for Choice section 2!",
               },
             },
             Ending: {
@@ -73,6 +73,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("setPageIndex", this.$options.name);
+    console.log("Chapter1: " + JSON.stringify(this.ChapterJSON));
   },
 };
 </script>

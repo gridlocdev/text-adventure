@@ -9,15 +9,20 @@ export default new Vuex.Store({
     Sound: false,
     DarkMode: false,
     TextSpeed: 10,
+    StoryName: 'Text Adventure Game',
     ChapterIconList: ['mdi-crown-outline', 'mdi-bridge', 'mdi-sword-cross', 'mdi-wizard-hat', 'mdi-image-filter-hdr'],
     SuccessText: 'You mug the robber!',
     GameOverText: 'The robber mugs u',
     CurrentChapter: 1,
-    NumberOfChapters: 5,
+    NumberOfChapters: 2,
     SequencerIndex: 0,
     ResetChapter: false,
   },
   mutations: {
+    setStoryName(state, text) {
+      state.StoryName = text;
+      console.log("(State) StoryName: " + text);
+    },
     resetChapter(state) {
       state.ResetChapter = true;
       console.log("(State) ResetChapter: " + "true");
@@ -64,6 +69,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setStoryName(context, text) {
+      context.commit('setStoryName', text);
+    },
     resetChapter(context) {
       context.commit("resetChapter")
     },

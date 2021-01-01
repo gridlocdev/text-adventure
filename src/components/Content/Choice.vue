@@ -54,11 +54,13 @@ export default {
     answerChoice(answerChoice) {
       if (answerChoice == this.correctChoice) {
         this.$router.push("./success");
+        this.$store.dispatch("setSuccessText", this.successText);
+        // this.$store.state.SuccessText = this.successText;
       } else {
         // emit an event for the Sequencer to re-route to gameover
         this.$emit("GameOver", this.gameOverText);
-        this.$store.state.GameOverText = this.gameOverText;
-
+        //this.$store.state.GameOverText = this.gameOverText;
+        this.$store.dispatch("setGameOverText", this.gameOverText);
         this.$router.push("./gameover");
       }
     },
@@ -77,10 +79,6 @@ export default {
         this.$router.push(routerLink);
       }, 1500);
     },
-  },
-  activated: function () {
-    this.$store.dispatch("setGameOverText", this.gameOverText);
-    this.$store.dispatch("setSuccessText", this.successText);
   },
 };
 </script>

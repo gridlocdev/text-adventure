@@ -3,7 +3,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Text Adventure Game</v-toolbar-title>
+      <v-toolbar-title>{{ this.$store.state.StoryName }}</v-toolbar-title>
       <v-spacer></v-spacer>
 
       <Settings />
@@ -23,7 +23,7 @@
           v-for="item in NavigationItems"
           :key="item.title"
           link
-          @click="navigateTo(item.routerLink)"
+          @click="navigateTo(item.routerLink, item.title)"
         >
           <v-list-item-icon>
             <v-icon style="fill: green">{{ item.icon }}</v-icon>
@@ -49,22 +49,26 @@ export default {
     drawer: null,
     NavigationItems: [
       { title: "Home", icon: "mdi-arm-flex", routerLink: "./" },
-      { title: "Ending", icon: "mdi-lock", routerLink: "./ending" },
-      { title: "Success", icon: "mdi-lock", routerLink: "./success" },
-      { title: "ChoicePageTest", icon: "mdi-lock", routerLink: "./choice" },
-      { title: "Intro", icon: "mdi-lock", routerLink: "./intro" },
-      { title: "Game Over", icon: "mdi-lock", routerLink: "./gameover" },
-      { title: "Chapter 1", icon: "mdi-lock", routerLink: "./chapter1" },
+      {
+        title: "The Hero's Journey",
+        icon: "mdi-lock",
+        routerLink: "./chapterSequencer",
+      },
     ],
 
     right: null,
   }),
   methods: {
-    navigateTo(routerLink) {
+    navigateTo(routerLink, title) {
       if (routerLink == "." + this.$route.path) {
         this.drawer = !this.drawer;
       } else {
         this.$router.push(routerLink);
+      }
+      if (title != "Home") {
+        this.$store.dispatch("setStoryName", title);
+      } else {
+        this.$store.dispatch("setStoryName", "Text Adventure Game");
       }
     },
   },

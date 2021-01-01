@@ -50,6 +50,12 @@ export default {
   errorCaptured(error) {
     console.log("Error occured in Intro component: " + error);
   },
+  // mounted() {
+  //   if (this._inactive != false) {
+  //     console.log("I've been hit!");
+  //     this.initFadeOut();
+  //   }
+  // },
   activated() {
     this.$store.dispatch("setPageIndex", this.$options.name);
     this.initFadeOut();

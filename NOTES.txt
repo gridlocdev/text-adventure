@@ -1,20 +1,19 @@
 Next Steps: 
 
-{{The sequencer is done, now all that's left is: }} 
+{{ The sequencer is done, now all that's left is: }} 
 
-- Clean up my Code: 
-: Remove unnecessary Console.log statements
-: Remove all components from the Router except for Home and Chapter 1
-: Re-organize my Components, remove the "Test" folder and hierarchy the others
+- Fix the bugs with the fadeOut on Intro and Ending, it doesn't trigger with just Activated. (Mounted used to be there, but it decided to trigger twice at first.)
 
+- Add an End Game screen 
+- Add a Back arrow to the TextSequencer component to go to last text
 
-- Create the ChapterSequencer component: 
-: Sets the Route for the chapters. 
-: Takes in the full JSON and sends just the chapter's JSON to the Sequencer.
-: Handles ChapterChange events from the Sequencer, and re-sends the data to the Sequencer.
+- Fix the spacing on the Choice buttons in non-full screen
+
 
 - Create and add the Sound Effects
 - Modify the Light and Dark mode appearance
+
+- Add the "Insert JSON" module, where it can create your own story in the view.
 
 - Documentation: 
 : In each component, at the top, list what the component does in a comment.

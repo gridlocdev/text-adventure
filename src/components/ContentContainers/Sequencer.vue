@@ -8,7 +8,6 @@
       ></Intro>
       <TypewriterView
         v-if="this.sequenceIndexComponentType == 'TextSection'"
-        @incrementSequence="incrementSequence()"
         :text="this.TextSection.textArray"
       />
 
@@ -23,8 +22,9 @@
       />
       <Ending
         v-if="this.sequenceIndexComponentType == 'Ending'"
-        Header="Chapter Complete!"
-        SubText="Chapter 1 is compolete."
+        :title="this.Ending.title"
+        :subText="this.Ending.subText"
+        v-on:endChapter="endChapter"
       ></Ending>
     </v-col>
   </v-row>
@@ -44,14 +44,17 @@ export default {
   watch: {
     SequencerIndex(newValue, oldValue) {
       // When the SequencerIndex is updated, show the correct component and update its data.
-      this.sequenceIndex = newValue;
-      this.sequenceIndexComponentType = this.chapterTimeline[
-        this.sequenceIndex
-      ][1];
-      this.advanceChapterTimeline();
-      console.log(
-        `Updating Chapter Component Index from ${oldValue} to ${newValue}`
-      );
+      if (newValue < this.chapterTimeline.length) {
+        console.log("SequencerIndex watcher: " + newValue);
+        this.sequenceIndex = newValue;
+        this.sequenceIndexComponentType = this.chapterTimeline[
+          this.sequenceIndex
+        ][1];
+        this.advanceChapterTimeline();
+        console.log(`Updating sequenceIndex from ${oldValue} to ${newValue}`);
+      } else {
+        console.log("Hit end of chapter!");
+      }
     },
     ResetChapter(newValue, oldValue) {
       // When the Chapter reset flag is true, reset the chapter's data
@@ -106,39 +109,52 @@ export default {
   },
   methods: {
     incrementSequence() {
-      this.$store.state.SequenceIndex++;
-      this.sequenceIndex++;
+      this.$store.dispatch(
+        "setSequencerIndex",
+        this.$store.state.SequencerIndex + 1
+      );
+      this.sequenceIndex = this.$store.state.SequencerIndex;
+      // this.sequenceIndex++;
     },
     setInitialComponentDataFromJsonImportProp() {
       // Sets the starting data for the Sequencer's components' content
       const inputJSON = JSON.parse(this.jsonPayload);
+      //console.log("SEQUENCER.inputJSON :" + JSON.stringify(inputJSON));
       const chapterJSON = inputJSON.MainSections[0];
+      //console.log("SEQUENCER.chapterJSON :" + JSON.stringify(chapterJSON));
 
       // Sets data for Intro
-      this.setSequencerIntroData(
-        chapterJSON.Intro.title,
-        chapterJSON.Intro.subText
-      );
+      if (chapterJSON.Intro != undefined) {
+        this.setSequencerIntroData(
+          chapterJSON.Intro.title,
+          chapterJSON.Intro.subText
+        );
+      }
       // Sets data for the TextSections
-      this.setSequencerTextSectionData(
-        JSON.parse(JSON.stringify(chapterJSON.TextSection1))
-      );
-
+      if (chapterJSON.TextSection1 != undefined) {
+        this.setSequencerTextSectionData(
+          JSON.parse(JSON.stringify(chapterJSON.TextSection1))
+        );
+      }
       // Sets data for the ChoiceSections
-      this.setSequencerChoiceSectionData(
-        chapterJSON.ChoiceSection1.text,
-        chapterJSON.ChoiceSection1.choices.choice1,
-        chapterJSON.ChoiceSection1.choices.choice2,
-        chapterJSON.ChoiceSection1.choicesMetadata.correctChoice,
-        chapterJSON.ChoiceSection1.choicesMetadata.gameOverText,
-        chapterJSON.ChoiceSection1.choicesMetadata.successText
-      );
+      if (chapterJSON.ChoiceSection1 != undefined) {
+        this.setSequencerChoiceSectionData(
+          chapterJSON.ChoiceSection1.text,
+          chapterJSON.ChoiceSection1.choices.choice1,
+          chapterJSON.ChoiceSection1.choices.choice2,
+          chapterJSON.ChoiceSection1.choicesMetadata.correctChoice,
+          chapterJSON.ChoiceSection1.choicesMetadata.gameOverText,
+          chapterJSON.ChoiceSection1.choicesMetadata.successText
+        );
+      }
 
       // Sets data for the Ending
-      this.setSequencerEndingData(
-        chapterJSON.Ending.title,
-        chapterJSON.Ending.subText
-      );
+      if (chapterJSON.Ending != undefined) {
+        this.setSequencerEndingData(
+          chapterJSON.Ending.title,
+          chapterJSON.Ending.subText
+        );
+      }
     },
     setSequencerIntroData(title, subText) {
       this.Intro.title = title;
@@ -272,6 +288,19 @@ export default {
 
       console.log("advanceChapterTimeline() hit.");
     },
+    endChapter() {
+      if (
+        this.$store.state.CurrentChapter <= this.$store.state.NumberOfChapters
+      ) {
+        this.$store.dispatch(
+          "setCurrentChapter",
+          this.$store.state.CurrentChapter + 1
+        );
+        //this.setInitialComponentDataFromJsonImportProp();
+      } else {
+        console.log("Reached the end of the game!");
+      }
+    },
   },
   mounted() {
     // When mounted, display the first set of data.
@@ -280,6 +309,7 @@ export default {
     this.sequenceIndexComponentType = this.chapterTimeline[
       this.sequenceIndex
     ][1];
+    console.log(this.chapterTimeline);
     console.log("SequenceIndex: " + this.sequenceIndex);
   },
 };
