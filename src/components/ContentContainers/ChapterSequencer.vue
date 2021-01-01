@@ -29,6 +29,7 @@ export default {
         // this.$store.dispatch("resetIntroFade");
         console.log(`Updating Current Chapter from ${oldValue} to ${newValue}`);
       } else {
+        this.push()
         console.log("Hit end of game! Congratulations!");
       }
     },

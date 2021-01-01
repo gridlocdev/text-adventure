@@ -5,7 +5,7 @@
       align="center"
       justify="center"
     >
-      <h1 style="letter-spacing: 0.15em">Success!</h1>
+      <h1 class="success--text" style="font-size: 2.5em; letter-spacing: 0.15em">Success!</h1>
     </v-row>
     <v-row class="ma-10" align="center" justify="center">
       <typewriter :key="this.text" :text="this.text" :showNextButton="false" />
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Typewriter from "./Typewriter.vue";
+import Typewriter from "../../components/Content/Typewriter.vue";
 export default {
   components: {
     Typewriter,

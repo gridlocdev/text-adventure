@@ -2,15 +2,15 @@ Next Steps:
 
 {{ The sequencer is done, now all that's left is: }} 
 
-- Add an End Game screen 
+MVP:
 
-- Fix the spacing on the Choice buttons in non-full screen
+- Finish my story, and add it into the ChapterSequencer.
 
+Bonus Goal:
+- User-created stories.
+: 1 - Create Story JSON page
+: 2 - Load Story JSON page
 
-- Create and add the Sound Effects
-- Modify the Light and Dark mode appearance
-
-- Add the "Insert JSON" module, where it can create your own story in the view.
 
 Optional: (If people ask for it) - Add a Back arrow to the TextSequencer component to go to last text
 

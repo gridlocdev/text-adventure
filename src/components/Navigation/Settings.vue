@@ -92,9 +92,9 @@ export default {
       SettingsItems_Toggles: [
         {
           title: "Dark Mode",
-          icon: "mdi-weather-night",
+          icon: "mdi-white-balance-sunny",
           methodName: "toggleDarkMode",
-          toggle: false,
+          toggle: true,
         },
       ],
       SettingsItems_ChoiceBtns: [
@@ -118,7 +118,7 @@ export default {
     },
     toggleDarkMode() {
       // Set the ViewModel as the data we need
-      var vm = this.SettingsItems_Toggles[1];
+      var vm = this.SettingsItems_Toggles[0];
       vm.toggle = !vm.toggle;
 
       this.$vuetify.theme.dark = vm.toggle;

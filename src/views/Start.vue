@@ -7,10 +7,10 @@
       <v-row class="pa-md-2" align="center" justify="center">
         <h1>Text Adventure Game</h1>
       </v-row>
-      <v-row class="pb-md-5" align="center" justify="center">
+      <v-row class="pb-md-5 ma-2" align="center" justify="center">
         <h3>Test your might against the greatest of text adventures.</h3>
       </v-row>
-      <v-row class="pa-md-5" align="center" justify="center">
+      <v-row class="pa-md-5 ma-8" align="center" justify="center">
         <v-btn
           @click="$router.push('./chapterSequencer')"
           elevation="2"
