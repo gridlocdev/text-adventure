@@ -26,7 +26,7 @@ export default {
       if (newValue <= this.$store.state.NumberOfChapters) {
         this.populateCurrentChapterJSON();
         this.$store.dispatch("setSequencerIndex", 0);
-
+        // this.$store.dispatch("resetIntroFade");
         console.log(`Updating Current Chapter from ${oldValue} to ${newValue}`);
       } else {
         console.log("Hit end of game! Congratulations!");

@@ -62,6 +62,7 @@ export default {
         this.setInitialComponentDataFromJsonImportProp();
         this.$store.dispatch("setSequencerIndex", 0);
       } else {
+        // setting false to True
         this.$store.state.ResetChapter = false;
       }
     },
@@ -224,7 +225,6 @@ export default {
 
       var sectionName = this.chapterTimeline[this.sequenceIndex][2];
       var sectionType = this.chapterTimeline[this.sequenceIndex][1];
-      console.log("AdvanceTimeline() SWITCH HIT:");
       switch (sectionType) {
         case "Intro":
           // Sets data for Intro
@@ -232,34 +232,18 @@ export default {
             this.chapterJSON[sectionName].title,
             this.chapterJSON[sectionName].subText
           );
-          console.log(
-            "AdvanceTimeline() (Intro): " + this.chapterJSON[sectionName].title,
-            this.chapterJSON[sectionName].subText
-          );
+          
           break;
         case "TextSection":
           // Sets data for the TextSections
           this.setSequencerTextSectionData(
             JSON.parse(JSON.stringify(this.chapterJSON[sectionName]))
           );
-          console.log(
-            "AdvanceTimeline() (TextSection): " +
-              JSON.parse(JSON.stringify(this.chapterJSON[sectionName]))
-          );
           break;
         case "ChoiceSection":
           // Sets data for the ChoiceSections
           this.setSequencerChoiceSectionData(
             this.chapterJSON[sectionName].text,
-            this.chapterJSON[sectionName].choices.choice1,
-            this.chapterJSON[sectionName].choices.choice2,
-            this.chapterJSON[sectionName].choicesMetadata.correctChoice,
-            this.chapterJSON[sectionName].choicesMetadata.gameOverText,
-            this.chapterJSON[sectionName].choicesMetadata.successText
-          );
-          console.log(
-            "AdvanceTimeline() (ChoiceSection): " +
-              this.chapterJSON[sectionName].text,
             this.chapterJSON[sectionName].choices.choice1,
             this.chapterJSON[sectionName].choices.choice2,
             this.chapterJSON[sectionName].choicesMetadata.correctChoice,
@@ -273,11 +257,6 @@ export default {
             this.chapterJSON[sectionName].title,
             this.chapterJSON[sectionName].subText
           );
-          console.log(
-            "AdvanceTimeline() (Ending): " +
-              this.chapterJSON[sectionName].title,
-            this.chapterJSON[sectionName].subText
-          );
           break;
         default:
           console.log(
@@ -285,8 +264,6 @@ export default {
           );
           break;
       }
-
-      console.log("advanceChapterTimeline() hit.");
     },
     endChapter() {
       if (

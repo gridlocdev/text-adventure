@@ -57,7 +57,10 @@ export default {
       this.$router.go(-1);
     },
     clickRestartChapter() {
+      this.$store.dispatch("resetIntroFade");
       this.$store.dispatch("resetChapter");
+      console.log("clickRestartChapter clicked.")
+      
       this.$router.push("./");
     },
   },

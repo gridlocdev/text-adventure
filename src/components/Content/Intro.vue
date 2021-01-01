@@ -23,8 +23,17 @@ export default {
     title: String,
     subText: String,
   },
+  data() {
+    return {
+      componentMountedTriggered: false,
+      componentActivatedTriggered: false,
+      fadeOutCalls: 0,
+    };
+  },
   methods: {
     initFadeOut() {
+      // If the fadeOut hasn't been called yet
+
       // Function to handle fading in/out Intro text on a timer.
       // Wait the 3000ms for fadeIn, then fadeOut.
       var fadeContainer = document.getElementById("fadeContainer");
@@ -37,11 +46,14 @@ export default {
           );
           // Wait for the 3000ms for fadeOut to end, and emit an event.
           setTimeout(() => {
+            console.log(
+              "Secont setTimeout hit. fadeOutStarted = " + this.fadeOutStarted
+            );
+            this.$emit("incrementSequence");
             this.$store.dispatch(
               "setSequencerIndex",
               this.$store.state.SequencerIndex + 1
             );
-            this.$emit("incrementSequence");
           }, 3000);
         }
       }, 3000);
@@ -50,15 +62,19 @@ export default {
   errorCaptured(error) {
     console.log("Error occured in Intro component: " + error);
   },
-  // mounted() {
-  //   if (this._inactive != false) {
-  //     console.log("I've been hit!");
-  //     this.initFadeOut();
-  //   }
-  // },
+  mounted() {
+    console.log("Mounted()");
+    if (!this.$store.state.ResetIntroFade) {
+      this.initFadeOut();
+    }
+  },
   activated() {
+    console.log("Activated()");
     this.$store.dispatch("setPageIndex", this.$options.name);
-    this.initFadeOut();
+    if (this.$store.state.ResetIntroFade) {
+      this.$store.state.ResetIntroFade = false;
+      this.initFadeOut();
+    }
   },
 };
 </script>

@@ -2,10 +2,7 @@ Next Steps:
 
 {{ The sequencer is done, now all that's left is: }} 
 
-- Fix the bugs with the fadeOut on Intro and Ending, it doesn't trigger with just Activated. (Mounted used to be there, but it decided to trigger twice at first.)
-
 - Add an End Game screen 
-- Add a Back arrow to the TextSequencer component to go to last text
 
 - Fix the spacing on the Choice buttons in non-full screen
 
@@ -14,6 +11,8 @@ Next Steps:
 - Modify the Light and Dark mode appearance
 
 - Add the "Insert JSON" module, where it can create your own story in the view.
+
+Optional: (If people ask for it) - Add a Back arrow to the TextSequencer component to go to last text
 
 - Documentation: 
 : In each component, at the top, list what the component does in a comment.

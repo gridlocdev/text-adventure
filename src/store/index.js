@@ -6,7 +6,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     PageIndex: 'Start',
-    Sound: false,
     DarkMode: false,
     TextSpeed: 10,
     StoryName: 'Text Adventure Game',
@@ -17,8 +16,13 @@ export default new Vuex.Store({
     NumberOfChapters: 2,
     SequencerIndex: 0,
     ResetChapter: false,
+    ResetIntroFade: false
   },
   mutations: {
+    resetIntroFade(state) {
+      state.ResetIntroFade = true;
+      console.log("(State) ResetIntroFade: " + "true");
+    },
     setStoryName(state, text) {
       state.StoryName = text;
       console.log("(State) StoryName: " + text);
@@ -55,10 +59,6 @@ export default new Vuex.Store({
       state.PageIndex = pageIndex;
       console.log("(State) pageIndex: " + pageIndex);
     },
-    toggleSound(state, soundToggle) {
-      state.Sound = soundToggle;
-      console.log("(State) soundToggle: " + soundToggle);
-    },
     toggleDarkMode(state, darkModeToggle) {
       state.DarkMode = darkModeToggle;
       console.log("(State) darkModeToggle: " + darkModeToggle);
@@ -69,6 +69,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    resetIntroFade(context) {
+      context.commit('resetIntroFade');
+    },
     setStoryName(context, text) {
       context.commit('setStoryName', text);
     },
@@ -95,9 +98,6 @@ export default new Vuex.Store({
     },
     setPageIndex(context, pageIndex) {
       context.commit('setPageIndex', pageIndex);
-    },
-    toggleSound(context, soundToggle) {
-      context.commit('toggleSound', soundToggle);
     },
     toggleDarkMode(context, darkModeToggle) {
       context.commit('toggleDarkMode', darkModeToggle);

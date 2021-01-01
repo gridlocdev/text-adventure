@@ -18,7 +18,7 @@
             name="toggleRows"
             align="center"
             justify="center"
-            class="text-center"
+            class="text-center my-3"
             cols="12"
             no-gutters
           >
@@ -46,7 +46,7 @@
             name="multiButtonRows"
             align="center"
             justify="center"
-            class="text-center"
+            class="text-center my-3"
             cols="12"
             no-gutters
           >
@@ -63,11 +63,11 @@
                 color="accent-3"
                 group
               >
-                <v-btn @click="setTextSpeed(110)" value="left"> Slow </v-btn>
+                <v-btn @click="setTextSpeed(90)" value="left"> Slow </v-btn>
 
-                <v-btn @click="setTextSpeed(90)" value="center"> Normal </v-btn>
+                <v-btn @click="setTextSpeed(70)" value="center"> Normal </v-btn>
 
-                <v-btn @click="setTextSpeed(50)" value="right"> Fast </v-btn>
+                <v-btn @click="setTextSpeed(30)" value="right"> Fast </v-btn>
               </v-btn-toggle>
             </v-col>
           </v-row>
@@ -90,12 +90,6 @@ export default {
     return {
       settingsModal: false,
       SettingsItems_Toggles: [
-        {
-          title: "Sound",
-          icon: "mdi-volume-off",
-          methodName: "toggleSound",
-          toggle: false,
-        },
         {
           title: "Dark Mode",
           icon: "mdi-weather-night",
@@ -121,24 +115,6 @@ export default {
     setPageIndex() {
       // Set the application state PageIndex to "Settings"
       this.$store.dispatch("setPageIndex", this.$options.name);
-    },
-
-    toggleSound() {
-      // Set the ViewModel as the data we need
-      var vm = this.SettingsItems_Toggles[0];
-      vm.toggle = !vm.toggle;
-
-      // Set the Icon of the ViewModel based on the Toggle value
-      switch (vm.toggle) {
-        case false:
-          vm.icon = "mdi-volume-off";
-          break;
-        case true:
-          vm.icon = "mdi-volume-high";
-          break;
-      }
-      // Update our AppState by calling the Action
-      this.$store.dispatch("toggleSound", vm.toggle);
     },
     toggleDarkMode() {
       // Set the ViewModel as the data we need
