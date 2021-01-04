@@ -12,7 +12,7 @@
       </v-row>
       <v-row class="pa-md-5 ma-8" align="center" justify="center">
         <v-btn
-          @click="$router.push('./chapterSequencer')"
+          @click="$router.push('chapter' + `${store.state.CurrentChapter}`)"
           elevation="2"
           x-large
           color="primary"
@@ -26,10 +26,17 @@
 </template>
 
 <script>
+import store from "../store/index.js";
+
 export default {
   name: "Start",
   mounted() {
     this.$store.dispatch("setPageIndex", this.$options.name);
+  },
+  data: function () {
+    return {
+      store: store,
+    };
   },
 };
 </script>

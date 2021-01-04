@@ -40,6 +40,7 @@
 
 <script>
 import Settings from "./Settings.vue";
+import store from "../../store/index";
 
 export default {
   components: {
@@ -52,7 +53,7 @@ export default {
       {
         title: "The Hero's Journey",
         icon: "mdi-lock",
-        routerLink: "./chapterSequencer",
+        routerLink: "chapter" + store.state.CurrentChapter,
       },
     ],
 

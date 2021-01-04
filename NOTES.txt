@@ -3,14 +3,24 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
-
+- Bugtest the Chapter routing
+- Add a Privacy Policy (In the navbar, at the bottom)
+: All data is stored locally on your browser. The storage there is cached, and is used to persist your story progress through refreshes and when the browser is closed. 
+: If you would like to reset it, click "Reset Story Progress" in Settings, or you can also reset it through your browser options.
+- In Settings, add a button for "Reset Story Progress"
+: This should clear out the LocalStorage for that chapter's stuff
 - Finish my story, and add it into the ChapterSequencer.
 
 Bonus Goal:
 - User-created stories.
 : 1 - Create Story JSON page
+: : Drag and drop story sections to create a story
+: : Select your chapter's name, icon, and description
+: : Export it as JSON, so the user can save it and load a new story
 : 2 - Load Story JSON page
-
+: : Create the Story JSON in the VueX State
+: : In ChapterSequencer, initialize it to the State and set a watcher
+: : After loaded, add a new item to the navbar list
 
 Optional: (If people ask for it) - Add a Back arrow to the TextSequencer component to go to last text
 

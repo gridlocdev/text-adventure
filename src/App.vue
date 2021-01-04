@@ -13,12 +13,17 @@
 
 <script>
 import HeaderBar from "./components/Navigation/HeaderBar.vue";
+import store from './store';
 
 export default {
   name: "App",
   components: {
     HeaderBar,
   },
+  store: store,
+  beforeCreate() {
+    this.$store.commit('initializeStore');
+  }
 };
 </script>
 

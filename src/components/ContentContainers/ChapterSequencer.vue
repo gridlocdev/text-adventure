@@ -26,10 +26,11 @@ export default {
       if (newValue <= this.$store.state.NumberOfChapters) {
         this.populateCurrentChapterJSON();
         this.$store.dispatch("setSequencerIndex", 0);
+        this.$router.push("/chapter" + this.$store.state.CurrentChapter);
         // this.$store.dispatch("resetIntroFade");
         console.log(`Updating Current Chapter from ${oldValue} to ${newValue}`);
       } else {
-        this.push()
+        this.$router.push("/endgame");
         console.log("Hit end of game! Congratulations!");
       }
     },

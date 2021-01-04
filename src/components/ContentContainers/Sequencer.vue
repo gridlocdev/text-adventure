@@ -79,7 +79,7 @@ export default {
   },
   data: function () {
     return {
-      sequenceIndex: 0,
+      sequenceIndex: localStorage.getItem("SequencerIndex"),
       sequenceIndexComponentType: "",
       chapterTimeline: [],
       endSequence: false,
@@ -217,6 +217,9 @@ export default {
         i++;
       }
       this.chapterTimeline = timeline;
+      localStorage.setItem("ChapterTimeline", JSON.stringify(timeline));
+      console.log(JSON.parse(localStorage.getItem("ChapterTimeline")));
+      console.log(this.sequenceIndex);
       console.log(timeline);
     },
     advanceChapterTimeline() {
@@ -232,7 +235,7 @@ export default {
             this.chapterJSON[sectionName].title,
             this.chapterJSON[sectionName].subText
           );
-          
+
           break;
         case "TextSection":
           // Sets data for the TextSections
@@ -281,8 +284,11 @@ export default {
   },
   mounted() {
     // When mounted, display the first set of data.
+    this.sequenceIndex = this.$store.state.SequencerIndex;
+    this.chapterTimeline = JSON.parse(localStorage.getItem("ChapterTimeline"));
     this.createChapterTimeline();
     this.setInitialComponentDataFromJsonImportProp();
+    console.log(this.chapterTimeline);
     this.sequenceIndexComponentType = this.chapterTimeline[
       this.sequenceIndex
     ][1];

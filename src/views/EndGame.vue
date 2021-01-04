@@ -30,8 +30,7 @@ export default {
       ],
     };
   },
-  methods: {
-  },
+  methods: {},
   mounted() {
     // On load, show the first textIndex entry and just leave the next to render
     setTimeout(() => {
@@ -42,6 +41,9 @@ export default {
         // Wait for the 3000ms for fadeOut to end, and emit an event.
         setTimeout(() => {
           this.$emit("endGame");
+          this.$store.commit("setSequencerIndex", 0);
+          this.$store.commit("setCurrentChapter", 1);
+          this.$store.commit("resetIntroFade");
           this.textIndex++;
         }, 1500);
       }

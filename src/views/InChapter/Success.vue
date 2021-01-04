@@ -5,7 +5,12 @@
       align="center"
       justify="center"
     >
-      <h1 class="success--text" style="font-size: 2.5em; letter-spacing: 0.15em">Success!</h1>
+      <h1
+        class="success--text"
+        style="font-size: 2.5em; letter-spacing: 0.15em"
+      >
+        Success!
+      </h1>
     </v-row>
     <v-row class="ma-10" align="center" justify="center">
       <typewriter :key="this.text" :text="this.text" :showNextButton="false" />
@@ -33,6 +38,8 @@
 
 <script>
 import Typewriter from "../../components/Content/Typewriter.vue";
+import store from "../../store/index.js";
+
 export default {
   components: {
     Typewriter,
@@ -40,6 +47,7 @@ export default {
   data: function () {
     return {
       text: String,
+      store: store,
     };
   },
   methods: {
@@ -49,7 +57,7 @@ export default {
         "setSequencerIndex",
         this.$store.state.SequencerIndex + 1
       );
-      this.$router.push("./chapterSequencer");
+      this.$router.push("chapter" + store.state.CurrentChapter);
     },
     updateSuccessText() {
       this.text = this.$store.state.SuccessText;

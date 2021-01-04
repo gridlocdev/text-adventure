@@ -3,12 +3,14 @@ import VueRouter from 'vue-router'
 import Start from '../views/Start.vue'
 import EndGame from '../views/EndGame.vue'
 
-
 import Success from '../views/InChapter/Success.vue'
 import GameOver from '../views/InChapter/GameOver.vue'
 import Ending from '../components/Content/Ending.vue'
 
 import ChapterSequencer from '../components/ContentContainers/ChapterSequencer.vue'
+
+import store from '../store/index.js'
+var storeVar = store;
 
 Vue.use(VueRouter)
 
@@ -25,7 +27,14 @@ const routes = [
     component: Start
   },
   {
-    path: '/chapterSequencer',
+    path: '*',
+    redirect: '/',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+  },
+  {
+    path: `/chapter:${storeVar.state.CurrentChapter}`,
     name: ChapterSequencer,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -71,4 +80,15 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  // If the user is navigating to a URL that starts with "Chapter", redirect them to where they left off.
+  if (to.path.includes('chapter') && to.path !== `/chapter:${storeVar.state.CurrentChapter}`) {
+    console.log("Router BeforeEach hit! Route: " + to.path)
+    console.log("Router compare: " + `/chapter:${storeVar.state.CurrentChapter}`)
+    next({ path: `/chapter:${storeVar.state.CurrentChapter}` });
+  }
+  else {
+    next();
+  }
+});
 export default router
