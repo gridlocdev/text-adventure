@@ -106,9 +106,9 @@ export default {
       SettingsItems_Toggles: [
         {
           title: "Dark Mode",
-          icon: "mdi-white-balance-sunny",
+          icon: "",
           methodName: "toggleDarkMode",
-          toggle: true,
+          toggle: this.$store.state.DarkMode,
         },
       ],
       SettingsItems_ChoiceBtns: [
@@ -137,16 +137,46 @@ export default {
 
       this.$vuetify.theme.dark = vm.toggle;
       // Set the Icon of the ViewModel based on the Toggle value
+
       switch (vm.toggle) {
-        case false:
+        case true:
           vm.icon = "mdi-weather-night";
           break;
-        case true:
+        case false:
           vm.icon = "mdi-white-balance-sunny";
           break;
       }
       // Update our AppState by calling the Action
       this.$store.dispatch("toggleDarkMode", vm.toggle);
+    },
+    setDarkModeSettingsIcon(toggle) {
+      switch (toggle) {
+        case true:
+          this.SettingsItems_Toggles[0].icon = "mdi-weather-night";
+          break;
+        case false:
+          this.SettingsItems_Toggles[0].icon = "mdi-white-balance-sunny";
+          break;
+      }
+      this.SettingsItems_Toggles[0].toggle = toggle;
+    },
+    setTextSpeedButtonGroupActiveItem(textSpeed) {
+      console.log(typeof textSpeed);
+      switch (textSpeed) {
+        case 50:
+          this.SettingsItems_ChoiceBtns[0].activeBtnPosition = "left";
+          break;
+        case 30:
+          this.SettingsItems_ChoiceBtns[0].activeBtnPosition = "center";
+          break;
+        case 10:
+          this.SettingsItems_ChoiceBtns[0].activeBtnPosition = "right";
+          break;
+        default:
+          console.log("Hit default. Not sure how you got here.");
+          break;
+      }
+      console.log(textSpeed);
     },
     setTextSpeed(textSpeed) {
       this.$store.dispatch("setTextSpeed", textSpeed);
@@ -157,6 +187,10 @@ export default {
       // When the SettingsModal is opened, call SetPageIndex()
       this.setPageIndex();
     },
+  },
+  mounted() {
+    this.setDarkModeSettingsIcon(this.$store.state.DarkMode);
+    this.setTextSpeedButtonGroupActiveItem(this.$store.state.TextSpeed);
   },
 };
 </script>

@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     PageIndex: 'Start',
-    DarkMode: false,
+    DarkMode: true,
     TextSpeed: 10,
     StoryName: 'Text Adventure Game',
     ChapterIconList: ['mdi-crown-outline', 'mdi-bridge', 'mdi-sword-cross', 'mdi-wizard-hat', 'mdi-image-filter-hdr'],
@@ -26,7 +26,7 @@ export default new Vuex.Store({
       }
       if (localStorage.getItem('DarkMode')) {
         state.DarkMode = localStorage.getItem('DarkMode') == 'true';
-        
+
         console.log("Loaded from LocalStorage: DarkMode - " + state.DarkMode)
       }
       if (localStorage.getItem('TextSpeed')) {

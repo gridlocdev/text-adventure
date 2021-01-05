@@ -57,9 +57,16 @@ export default {
   },
   methods: {
     resetLocalCache() {
+      // Sets variables we should keep, like the user's preferences
+      const darkMode = localStorage.getItem("DarkMode") == "true";
+      const textSpeed = parseInt(localStorage.getItem("TextSpeed"));
+
       // Resets LocalStorage, then navigates to the home URL.
       this.dialog = false;
       localStorage.clear();
+      localStorage.setItem("DarkMode", darkMode);
+      localStorage.setItem("TextSpeed", textSpeed);
+
       this.$emit("closeSettingsModal");
       this.$router.push({ name: "Start" });
       this.$router.go();

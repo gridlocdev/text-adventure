@@ -3,10 +3,12 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
-- Fix some bugs with the LocalStorage: 
-: Make the settings on Settings visible as they were set. Dark Mode, Text Speed, etc;
-- Fix the Reset Local Cache: 
-: When it resets the local cache, make sure it keeps the "Dark Mode" and "Text Speed" cached. In that reset function, set those two from the state to a local variable and then re-set them to local storage after cache is cleared.
+- Fix the bug with the router
+: To reproduce - Go through the story until you hit chapter 2, and then do a router action. 
+: : If you refresh the page, the URL updates from 2 to 1, when it shouldn't.
+: : If you use the NavBar link, it updates back to 2 like it should.
+: : https://stackoverflow.com/questions/50382185/how-to-detect-page-is-refreshed-in-vue-js 
+: : : In short, refreshing doesn't hit my BeforeEach router function.
 - Finish my story, and add it into the ChapterSequencer.
 
 Bonus Goal:
