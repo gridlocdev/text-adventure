@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     PageIndex: 'Start',
-    DarkMode: true,
+    DarkMode: false,
     TextSpeed: 10,
     StoryName: 'Text Adventure Game',
     ChapterIconList: ['mdi-crown-outline', 'mdi-bridge', 'mdi-sword-cross', 'mdi-wizard-hat', 'mdi-image-filter-hdr'],
@@ -21,52 +21,53 @@ export default new Vuex.Store({
   mutations: {
     initializeStore(state) {
       if (localStorage.getItem('PageIndex')) {
-        console.log("Loaded from LocalStorage: PageIndex - " + state.PageIndex)
         state.PageIndex = localStorage.getItem('PageIndex');
+        console.log("Loaded from LocalStorage: PageIndex - " + state.PageIndex)
       }
       if (localStorage.getItem('DarkMode')) {
+        state.DarkMode = localStorage.getItem('DarkMode') == 'true';
+        
         console.log("Loaded from LocalStorage: DarkMode - " + state.DarkMode)
-        state.DarkMode = localStorage.getItem('DarkMode');
       }
       if (localStorage.getItem('TextSpeed')) {
-        console.log("Loaded from LocalStorage: TextSpeed - " + state.TextSpeed)
         state.TextSpeed = parseInt(localStorage.getItem('TextSpeed'));
+        console.log("Loaded from LocalStorage: TextSpeed - " + state.TextSpeed)
       }
       if (localStorage.getItem('StoryName')) {
-        console.log("Loaded from LocalStorage: StoryName - " + state.StoryName)
         state.StoryName = localStorage.getItem('StoryName');
+        console.log("Loaded from LocalStorage: StoryName - " + state.StoryName)
       }
       if (localStorage.getItem('ChapterIconList')) {
+        state.ChapterIconList = JSON.parse(localStorage.getItem('ChapterIconList'));
         console.log("Loaded from LocalStorage: ChapterIconList - " + state.ChapterIconList)
-        state.ChapterIconList = localStorage.getItem('ChapterIconList');
       }
       if (localStorage.getItem('SuccessText')) {
-        console.log("Loaded from LocalStorage: SuccessText - " + state.SuccessText)
         state.SuccessText = localStorage.getItem('SuccessText');
+        console.log("Loaded from LocalStorage: SuccessText - " + state.SuccessText)
       }
       if (localStorage.getItem('GameOverText')) {
-        console.log("Loaded from LocalStorage: GameOverText - " + state.GameOverText)
         state.GameOverText = localStorage.getItem('GameOverText');
+        console.log("Loaded from LocalStorage: GameOverText - " + state.GameOverText)
       }
       if (localStorage.getItem('CurrentChapter')) {
-        console.log("Loaded from LocalStorage: CurrentChapter - " + state.CurrentChapter)
         state.CurrentChapter = parseInt(localStorage.getItem('CurrentChapter'));
+        console.log("Loaded from LocalStorage: CurrentChapter - " + state.CurrentChapter)
       }
       if (localStorage.getItem('NumberOfChapters')) {
-        console.log("Loaded from LocalStorage: NumberOfChapters - " + state.NumberOfChapters)
         state.NumberOfChapters = parseInt(localStorage.getItem('NumberOfChapters'));
+        console.log("Loaded from LocalStorage: NumberOfChapters - " + state.NumberOfChapters)
       }
       if (localStorage.getItem('SequencerIndex')) {
-        console.log("Loaded from LocalStorage: SequencerIndex - " + state.SequencerIndex)
         state.SequencerIndex = parseInt(localStorage.getItem('SequencerIndex'));
+        console.log("Loaded from LocalStorage: SequencerIndex - " + state.SequencerIndex)
       }
       if (localStorage.getItem('ResetChapter')) {
+        state.ResetChapter = localStorage.getItem('ResetChapter') == 'true';
         console.log("Loaded from LocalStorage: ResetChapter - " + state.ResetChapter)
-        state.ResetChapter = localStorage.getItem('ResetChapter');
       }
       if (localStorage.getItem('ResetIntroFade')) {
+        state.ResetIntroFade = localStorage.getItem('ResetIntroFade') == 'true';
         console.log("Loaded from LocalStorage: ResetIntroFade - " + state.ResetIntroFade)
-        state.ResetIntroFade = localStorage.getItem('ResetIntroFade');
       }
     },
     resetIntroFade(state) {
@@ -90,13 +91,13 @@ export default new Vuex.Store({
       console.log("(State) SequencerIndex: " + number);
     },
     setNumberOfChapters(state, number) {
-      state.ChapterIconList = number;
+      state.NumberOfChapters = number;
       localStorage.setItem('ChapterIconList', number);
       console.log("(State) CurrentChapter: " + number);
     },
     setChapterIconArray(state, array) {
       state.ChapterIconList = array;
-      localStorage.setItem('ChapterIconList', array);
+      localStorage.setItem('ChapterIconList', JSON.stringify(array));
       console.log("(State) CurrentChapter: " + array);
     },
     setCurrentChapter(state, number) {

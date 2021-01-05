@@ -34,6 +34,19 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <template v-slot:append>
+        <v-divider></v-divider>
+        <div class="pa-2">
+          <v-list-item link @click="navigateTo('/privacypolicy')">
+            <v-list-item-content>
+              <v-list-item-title> Privacy Policy</v-list-item-title>
+            </v-list-item-content>
+            <!-- <v-list-item-icon>
+              <v-icon style="fill: green">mdi-security</v-icon>
+            </v-list-item-icon> -->
+          </v-list-item>
+        </div>
+      </template>
     </v-navigation-drawer>
   </div>
 </template>
@@ -49,7 +62,7 @@ export default {
   data: () => ({
     drawer: null,
     NavigationItems: [
-      { title: "Home", icon: "mdi-arm-flex", routerLink: "./" },
+      { title: "Home", icon: "mdi-arm-flex", routerLink: "/" },
       {
         title: "The Hero's Journey",
         icon: "mdi-lock",
@@ -60,16 +73,20 @@ export default {
     right: null,
   }),
   methods: {
-    navigateTo(routerLink, title) {
-      if (routerLink == "." + this.$route.path) {
+    navigateTo(routerLink, title = null) {
+      if (routerLink == this.$route.path) {
         this.drawer = !this.drawer;
       } else {
         this.$router.push(routerLink);
       }
-      if (title != "Home") {
-        this.$store.dispatch("setStoryName", title);
-      } else {
-        this.$store.dispatch("setStoryName", "Text Adventure Game");
+      if (title != null) {
+        if (title != "Home") {
+          this.$store.dispatch("setStoryName", title);
+        } else {
+          this.$store.dispatch("setStoryName", "Text Adventure Game");
+        }
+      } else if (routerLink == "/privacypolicy") {
+        this.$store.dispatch("setStoryName", "Privacy Policy");
       }
     },
   },

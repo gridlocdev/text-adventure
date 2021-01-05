@@ -3,12 +3,10 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
-- Bugtest the Chapter routing
-- Add a Privacy Policy (In the navbar, at the bottom)
-: All data is stored locally on your browser. The storage there is cached, and is used to persist your story progress through refreshes and when the browser is closed. 
-: If you would like to reset it, click "Reset Story Progress" in Settings, or you can also reset it through your browser options.
-- In Settings, add a button for "Reset Story Progress"
-: This should clear out the LocalStorage for that chapter's stuff
+- Fix some bugs with the LocalStorage: 
+: Make the settings on Settings visible as they were set. Dark Mode, Text Speed, etc;
+- Fix the Reset Local Cache: 
+: When it resets the local cache, make sure it keeps the "Dark Mode" and "Text Speed" cached. In that reset function, set those two from the state to a local variable and then re-set them to local storage after cache is cleared.
 - Finish my story, and add it into the ChapterSequencer.
 
 Bonus Goal:

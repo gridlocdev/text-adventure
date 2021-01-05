@@ -13,7 +13,7 @@
 
 <script>
 import HeaderBar from "./components/Navigation/HeaderBar.vue";
-import store from './store';
+import store from "./store";
 
 export default {
   name: "App",
@@ -22,8 +22,10 @@ export default {
   },
   store: store,
   beforeCreate() {
-    this.$store.commit('initializeStore');
-  }
+    this.$store.commit("initializeStore");
+
+    this.$vuetify.theme.dark = this.$store.state.DarkMode;
+  },
 };
 </script>
 

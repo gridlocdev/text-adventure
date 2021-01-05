@@ -63,14 +63,23 @@
                 color="accent-3"
                 group
               >
-                <v-btn @click="setTextSpeed(90)" value="left"> Slow </v-btn>
+                <v-btn @click="setTextSpeed(50)" value="left"> Slow </v-btn>
 
-                <v-btn @click="setTextSpeed(70)" value="center"> Normal </v-btn>
+                <v-btn @click="setTextSpeed(30)" value="center"> Normal </v-btn>
 
-                <v-btn @click="setTextSpeed(30)" value="right"> Fast </v-btn>
+                <v-btn @click="setTextSpeed(10)" value="right"> Fast </v-btn>
               </v-btn-toggle>
             </v-col>
           </v-row>
+        </div>
+        <div>
+          <ResetStoryProgress v-on:closeSettingsModal="settingsModal = false" />
+
+          <!-- <v-row>
+            <v-col class="text-center">
+              <v-btn rounded> Reset Story Progress </v-btn>
+            </v-col>
+          </v-row> -->
         </div>
 
         <v-card-actions>
@@ -84,8 +93,13 @@
 </template>
 
 <script>
+import ResetStoryProgress from "./ResetStoryProgress.vue";
+
 export default {
   name: "Settings",
+  components: {
+    ResetStoryProgress,
+  },
   data: function () {
     return {
       settingsModal: false,
