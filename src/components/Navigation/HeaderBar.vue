@@ -68,6 +68,11 @@ export default {
         icon: "mdi-lock",
         routerLink: "chapter" + store.state.CurrentChapter,
       },
+      {
+        title: "Story Creator",
+        icon: "mdi-lock",
+        routerLink: "/storyCreator",
+      },
     ],
 
     right: null,

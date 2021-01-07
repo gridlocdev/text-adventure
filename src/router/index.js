@@ -7,6 +7,7 @@ import Success from '../views/InChapter/Success.vue'
 import GameOver from '../views/InChapter/GameOver.vue'
 import Ending from '../components/Content/Ending.vue'
 import PrivacyPolicy from '../views/PrivacyPolicy.vue'
+import StoryCreator from '../views/StoryCreator.vue'
 
 import ChapterSequencer from '../components/ContentContainers/ChapterSequencer.vue'
 
@@ -81,6 +82,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/PrivacyPolicy.vue')
+  },
+  {
+    path: '/storyCreator',
+    name: StoryCreator,
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/StoryCreator.vue')
   },
 
 ]

@@ -3,6 +3,10 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
+- Get User Created Stories working. 
+: https://sortablejs.github.io/Vue.Draggable/#/ <- Vue Draggable library
+: Create a nested list, to generate the JSON necessary for a new story.
+: : When you begin to drag something, use the CSS property { cursor: move } 
 - Fix the bug with the router
 : To reproduce - Go through the story until you hit chapter 2, and then do a router action. 
 : : If you refresh the page, the URL updates from 2 to 1, when it shouldn't.
@@ -21,6 +25,71 @@ Bonus Goal:
 : : Create the Story JSON in the VueX State
 : : In ChapterSequencer, initialize it to the State and set a watcher
 : : After loaded, add a new item to the navbar list
+
+Objective: 
+
+- Create two draggable lists. One to contain elements to add to, and the other as a static list of items to select from.
+
+
+- NewStorySections
+- SectionList
+
+When you drag things from the SectionList, it should set the item you're dragging to contain a data payload to be dropped. 
+
+When it gets dropped, it will add something to the JSON in a specific index.\
+
+
+Drop types: 
+
+AddChapter: 
+{
+    ${chapterName} : { MainSections: [{}]}
+}
+[[
+const chapterName = `'Chapter${this.ChapterDropIndex}`
+]]
+
+Intro: 
+{
+    title: ''
+    subtext: ''
+}
+[[
+
+]]
+
+TextSection: 
+
+[
+{ text: '' },
+
+]
+
+
+ChoiceSection: 
+{
+ChoiceSection1: {
+    text: "",
+    choices: {
+	    choice1: "",
+	    choice2: "",
+    },
+    choicesMetadata: {
+	    correctChoice: number,
+	    gameOverText: "",
+	    successText: "",
+				},
+},
+}
+
+Ending: 
+
+{
+    title: "",
+    subText: "",
+}
+
+
 
 Optional: (If people ask for it) - Add a Back arrow to the TextSequencer component to go to last text
 
