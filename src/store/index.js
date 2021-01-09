@@ -16,7 +16,8 @@ export default new Vuex.Store({
     NumberOfChapters: 2,
     SequencerIndex: 0,
     ResetChapter: false,
-    ResetIntroFade: false
+    ResetIntroFade: false,
+    StoryInProgress: false
   },
   mutations: {
     initializeStore(state) {
@@ -69,6 +70,15 @@ export default new Vuex.Store({
         state.ResetIntroFade = localStorage.getItem('ResetIntroFade') == 'true';
         console.log("Loaded from LocalStorage: ResetIntroFade - " + state.ResetIntroFade)
       }
+      if (localStorage.getItem('StoryInProgress')) {
+        state.StoryInProgress = localStorage.getItem('StoryInProgress') == 'true';
+        console.log("Loaded from LocalStorage: StoryInProgress - " + state.StoryInProgress)
+      }
+    },
+    setGameInProgress(state, bool) {
+      state.GameInProgress = bool;
+      localStorage.setItem('GameInProgress', true);
+      console.log("(State) GameInProgress: " + "true");
     },
     resetIntroFade(state) {
       state.ResetIntroFade = true;
@@ -132,6 +142,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setGameInProgress(context, bool) {
+      context.commit('setGameInProgress', bool)
+    },
     resetIntroFade(context) {
       context.commit('resetIntroFade');
     },

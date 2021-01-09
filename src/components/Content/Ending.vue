@@ -27,7 +27,7 @@
       </v-col>
     </v-row>
     <v-col>
-      <v-row align="center" justify="center">
+      <v-row class="ma-1" align="center" justify="center">
         <h1>{{ title }}</h1>
       </v-row>
 

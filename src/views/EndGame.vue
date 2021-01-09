@@ -40,10 +40,9 @@ export default {
         fadeContainer.classList.replace("animate__fadeIn", "animate__fadeOut");
         // Wait for the 3000ms for fadeOut to end, and emit an event.
         setTimeout(() => {
-          this.$emit("endGame");
-          this.$store.commit("setSequencerIndex", 0);
-          this.$store.commit("setCurrentChapter", 1);
-          this.$store.commit("resetIntroFade");
+          this.$store.dispatch("setSequencerIndex", 0);
+          this.$store.dispatch("setCurrentChapter", 1);
+          this.$store.dispatch("resetIntroFade");
           this.textIndex++;
         }, 1500);
       }

@@ -2,10 +2,12 @@
   <Sequencer
     :key="JSON.stringify(chapterJSON)"
     :jsonPayload="JSON.stringify(chapterJSON)"
+    v-on:endGame="endGame()"
   />
 </template>
 
 <script>
+//v-on:reloadChapterData="reloadChapterData()"
 import Sequencer from "./Sequencer.vue";
 
 import { mapState } from "vuex";
@@ -16,47 +18,60 @@ export default {
     Sequencer,
   },
   created() {
-    console.log("Chapter: " + this.$store.state.CurrentChapter);
     this.populateCurrentChapterJSON();
-    console.log("ChapterJSON: " + JSON.stringify(this.chapterJSON));
   },
   computed: mapState(["CurrentChapter"]),
   watch: {
     CurrentChapter(newValue, oldValue) {
-      if (newValue <= this.$store.state.NumberOfChapters) {
+      if (
+        newValue <= this.$store.state.NumberOfChapters &&
+        this.$store.state.GameInProgress == true
+      ) {
         this.populateCurrentChapterJSON();
         this.$store.dispatch("setSequencerIndex", 0);
         this.$router.push("/chapter" + this.$store.state.CurrentChapter);
         // this.$store.dispatch("resetIntroFade");
         console.log(`Updating Current Chapter from ${oldValue} to ${newValue}`);
       } else {
-        this.$router.push("/endgame");
-        console.log("Hit end of game! Congratulations!");
+        this.populateCurrentChapterJSON();
+        console.log("Game In Progress: " + this.$store.state.GameInProgress);
+        console.log("CurrentChapter: " + this.$store.state.CurrentChapter);
       }
     },
   },
   methods: {
+    endGame() {
+      this.$store.dispatch("setGameInProgress", false);
+      this.$router.push("/endgame");
+      console.log("Hit end of game! Congratulations!");
+    },
     populateCurrentChapterJSON() {
-      this.chapterJSON = this.chapterJSON = this.storyJSON[
-        "Chapter" + this.$store.state.CurrentChapter
-      ].ChapterJSON;
+      this.chapterJSON = this.storyJSON.Chapters[
+        this.$store.state.CurrentChapter - 1
+      ].ChapterSections;
+      //console.log("populateCurrentChapterJSON: " + JSON.stringify(this.chapterJSON));
     },
   },
-  data() {
+  data: function () {
     return {
       chapterJSON: {
         // Just the chapter's json
       },
       storyJSON: {
-        Chapter1: {
-          ChapterJSON: {
-            MainSections: [
+        Chapters: [
+          {
+            ChapterName: "Chapter 1",
+            ChapterSections: [
               {
-                Intro: {
+                SectionType: "Intro",
+                SectionData: {
                   title: "Chapter 1",
                   subText: "The Unruly King",
                 },
-                TextSection1: [
+              },
+              {
+                SectionType: "TextSection",
+                SectionData: [
                   {
                     text: "You wake up.",
                   },
@@ -67,7 +82,10 @@ export default {
                     text: "King says hi, but you need sword.",
                   },
                 ],
-                ChoiceSection1: {
+              },
+              {
+                SectionType: "ChoiceSection",
+                SectionData: {
                   text: "What should you do?",
                   choices: {
                     choice1: "Option 1",
@@ -79,7 +97,10 @@ export default {
                     successText: "He hands you the sword, good job!",
                   },
                 },
-                TextSection2: [
+              },
+              {
+                SectionType: "TextSection",
+                SectionData: [
                   {
                     text: "EEEEEEEEEEEEEEI am text one.",
                   },
@@ -90,11 +111,14 @@ export default {
                     text: "Huzzah!",
                   },
                 ],
-                ChoiceSection2: {
-                  text: "What should you dooooo?",
+              },
+              {
+                SectionType: "ChoiceSection",
+                SectionData: {
+                  text: "What should you do?",
                   choices: {
-                    choice1: "COption 1",
-                    choice2: "COption 2",
+                    choice1: "Option 1",
+                    choice2: "Option 2",
                   },
                   choicesMetadata: {
                     correctChoice: "1",
@@ -102,23 +126,29 @@ export default {
                     successText: "SUCCESS: 2",
                   },
                 },
-                Ending: {
+              },
+              {
+                SectionType: "Ending",
+                SectionData: {
                   title: "Chapter 1 Complete!",
                   subText: "You've successfully started your journey!",
                 },
               },
             ],
           },
-        },
-        Chapter2: {
-          ChapterJSON: {
-            MainSections: [
+          {
+            ChapterName: "Chapter 2",
+            ChapterSections: [
               {
-                Intro: {
+                SectionType: "Intro",
+                SectionData: {
                   title: "Chapter 2",
                   subText: "The Other Guy",
                 },
-                TextSection1: [
+              },
+              {
+                SectionType: "TextSection",
+                SectionData: [
                   {
                     text: "A guy's there.",
                   },
@@ -129,7 +159,10 @@ export default {
                     text: "What's his name again? Who knows.",
                   },
                 ],
-                ChoiceSection1: {
+              },
+              {
+                SectionType: "ChoiceSection",
+                SectionData: {
                   text: "Should you ask his name?",
                   choices: {
                     choice1: "Heck yeah",
@@ -142,7 +175,10 @@ export default {
                       "My name is... Chuck norris. Here's 10 million dollars.",
                   },
                 },
-                TextSection2: [
+              },
+              {
+                SectionType: "TextSection",
+                SectionData: [
                   {
                     text:
                       "Now equipped with 10 million dollars, you set your sights on the moon.",
@@ -156,7 +192,10 @@ export default {
                       "10 million is a lot, but you might not be able to go to the moon with that.",
                   },
                 ],
-                ChoiceSection2: {
+              },
+              {
+                SectionType: "ChoiceSection",
+                SectionData: {
                   text: "You need more money, what should you do?",
                   choices: {
                     choice1: "Become a hotdog stand guy",
@@ -170,14 +209,17 @@ export default {
                       "You find a runescape player that's sick nasty and gives you 400 billion GP",
                   },
                 },
-                Ending: {
+              },
+              {
+                SectionType: "Ending",
+                SectionData: {
                   title: "Chapter 2 Complete!",
                   subText: "You're rich! Muahahahahaaaaa",
                 },
               },
             ],
           },
-        },
+        ],
       },
     };
   },

@@ -9,9 +9,9 @@
           group="SectionList"
           @change="log"
         >
-        <div v-for="element in newStorySections" :key="element.text">
-          {{ element.text }}
-        </div>
+          <div v-for="element in newStorySections" :key="element.text">
+            {{ element.text }}
+          </div>
         </draggable>
       </v-col>
       <v-col class="col-6" align="center" justify="center">
@@ -48,27 +48,27 @@ export default {
         {
           text: "Add Chapter",
           icon: "mdi-folder-plus",
-          type: "goodbye",
+          componentName: 'Chapter',
         },
         {
           text: "Intro",
           icon: "mdi-rocket-launch",
-          type: "greeting",
+          componentName: 'Intro'
         },
         {
           text: "Text Section",
           icon: "mdi-text-box-multiple",
-          type: "greeting",
+          componentName: 'Text Section'
         },
         {
           text: "Choice Section",
           icon: "mdi-file-tree",
-          type: "affirmation",
+          componentName: 'Choice Section'
         },
         {
           text: "Ending",
           icon: "mdi-marker-check",
-          type: "goodbye",
+          componentName: 'Ending'
         },
       ],
     };

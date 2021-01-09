@@ -3,17 +3,20 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
-- Get User Created Stories working. 
-: https://sortablejs.github.io/Vue.Draggable/#/ <- Vue Draggable library
-: Create a nested list, to generate the JSON necessary for a new story.
+- Replace the Textboxes in textSection with v-textarea https://vuetifyjs.com/en/components/textareas/#misc
+- Replace the ChoiceSection question text with a v-textarea as well.
+- Add Saving to the chapter components
+: : Add a label next to the component name (Intro) that lists -unsaved or -saved in a muted red or green.
+: : On mouse out (@onmouseout), save. 
+: : Also save when the user clicks the unsaved label. 
+- Create the events that send the data to the Chapter component
+- Create the event that transfers the data from Chapter to the StoryCreator component.
+- Add the component that allows you to add these components to the chapter.
+- Use the draggables library to allow dragging of the chapter components.
 : : When you begin to drag something, use the CSS property { cursor: move } 
-- Fix the bug with the router
-: To reproduce - Go through the story until you hit chapter 2, and then do a router action. 
-: : If you refresh the page, the URL updates from 2 to 1, when it shouldn't.
-: : If you use the NavBar link, it updates back to 2 like it should.
-: : https://stackoverflow.com/questions/50382185/how-to-detect-page-is-refreshed-in-vue-js 
-: : : In short, refreshing doesn't hit my BeforeEach router function.
+: : https://sortablejs.github.io/Vue.Draggable/#/ <- Vue Draggable library
 - Finish my story, and add it into the ChapterSequencer.
+- In the TextSection, add an indicator for how many sections are left. (Small dots at the bottom of the screen, that each fill up once you proceed.)
 
 Bonus Goal:
 - User-created stories.
