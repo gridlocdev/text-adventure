@@ -3,16 +3,21 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
-- Replace the Textboxes in textSection with v-textarea https://vuetifyjs.com/en/components/textareas/#misc
-- Replace the ChoiceSection question text with a v-textarea as well.
+
+- Create the remainder of the methods to send the data from the child Chapter components to the AddChapter component.
+- Create the methods that show what the user can actually add into the chaptertimeline as a dynamic component. (It should be something like a dotted line with a box you can select. First component is intro, second can either be text or choice section, last is always ending, and ending is required.)
+
+- In the StoryCreator, add the ability to add and modify the icon for each chapter. 
+
 - Add Saving to the chapter components
 : : Add a label next to the component name (Intro) that lists -unsaved or -saved in a muted red or green.
 : : On mouse out (@onmouseout), save. 
 : : Also save when the user clicks the unsaved label. 
-- Create the events that send the data to the Chapter component
+
 - Create the event that transfers the data from Chapter to the StoryCreator component.
-- Add the component that allows you to add these components to the chapter.
+
 - Use the draggables library to allow dragging of the chapter components.
+: : Add a "mdi-drag" icon to the top center of each section.
 : : When you begin to drag something, use the CSS property { cursor: move } 
 : : https://sortablejs.github.io/Vue.Draggable/#/ <- Vue Draggable library
 - Finish my story, and add it into the ChapterSequencer.

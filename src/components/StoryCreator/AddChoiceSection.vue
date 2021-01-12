@@ -6,7 +6,7 @@
           <v-row class="mx-2 d-flex">
             <v-icon class="ma-2"> mdi-file-tree </v-icon>
             <h2 class="my-4">ChoiceSection</h2>
-            <v-icon class="ml-auto">mdi-close</v-icon>
+            <v-icon class="ml-auto clickable">mdi-close</v-icon>
           </v-row>
           <v-divider class="mx-2"></v-divider>
           <v-text-field
@@ -106,6 +106,9 @@
 <script>
 export default {
   name: "AddChoiceSection",
+  props: {
+    sectionID: Number,
+  },
   data() {
     return {
       questionText: "",
@@ -131,6 +134,59 @@ export default {
         },
       ],
     };
+  },
+  watch: {
+    questionText: {
+      handler: function () {
+        this.exportSectionData("ChoiceSection", {
+          questionText: this.questionText,
+          choices: {
+            choice1: this.choices.choice1,
+            choice2: this.choices.choice2,
+          },
+          choicesMetadata: {
+            correctChoice: this.choicesMetadata.correctChoice,
+            gameOverText: this.choicesMetadata.gameOverText,
+            successText: this.choicesMetadata.successText,
+          },
+        });
+      },
+      deep: false,
+    },
+    choices: {
+      handler: function () {
+        this.exportSectionData("ChoiceSection", {
+          questionText: this.questionText,
+          choices: {
+            choice1: this.choices.choice1,
+            choice2: this.choices.choice2,
+          },
+          choicesMetadata: {
+            correctChoice: this.choicesMetadata.correctChoice,
+            gameOverText: this.choicesMetadata.gameOverText,
+            successText: this.choicesMetadata.successText,
+          },
+        });
+      },
+      deep: true,
+    },
+    choicesMetadata: {
+      handler: function () {
+        this.exportSectionData("ChoiceSection", {
+          questionText: this.questionText,
+          choices: {
+            choice1: this.choices.choice1,
+            choice2: this.choices.choice2,
+          },
+          choicesMetadata: {
+            correctChoice: this.choicesMetadata.correctChoice,
+            gameOverText: this.choicesMetadata.gameOverText,
+            successText: this.choicesMetadata.successText,
+          },
+        });
+      },
+      deep: true,
+    },
   },
   methods: {
     setCorrectAnswer(answer) {
@@ -168,6 +224,10 @@ export default {
           break;
       }
     },
+    exportSectionData(sectionType, sectionData) {
+      this.$emit("sectionModified", this.sectionID);
+      this.$emit("updateComponentData", JSON.stringify(sectionData));
+    },
   },
 };
 </script>
@@ -175,5 +235,12 @@ export default {
 <style scoped>
 .v-btn::before {
   background-color: transparent;
+}
+.v-icon.clickable:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+.v-icon.clickable::after {
+  display: none !important;
 }
 </style>
