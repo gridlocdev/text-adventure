@@ -4,17 +4,16 @@ Next Steps:
 
 MVP:
 
-- Create the remainder of the methods to send the data from the child Chapter components to the AddChapter component.
-- Create the methods that show what the user can actually add into the chaptertimeline as a dynamic component. (It should be something like a dotted line with a box you can select. First component is intro, second can either be text or choice section, last is always ending, and ending is required.)
-
 - In the StoryCreator, add the ability to add and modify the icon for each chapter. 
+- After clicking the Plus button on TextSection, focus onto the textbox at the bottom.
+
+- Add sub-url on the StoryCreator tab for each tab type, that way I can router link to it from the Home page.
+
 
 - Add Saving to the chapter components
 : : Add a label next to the component name (Intro) that lists -unsaved or -saved in a muted red or green.
 : : On mouse out (@onmouseout), save. 
 : : Also save when the user clicks the unsaved label. 
-
-- Create the event that transfers the data from Chapter to the StoryCreator component.
 
 - Use the draggables library to allow dragging of the chapter components.
 : : Add a "mdi-drag" icon to the top center of each section.
@@ -22,82 +21,6 @@ MVP:
 : : https://sortablejs.github.io/Vue.Draggable/#/ <- Vue Draggable library
 - Finish my story, and add it into the ChapterSequencer.
 - In the TextSection, add an indicator for how many sections are left. (Small dots at the bottom of the screen, that each fill up once you proceed.)
-
-Bonus Goal:
-- User-created stories.
-: 1 - Create Story JSON page
-: : Drag and drop story sections to create a story
-: : Select your chapter's name, icon, and description
-: : Export it as JSON, so the user can save it and load a new story
-: 2 - Load Story JSON page
-: : Create the Story JSON in the VueX State
-: : In ChapterSequencer, initialize it to the State and set a watcher
-: : After loaded, add a new item to the navbar list
-
-Objective: 
-
-- Create two draggable lists. One to contain elements to add to, and the other as a static list of items to select from.
-
-
-- NewStorySections
-- SectionList
-
-When you drag things from the SectionList, it should set the item you're dragging to contain a data payload to be dropped. 
-
-When it gets dropped, it will add something to the JSON in a specific index.\
-
-
-Drop types: 
-
-AddChapter: 
-{
-    ${chapterName} : { MainSections: [{}]}
-}
-[[
-const chapterName = `'Chapter${this.ChapterDropIndex}`
-]]
-
-Intro: 
-{
-    title: ''
-    subtext: ''
-}
-[[
-
-]]
-
-TextSection: 
-
-[
-{ text: '' },
-
-]
-
-
-ChoiceSection: 
-{
-ChoiceSection1: {
-    text: "",
-    choices: {
-	    choice1: "",
-	    choice2: "",
-    },
-    choicesMetadata: {
-	    correctChoice: number,
-	    gameOverText: "",
-	    successText: "",
-				},
-},
-}
-
-Ending: 
-
-{
-    title: "",
-    subText: "",
-}
-
-
 
 Optional: (If people ask for it) - Add a Back arrow to the TextSequencer component to go to last text
 

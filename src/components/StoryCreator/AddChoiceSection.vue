@@ -32,6 +32,7 @@
                   v-ripple="{
                     class: 'success--text',
                   }"
+                  tabindex="-1"
                   class="my-5"
                   fab
                   small
@@ -63,6 +64,7 @@
                   v-ripple="{
                     class: 'success--text',
                   }"
+                  tabindex="-1"
                   class="my-5"
                   fab
                   small

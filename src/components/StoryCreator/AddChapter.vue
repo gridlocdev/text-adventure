@@ -115,15 +115,14 @@ export default {
       this.chapterTimeline[
         this.currentSectionID
       ].SectionData = this.currentSectionData;
-      
-      const chapterData = this.chapterTimeline.map(
+
+      const chapterSections = this.chapterTimeline.map(
         ({ SectionType, SectionData }) => ({ SectionType, SectionData })
       );
-
-      this.$emit("updateChapterData", {
+      this.$emit("updateChapterSections", {
         ChapterID: this.chapterID,
         ChapterName: this.chapterName,
-        ChapterData: chapterData,
+        ChapterSections: chapterSections,
       });
     },
   },
@@ -148,8 +147,8 @@ export default {
     },
   },
   mounted() {
-    console.log("mounted() chapterID: " + this.chapterID);
-    this.chapterActivated = true;
+    // console.log("mounted() chapterID: " + this.chapterID);
+    this.chapterActivated = false;
   },
 };
 </script>

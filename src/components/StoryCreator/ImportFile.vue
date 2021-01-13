@@ -1,83 +1,49 @@
 <template>
   <v-container>
-    <v-tabs fixed-tabs mandatory>
-      <v-tab @click="currentTab = 1"> Create your Story </v-tab>
-      <v-tab @click="currentTab = 2"> Import a Story </v-tab>
-      <v-tab @click="currentTab = 3"> Export a Story </v-tab>
-    </v-tabs>
-    <v-row v-show="currentTab == 1" no-gutters>
+    <v-row align="center" justify="center">
+      <v-file-input
+        v-on:change="importFile"
+        accept="application/json"
+        label="Insert Story (.JSON file extension)"
+        show-size
+        truncate-length="15"
+      ></v-file-input>
+    </v-row>
+    <v-row v-if="jsonFileSelected == true">
       <v-col>
-        <v-row class="pt-5">
-          <v-col align="center" justify="center">
-            <h1>Story Creator</h1>
-          </v-col>
-        </v-row>
-
-        <v-row class="my-5">
-          <AddChapter
-            v-for="chapterNumber in numberOfChapters + 1"
-            :key="chapterNumber"
-            :chapterNumber="chapterNumber"
-            v-on:addChapter="addChapter"
-            v-on:removeChapter="removeChapter"
-            @updateChapterSections="updateChapterSections"
-          ></AddChapter>
-        </v-row>
+        <v-sheet class="ma-5 pa-5" elevation="10" outlined rounded>
+          <v-row>
+            <v-col class="text-left">
+              <pre><code>{{ JSON.stringify(storyJSON, null, "\t") }}</code></pre>
+            </v-col>
+          </v-row>
+        </v-sheet>
       </v-col>
     </v-row>
-    <v-row v-show="currentTab == 2">
-      <v-container>
-        <v-row class="ma-5">
-          <v-col align="center" justify="center">
-            <v-row class="pb-5">
-              <v-col align="center" justify="center">
-                <h1>Import a Story</h1>
-              </v-col>
-            </v-row>
-            <import-file></import-file>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-row>
-    <v-row v-show="currentTab == 3">
-      <v-container>
-        <v-row class="ma-5">
-          <v-col align="center" justify="center">
-            <v-row class="pb-5">
-              <v-col align="center" justify="center">
-                <h1>Export your Story</h1>
-              </v-col>
-            </v-row>
-            <export-file :storyJSON="JSON.stringify(storyJSON2)"></export-file>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-row>
+    <div class="text-center">
+      <v-snackbar v-model="snackbar" :timeout="snackbarTimeout">
+        {{ snackbarText }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+    </div>
   </v-container>
 </template>
 
 <script>
-//import chapterSectionDraggables from "../components/Draggables/ChapterSectionDraggables.vue";
-import AddChapter from "../components/StoryCreator/AddChapter.vue";
-import ExportFile from "../components/StoryCreator/ExportFile.vue";
-import ImportFile from '../components/StoryCreator/ImportFile.vue';
-
 export default {
-  components: {
-    AddChapter,
-    ExportFile,
-    ImportFile,
-    //  chapterSectionDraggables,
-  },
+  name: "ImportFile",
   data() {
     return {
-      currentChapterID: 0,
-      currentChapterData: {},
-      numberOfChapters: 0,
-      currentTab: 2,
-      storyJSON: {
-        Chapters: [{}],
-      },
+      storyJSON: {},
+      jsonFileSelected: false,
+      snackbar: false,
+      snackbarText: `SnackbarText`,
+      snackbarTimeout: 3000,
       storyJSON2: {
         Chapters: [
           {
@@ -245,29 +211,41 @@ export default {
     };
   },
   methods: {
-    updateChapterSections(value) {
-      console.log("updateChapterSections: " + JSON.stringify(value));
-      console.log(value);
-      this.currentChapterData = value;
-      this.storyJSON.Chapters[
-        this.currentChapterData.ChapterID
-      ] = this.currentChapterData;
-      console.log(JSON.stringify(this.storyJSON));
+    importFile: function (file) {
+      try {
+        const fileName = file.name;
+        this.readFile(file);
+        this.snackbarText = `${fileName} imported successfully!`;
+        this.snackbar = true;
+        console.log(fileName);
+      } catch (err) {
+        console.log("An error has occurred.");
+      }
     },
-    setChapterSectionData(id, data) {
-      console.log(id, data);
-    },
-    addChapter() {
-      // Modify the storyJSON, add this chapter in the index it was created in.
-      this.numberOfChapters++;
-      console.log("AddChapter() hit.");
-    },
-    removeChapter() {
-      console.log("RemoveChapter() hit.");
+    readFile: function (file) {
+      const reader = new FileReader();
+      this.jsonFileSelected = true;
+      reader.readAsText(file);
+      reader.onload = (evt) => {
+        const fileText = JSON.parse(evt.target.result);
+        this.storyJSON = JSON.parse(fileText);
+        console.log(fileText);
+      };
     },
   },
 };
 </script>
 
 <style scoped>
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: inherit;
+}
+.v-application code {
+  background-color: transparent !important;
+}
 </style>

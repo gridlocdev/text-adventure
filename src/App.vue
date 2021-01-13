@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style>
-/* html {
-  overflow-y: hidden !important;
-} */
+html {
+  overflow: auto !important;
+}
 </style>

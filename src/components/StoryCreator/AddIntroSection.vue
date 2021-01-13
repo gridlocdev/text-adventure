@@ -56,13 +56,7 @@ export default {
   methods: {
     exportSectionData(sectionType, sectionData) {
       this.$emit("sectionModified", this.sectionID);
-      this.$emit(
-        "updateComponentData",
-        JSON.stringify({
-          SectionType: sectionType,
-          SectionData: sectionData,
-        })
-      );
+      this.$emit("updateComponentData", JSON.stringify(sectionData));
     },
   },
 };
