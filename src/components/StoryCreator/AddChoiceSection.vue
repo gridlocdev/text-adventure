@@ -6,7 +6,14 @@
           <v-row class="mx-2 d-flex">
             <v-icon class="ma-2"> mdi-file-tree </v-icon>
             <h2 class="my-4">ChoiceSection</h2>
-            <v-icon class="ml-auto clickable">mdi-close</v-icon>
+            <v-btn
+              class="my-auto ml-auto"
+              icon
+              depressed
+              @click="removeSection()"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
           </v-row>
           <v-divider class="mx-2"></v-divider>
           <v-text-field
@@ -33,7 +40,7 @@
                     class: 'success--text',
                   }"
                   tabindex="-1"
-                  class="my-5"
+                  class="my-5 answerButton"
                   fab
                   small
                   elevation="4"
@@ -65,7 +72,7 @@
                     class: 'success--text',
                   }"
                   tabindex="-1"
-                  class="my-5"
+                  class="my-5 answerButton"
                   fab
                   small
                   elevation="4"
@@ -127,12 +134,12 @@ export default {
         {
           icon: "mdi-check-bold",
           color: "success",
-          backgroundColor: "rgba(0, 255, 0, 0.1)",
+          backgroundColor: "rgba(0, 255, 0, 0.175)",
         },
         {
           icon: "mdi-close-thick",
           color: "error",
-          backgroundColor: "rgba(255, 0, 0, 0.1)",
+          backgroundColor: "rgba(255, 0, 0, 0.175)",
         },
       ],
     };
@@ -235,14 +242,13 @@ export default {
 </script>
 
 <style scoped>
-.v-btn::before {
-  background-color: transparent;
+.v-btn.answerButton {
+  color: green;
 }
-.v-icon.clickable:hover {
-  opacity: 0.6;
-  cursor: pointer;
+.v-btn.answerButton:not(:focus):hover {
+  color: red;
 }
-.v-icon.clickable::after {
-  display: none !important;
+.v-btn.answerButton:focus {
+  outline: none;
 }
 </style>

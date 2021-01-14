@@ -6,7 +6,14 @@
           <v-row class="mx-2 d-flex">
             <v-icon class="ma-2"> mdi-rocket-launch </v-icon>
             <h2 class="my-4">Intro</h2>
-            <v-icon class="ml-auto clickable">mdi-close</v-icon>
+            <v-btn
+              class="my-auto ml-auto"
+              icon
+              depressed
+              @click="removeSection()"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
           </v-row>
           <v-divider class="mx-2"></v-divider>
           <v-text-field
@@ -63,11 +70,4 @@ export default {
 </script>
 
 <style scoped>
-.v-icon.clickable:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}
-.v-icon.clickable::after {
-  display: none !important;
-}
 </style>

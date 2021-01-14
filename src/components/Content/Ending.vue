@@ -116,13 +116,13 @@ export default {
         if (i < this.$store.state.CurrentChapter - 1) {
           // If the chapter has been played, Sets the color to "Primary" for that button.
           this.chapterIconMasterList.push({
-            name: this.$store.state.ChapterIconList[i],
+            name: this.$store.state.CurrentStoryJSON.Chapters[i].ChapterIcon,
             color: "primary",
           });
         } else {
           // If the chapter has not been played, sets no color for that button.
           this.chapterIconMasterList.push({
-            name: this.$store.state.ChapterIconList[i],
+            name: this.$store.state.CurrentStoryJSON.Chapters[i].ChapterIcon,
             color: "",
           });
         }

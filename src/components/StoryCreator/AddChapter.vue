@@ -21,13 +21,47 @@
           <v-row class="mx-2 d-flex">
             <v-icon dense class="ma-2"> mdi-folder-plus </v-icon>
             <h2 class="my-4">{{ chapterName }}</h2>
-            <v-icon @click="removeChapter()" class="ml-auto clickable"
-              >mdi-close</v-icon
-            >
+            <v-btn class="my-auto ml-auto" icon depressed @click="removeChapter()">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
           </v-row>
+          <v-row no-gutters class="mx-2 d-flex">
+            <v-col align="center" justify="center" cols="6">
+              <v-text-field
+                v-model="chapterIcon"
+                class="pa-5"
+                label="Chapter Icon Name (e.g. 'mdi-delta')"
+                outlined
+                hide-details="auto"
+              />
+            </v-col>
+            <v-col class="my-auto" cols="1" align="center" justify="center">
+              <v-btn class="nohover" icon depressed disabled>
+                <v-icon v-if="!chapterIconTextIsIcon()">mdi-delta</v-icon>
+                <v-icon v-if="chapterIconTextIsIcon()">{{
+                  chapterIcon
+                }}</v-icon>
+              </v-btn>
+            </v-col>
+            <v-divider vertical class="my-3"></v-divider>
+            <v-col align="center" justify="center" class="mx-5 my-auto">
+              <v-btn
+                block
+                href="https://materialdesignicons.com/"
+                target="_blank"
+              >
+                <v-icon class="">mdi-link</v-icon>
+                <v-row>
+                  <span class="ml-5 mr-3">
+                    <h3>Material Design Icons</h3>
+                  </span>
+                </v-row>
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-divider class="mx-5 my-3"></v-divider>
 
           <div v-for="section in chapterTimeline" :key="section.id">
-            <!-- {{ JSON.stringify(section) }} -->
             <component
               :is="section.SectionComponent"
               :sectionID="section.id"
@@ -35,11 +69,6 @@
               @updateComponentData="updateComponentData"
             ></component>
           </div>
-
-          <!-- <add-intro-section></add-intro-section>
-          <add-text-section></add-text-section>
-          <add-choice-section></add-choice-section>
-          <add-ending-section></add-ending-section> -->
         </v-sheet>
       </v-col>
     </v-row>
@@ -69,6 +98,7 @@ export default {
       currentSectionData: {},
       chapterID: this.chapterNumber - 1,
       chapterName: "Chapter" + " " + this.chapterNumber,
+      chapterIcon: "",
       chapterTimeline: [
         {
           id: 0,
@@ -121,12 +151,20 @@ export default {
       );
       this.$emit("updateChapterSections", {
         ChapterID: this.chapterID,
+        ChapterIcon: this.chapterIcon,
         ChapterName: this.chapterName,
         ChapterSections: chapterSections,
       });
     },
   },
   methods: {
+    chapterIconTextIsIcon() {
+      if (this.chapterIcon.includes("mdi-")) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     updateCurrentSectionID(value) {
       this.currentSectionID = value;
     },
@@ -154,11 +192,8 @@ export default {
 </script>
 
 <style scoped>
-.v-icon.clickable:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}
-.v-icon.clickable::after {
-  display: none !important;
+.v-btn.v-btn--disabled.nohover .v-icon {
+  color: white !important;
+  opacity: 1;
 }
 </style>

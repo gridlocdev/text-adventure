@@ -9,7 +9,8 @@ export default new Vuex.Store({
     DarkMode: true,
     TextSpeed: 10,
     StoryName: 'Text Adventure Game',
-    ChapterIconList: ['mdi-crown-outline', 'mdi-bridge', 'mdi-sword-cross', 'mdi-wizard-hat', 'mdi-image-filter-hdr'],
+    StoryJSONArray: [],
+    CurrentStoryJSON: {},
     SuccessText: 'You mug the robber!',
     GameOverText: 'The robber mugs u',
     CurrentChapter: 1,
@@ -38,9 +39,13 @@ export default new Vuex.Store({
         state.StoryName = localStorage.getItem('StoryName');
         console.log("Loaded from LocalStorage: StoryName - " + state.StoryName)
       }
-      if (localStorage.getItem('ChapterIconList')) {
-        state.ChapterIconList = JSON.parse(localStorage.getItem('ChapterIconList'));
-        console.log("Loaded from LocalStorage: ChapterIconList - " + state.ChapterIconList)
+      if (localStorage.getItem('CurrentStoryJSON')) {
+        state.CurrentStoryJSON = JSON.parse(localStorage.getItem('CurrentStoryJSON'));
+        console.log("Loaded from LocalStorage: CurrentStoryJSON - " + state.CurrentStoryJSON)
+      }
+      if (localStorage.getItem('StoryJSONArray')) {
+        state.StoryJSONArray = JSON.parse(localStorage.getItem('StoryJSONArray'));
+        console.log("Loaded from LocalStorage: StoryJSONArray - " + JSON.stringify(state.StoryJSONArray, null, 2))
       }
       if (localStorage.getItem('SuccessText')) {
         state.SuccessText = localStorage.getItem('SuccessText');
@@ -102,13 +107,25 @@ export default new Vuex.Store({
     },
     setNumberOfChapters(state, number) {
       state.NumberOfChapters = number;
-      localStorage.setItem('ChapterIconList', number);
-      console.log("(State) CurrentChapter: " + number);
+      localStorage.setItem('NumberOfChapters', number);
+      console.log("(State) NumberOfChapters: " + number);
     },
-    setChapterIconArray(state, array) {
-      state.ChapterIconList = array;
-      localStorage.setItem('ChapterIconList', JSON.stringify(array));
-      console.log("(State) CurrentChapter: " + array);
+    setCurrentStoryJSON(state, json) {
+      state.CurrentStoryJSON = json;
+      localStorage.setItem('CurrentStoryJSON', json);
+      console.log("(State) CurrentStoryJSON: " + json);
+    },
+    addStoryToStoryJSONArray(state, jsonString) {
+      console.log("(state): pushing " + jsonString);
+      // var date = new Date();
+      state.StoryJSONArray.push(JSON.parse(jsonString));
+      localStorage.setItem('StoryJSONArray', JSON.stringify(state.StoryJSONArray));
+      console.log("(State) StoryJSONArray: " + JSON.stringify(state.StoryJSONArray, null, 2));
+    },
+    setStoryJSONArray(state, json) {
+      state.StoryJSONArray = json;
+      localStorage.setItem('StoryJSONArray', JSON.stringify(json));
+      console.log("(State) StoryJSONArray: " + json);
     },
     setCurrentChapter(state, number) {
       state.CurrentChapter = number;
@@ -158,10 +175,16 @@ export default new Vuex.Store({
       context.commit('setSequencerIndex', number);
     },
     setNumberOfChapters(context, number) {
-      context.commit('setCurrentChapter', number);
+      context.commit('setNumberOfChapters', number);
     },
-    setChapterIconArray(context, array) {
-      context.commit('setCurrentChapter', array);
+    setCurrentStoryJSON(context, json) {
+      context.commit('setCurrentStoryJSON', json);
+    },
+    addStoryToStoryJSONArray(context, json) {
+      context.commit('addStoryToStoryJSONArray', json);
+    },
+    setStoryJSONArray(context, json) {
+      context.commit('setStoryJSONArray', json);
     },
     setCurrentChapter(context, number) {
       context.commit('setCurrentChapter', number);

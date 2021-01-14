@@ -6,7 +6,14 @@
           <v-row class="mx-2 d-flex">
             <v-icon class="ma-2"> mdi-text-box-multiple </v-icon>
             <h2 class="my-4">Text Section</h2>
-            <v-icon class="ml-auto clickable">mdi-close</v-icon>
+            <v-btn
+              class="my-auto ml-auto"
+              icon
+              depressed
+              @click="removeSection()"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
           </v-row>
           <v-divider class="mx-2"></v-divider>
           <v-row
@@ -22,24 +29,30 @@
                 align="center"
                 justify="center"
               >
-                <v-icon
+                <v-btn
                   tabindex="-1"
+                  class="my-auto mx-auto"
+                  icon
+                  depressed
                   @click="moveTextSection(textJSON.id, 'up')"
-                  class="ma-2 clickable"
-                  >mdi-chevron-up</v-icon
                 >
+                  <v-icon>mdi-chevron-up</v-icon>
+                </v-btn>
               </v-row>
               <v-row
                 class="hidden-sm-and-up py-1 py-xs-0"
                 align="center"
                 justify="center"
               >
-                <v-icon
+                <v-btn
                   tabindex="-1"
+                  class="my-auto mx-auto"
+                  icon
+                  depressed
                   @click="removeExistingText(textJSON.id)"
-                  class="ma-2 clickable"
-                  >mdi-delete-forever</v-icon
                 >
+                  <v-icon>mdi-delete-forever</v-icon>
+                </v-btn>
               </v-row>
               <v-row
                 v-if="textJSON.id != textArray.length - 1"
@@ -47,17 +60,21 @@
                 align="center"
                 justify="center"
               >
-                <v-icon
+                <v-btn
                   tabindex="-1"
+                  class="my-auto mx-auto"
+                  icon
+                  depressed
                   @click="moveTextSection(textJSON.id, 'down')"
-                  class="ma-2 clickable"
-                  >mdi-chevron-down</v-icon
                 >
+                  <v-icon>mdi-chevron-down</v-icon>
+                </v-btn>
               </v-row>
             </v-col>
             <v-divider vertical></v-divider>
             <v-col cols="10">
               <v-textarea
+                ref="textInputs"
                 rows="1"
                 auto-grow
                 class="px-2"
@@ -71,18 +88,21 @@
             <v-divider vertical></v-divider>
             <v-col class="hidden-xs-only my-auto" col="1">
               <v-row justify="center">
-                <v-icon
+                <v-btn
                   tabindex="-1"
+                  class="my-auto mx-auto"
+                  icon
+                  depressed
                   @click="removeExistingText(textJSON.id)"
-                  class="ma-2 clickable"
-                  >mdi-delete-forever</v-icon
                 >
+                  <v-icon>mdi-delete-forever</v-icon>
+                </v-btn>
               </v-row>
             </v-col>
           </v-row>
           <v-row class="mx-5 my-2" align="center" justify="center">
             <v-btn @click="addNewText()" class="pa-5" block>
-              <v-icon class="ma-1 clickable">mdi-plus</v-icon>
+              <v-icon class="ma-1">mdi-plus</v-icon>
             </v-btn>
           </v-row>
         </v-sheet>
@@ -120,6 +140,10 @@ export default {
     addNewText() {
       this.currentTextIndex = this.textArray.length;
       this.textArray.push({ id: this.currentTextIndex, text: "" });
+      this.$nextTick(() => {
+        const lastIdx = this.textArray.length - 1;
+        this.$refs.textInputs[lastIdx].focus();
+      });
     },
     removeExistingText(id) {
       // Remove the element in that id's index
@@ -167,11 +191,4 @@ export default {
 </script>
 
 <style scoped>
-.v-icon.clickable:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}
-.v-icon.clickable::after {
-  display: none !important;
-}
 </style>
