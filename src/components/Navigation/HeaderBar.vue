@@ -26,7 +26,7 @@
           @click="navigateTo(item.routerLink, item.title)"
         >
           <v-list-item-icon>
-            <v-icon style="fill: green">{{ item.icon }}</v-icon>
+            <v-icon style="fill: green">mdi-{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -59,15 +59,15 @@ export default {
   data: () => ({
     drawer: null,
     NavigationItems: [
-      { title: "Home", icon: "mdi-arm-flex", routerLink: "/" },
+      { title: "Home", icon: "arm-flex", routerLink: "/" },
       {
         title: "The Hero's Journey",
-        icon: "mdi-lock",
+        icon: "lock",
         routerLink: "chapter" + store.state.CurrentChapter,
       },
       {
         title: "Story Creator",
-        icon: "mdi-lock",
+        icon: "lock",
         routerLink: "/storyCreator",
       },
     ],

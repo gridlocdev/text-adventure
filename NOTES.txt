@@ -5,6 +5,10 @@ Next Steps:
 MVP:
 - Replace the storyCreator tabs with v-stepper
 
+- Add form validation for StoryCreator 
+: Make sure that all fields aren't empty before you submit
+: 
+
 - On the Start screen, use the v-hover component to make it do cool stuff
 : When you hover on the active one, do nothing.
 : When you hover an inactive story, make a "select" overlay

@@ -65,11 +65,11 @@ export default {
     return {
       storyJSON: {
         StoryName: "The Hero's Journey",
-        StoryIcon: "mdi-crown-outline",
+        StoryIcon: "crown-outline",
         Chapters: [
           {
             ChapterName: "Chapter 1",
-            ChapterIcon: "mdi-delta",
+            ChapterIcon: "delta",
             ChapterSections: [
               {
                 SectionType: "Intro",
@@ -147,7 +147,7 @@ export default {
           },
           {
             ChapterName: "Chapter 2",
-            ChapterIcon: "mdi-delta",
+            ChapterIcon: "delta",
             ChapterSections: [
               {
                 SectionType: "Intro",

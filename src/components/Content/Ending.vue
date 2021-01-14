@@ -19,7 +19,7 @@
               tile
             >
               <v-icon>
-                {{ item.name }}
+                mdi-{{ item.name }}
               </v-icon>
             </v-btn>
           </v-col>

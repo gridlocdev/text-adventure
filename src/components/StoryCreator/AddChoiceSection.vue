@@ -50,7 +50,7 @@
                   <v-icon
                     class="choiceIcon"
                     :color="choiceButtonAppearances[0].color"
-                    >{{ choiceButtonAppearances[0].icon }}</v-icon
+                    >mdi-{{ choiceButtonAppearances[0].icon }}</v-icon
                   >
                 </v-btn>
               </v-row>
@@ -82,7 +82,7 @@
                   <v-icon
                     class="choiceIcon"
                     :color="choiceButtonAppearances[1].color"
-                    >{{ choiceButtonAppearances[1].icon }}</v-icon
+                    >mdi-{{ choiceButtonAppearances[1].icon }}</v-icon
                   >
                 </v-btn>
               </v-row>
@@ -132,12 +132,12 @@ export default {
       },
       choiceButtonAppearances: [
         {
-          icon: "mdi-check-bold",
+          icon: "check-bold",
           color: "success",
           backgroundColor: "rgba(0, 255, 0, 0.175)",
         },
         {
-          icon: "mdi-close-thick",
+          icon: "close-thick",
           color: "error",
           backgroundColor: "rgba(255, 0, 0, 0.175)",
         },

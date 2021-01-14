@@ -34,7 +34,7 @@
                 @click="triggerMethodFromMethodName(item.methodName)"
               >
                 <!-- item.toggle = !item.toggle; -->
-                <v-icon>{{ item.icon }}</v-icon>
+                <v-icon>mdi-{{ item.icon }}</v-icon>
               </v-btn>
             </v-col>
           </v-row>
@@ -140,10 +140,10 @@ export default {
 
       switch (vm.toggle) {
         case true:
-          vm.icon = "mdi-weather-night";
+          vm.icon = "weather-night";
           break;
         case false:
-          vm.icon = "mdi-white-balance-sunny";
+          vm.icon = "white-balance-sunny";
           break;
       }
       // Update our AppState by calling the Action
@@ -152,10 +152,10 @@ export default {
     setDarkModeSettingsIcon(toggle) {
       switch (toggle) {
         case true:
-          this.SettingsItems_Toggles[0].icon = "mdi-weather-night";
+          this.SettingsItems_Toggles[0].icon = "weather-night";
           break;
         case false:
-          this.SettingsItems_Toggles[0].icon = "mdi-white-balance-sunny";
+          this.SettingsItems_Toggles[0].icon = "white-balance-sunny";
           break;
       }
       this.SettingsItems_Toggles[0].toggle = toggle;

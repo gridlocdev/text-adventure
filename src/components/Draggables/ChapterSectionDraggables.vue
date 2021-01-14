@@ -24,9 +24,9 @@
           <div v-for="element in itemList" :key="element.text">
             <v-btn block :ripple="false" depressed class="ma-1 pa-3">
               <v-icon class="pr-2">
-                {{ element.icon }}
+                mdi-{{ element.icon }}
               </v-icon>
-              {{ element.text }}
+              mdi-{{ element.text }}
             </v-btn>
           </div>
         </draggable>
@@ -47,27 +47,27 @@ export default {
       itemList: [
         {
           text: "Add Chapter",
-          icon: "mdi-folder-plus",
+          icon: "folder-plus",
           componentName: 'Chapter',
         },
         {
           text: "Intro",
-          icon: "mdi-rocket-launch",
+          icon: "rocket-launch",
           componentName: 'Intro'
         },
         {
           text: "Text Section",
-          icon: "mdi-text-box-multiple",
+          icon: "text-box-multiple",
           componentName: 'Text Section'
         },
         {
           text: "Choice Section",
-          icon: "mdi-file-tree",
+          icon: "file-tree",
           componentName: 'Choice Section'
         },
         {
           text: "Ending",
-          icon: "mdi-marker-check",
+          icon: "marker-check",
           componentName: 'Ending'
         },
       ],
