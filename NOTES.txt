@@ -4,11 +4,7 @@ Next Steps:
 
 MVP:
 
-- Allow users to add and remove chapters, and the appropriate changes be made to the JSON.
-
-- Add form validation for StoryCreator 
-: Make sure that all fields aren't empty before you submit
-: 
+- Add a confirmation message when you finish saving your story, and navigate back to the home page.
 
 - On the Start screen, use the v-hover component to make it do cool stuff
 : When you hover on the active one, do nothing.

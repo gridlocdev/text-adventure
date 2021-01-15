@@ -22,6 +22,7 @@
             class="pa-5"
             label="Question Text"
             hide-details="auto"
+            :rules="[rules.required, rules.counters.questionText]"
           />
           <v-row class="mx-1" align="center" justify="center">
             <v-col>
@@ -31,6 +32,7 @@
                   class="pa-5"
                   label="Answer 1"
                   hide-details="auto"
+                  :rules="[rules.required, rules.counters.answerBox]"
                 />
                 <v-btn
                   :style="{
@@ -63,6 +65,7 @@
                   class="pa-5"
                   label="Answer 2"
                   hide-details="auto"
+                  :rules="[rules.required, rules.counters.answerBox]"
                 />
                 <v-btn
                   :style="{
@@ -96,6 +99,10 @@
               class="pa-5"
               label="Success Message"
               hide-details="auto"
+              :rules="[
+                rules.required,
+                rules.counters.successTextAndGameOverText,
+              ]"
             />
           </v-row>
           <v-row>
@@ -105,6 +112,10 @@
               class="pa-5"
               label="Game Over Message"
               hide-details="auto"
+              :rules="[
+                rules.required,
+                rules.counters.successTextAndGameOverText,
+              ]"
             />
           </v-row>
         </v-sheet>
@@ -143,6 +154,18 @@ export default {
           backgroundColor: "rgba(255, 0, 0, 0.175)",
         },
       ],
+
+      rules: {
+        required: (value) => !!value || "Cannot be empty",
+        counters: {
+          questionText: (value) =>
+            value.length <= 75 || "Maximum of 75 characters",
+          answerBox: (value) =>
+            value.length <= 50 || "Maximum of 50 characters",
+          successTextAndGameOverText: (value) =>
+            value.length <= 350 || "Maximum of 350 characters",
+        },
+      },
     };
   },
   watch: {

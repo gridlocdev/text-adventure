@@ -82,8 +82,7 @@
                 counter
                 label="Text"
                 v-model="textJSON.text"
-                :rules="textAreaMetadata.rules"
-                :value="textAreaMetadata.value"
+                :rules="[rules.required, rules.counter]"
               ></v-textarea>
             </v-col>
             <v-divider vertical></v-divider>
@@ -122,9 +121,9 @@ export default {
     return {
       currentTextIndex: 0,
       textArray: [{ id: 0, text: "" }],
-      textAreaMetadata: {
-        rules: [(v) => v.length <= 350 || "Max 350 characters"],
-        value: "Hello!",
+      rules: {
+        required: (value) => !!value || "Cannot be empty",
+        counter: (value) => value.length <= 350 || "Maximum of 350 characters",
       },
     };
   },
@@ -137,6 +136,7 @@ export default {
       deep: true,
     },
   },
+  
   methods: {
     addNewText() {
       this.currentTextIndex = this.textArray.length;

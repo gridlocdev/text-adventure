@@ -86,6 +86,11 @@
     </v-row>
     <v-row v-show="currentTab == 1">
       <v-container class="my-5">
+        <v-row class="mt-13">
+          <v-col align="center" justify="center">
+            <h1>Create Story Chapters</h1>
+          </v-col>
+        </v-row>
         <add-chapter
           v-for="(chapter, index) in storyJSON.Chapters"
           :key="chapter.ChapterID"
@@ -152,21 +157,21 @@
         </v-row>
         <v-divider></v-divider>
         <v-row class="my-5 mx-10">
-          <v-col v-show="!tabNextButton.tab1" align="center" justify="center">
+          <!-- <v-col v-show="!tabNextButton.tab2" align="center" justify="center">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <span v-bind="attrs" v-on="on">
-                  <v-btn disabled large @click="createStory()" elevation="5">
+                  <v-btn large @click="createStory()" elevation="5">
                     <span
                       ><strong> Add Story to Browser Cache </strong></span
                     ></v-btn
                   >
                 </span>
               </template>
-              <span>Add a story before you click Create!</span>
+              <span>Make sure you save or copy to a file so you can access your story later!</span>
             </v-tooltip>
-          </v-col>
-          <v-col v-show="tabNextButton.tab1" align="center" justify="center">
+          </v-col> -->
+          <v-col align="center" justify="center">
             <v-btn large @click="createStory()" elevation="5">
               <span><strong> Add Story to Browser Cache </strong></span></v-btn
             >
@@ -197,7 +202,7 @@ export default {
       },
       storyID: 0,
       currentChapterData: {},
-      currentTab: 1,
+      currentTab: 0,
       numberOfChaptersCreated: 0,
       storyJSON: {
         StoryID: 0,
