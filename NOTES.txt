@@ -4,8 +4,7 @@ Next Steps:
 
 MVP:
 
-- Clean the code I wrote for the story validator so that it works for the other ones too.
-: Create a version of this function for tab 1 that loops through all of the textboxes in storyJSON, and all of the icons in storyJSON. the watcher I created on storyJSON should execute as long as it's fed the appropriate stuff.
+- Allow users to add and remove chapters, and the appropriate changes be made to the JSON.
 
 - Add form validation for StoryCreator 
 : Make sure that all fields aren't empty before you submit
@@ -36,6 +35,8 @@ Optional: (If people ask for it) - Add a Back arrow to the TextSequencer compone
 
 - Documentation: 
 : In each component, at the top, list what the component does in a comment.
+
+- Re-format things with v-form
 
 Pages to have post-release: 
 

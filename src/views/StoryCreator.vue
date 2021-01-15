@@ -1,13 +1,15 @@
 <template>
   <v-container>
-    <v-tabs fixed-tabs mandatory v-model="currentTab">
-      <v-tab> 1. Name Your Story </v-tab>
-      <v-tab :disabled="!tabNextButton.tab0"> 2. Add Chapters </v-tab>
-      <v-tab :disabled="!tabNextButton.tab1"> 3. Confirm and Save </v-tab>
-    </v-tabs>
-    <v-row v-show="currentTab == 0" no-gutters>
+    <v-app-bar outlined fixed class="mt-14">
+      <v-tabs fixed-tabs mandatory v-model="currentTab">
+        <v-tab> 1. Name Your Story </v-tab>
+        <v-tab :disabled="!tabNextButton.tab0"> 2. Add Chapters </v-tab>
+        <v-tab :disabled="!tabNextButton.tab1"> 3. Confirm and Save </v-tab>
+      </v-tabs>
+    </v-app-bar>
+    <v-row class="my-5" v-show="currentTab == 0" no-gutters>
       <v-col>
-        <v-row class="pt-5">
+        <v-row>
           <v-col align="center" justify="center">
             <h1>Story Details</h1>
           </v-col>
@@ -23,7 +25,7 @@
             />
           </v-col>
         </v-row>
-        <v-row no-gutters class="mx-2 d-flex">
+        <v-row no-gutters class="my-5 mx-2 d-flex">
           <v-col align="center" justify="center" cols="6">
             <v-text-field
               prefix="mdi-"
@@ -60,8 +62,8 @@
             </v-btn>
           </v-col>
         </v-row>
-        <v-divider class="my-5"></v-divider>
-        <v-row class="my-5 mx-10">
+        <v-divider></v-divider>
+        <v-row class="my-3 mx-10">
           <v-col v-show="!tabNextButton.tab0" align="center" justify="center">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
@@ -83,16 +85,34 @@
       </v-col>
     </v-row>
     <v-row v-show="currentTab == 1">
-      <v-container>
+      <v-container class="my-5">
         <add-chapter
-          v-for="chapterNumber in numberOfChapters + 1"
-          :key="chapterNumber"
-          :chapterNumber="chapterNumber"
-          v-on:addChapter="addChapter"
+          v-for="(chapter, index) in storyJSON.Chapters"
+          :key="chapter.ChapterID"
+          :chapterID="index"
+          :chapterNumber="index + 1"
           v-on:removeChapter="removeChapter"
           @updateChapterSections="updateChapterSections"
         ></add-chapter>
-        <v-divider class="my-5"></v-divider>
+        <v-btn
+          @click="
+            () => {
+              storyJSON.Chapters.push({
+                ChapterID: numberOfChaptersCreated,
+                ChapterIcon: '',
+                ChapterName: 'Chapter ' + numberOfChapters,
+                ChapterSections: [],
+              });
+              numberOfChaptersCreated++;
+            }
+          "
+          class="pa-2 my-5"
+          elevation="5"
+          block
+          ><v-icon>mdi-plus</v-icon>
+          <span class="mx-2"><strong> Add Chapter</strong></span></v-btn
+        >
+        <v-divider></v-divider>
         <v-row class="my-5 mx-10">
           <!-- :disabled="!tabNextButton.tab1" -->
           <v-col v-show="!tabNextButton.tab1" align="center" justify="center">
@@ -104,10 +124,13 @@
                   >
                 </span>
               </template>
-              <span>Add a story before you click Create!</span>
+              <span
+                >Looks like you're missing some things up above. Check out and
+                fix what's empty or outlined in red!</span
+              >
             </v-tooltip>
           </v-col>
-          <v-col v-show="!tabNextButton.tab1" align="center" justify="center">
+          <v-col v-show="tabNextButton.tab1" align="center" justify="center">
             <v-btn large @click="nextTab()" elevation="5">
               <span><strong> Next </strong></span></v-btn
             >
@@ -115,7 +138,7 @@
         </v-row>
       </v-container>
     </v-row>
-    <v-row v-show="currentTab == 2">
+    <v-row class="my-5" v-show="currentTab == 2">
       <v-container>
         <v-row class="ma-5">
           <v-col align="center" justify="center">
@@ -127,7 +150,7 @@
             <export-file :storyJSON="JSON.stringify(storyJSON)"></export-file>
           </v-col>
         </v-row>
-        <v-divider class="my-5"></v-divider>
+        <v-divider></v-divider>
         <v-row class="my-5 mx-10">
           <v-col v-show="!tabNextButton.tab1" align="center" justify="center">
             <v-tooltip bottom>
@@ -173,93 +196,195 @@ export default {
         tab2: false,
       },
       storyID: 0,
-      currentChapterID: 0,
       currentChapterData: {},
-      numberOfChapters: 0,
-      currentTab: 0,
+      currentTab: 1,
+      numberOfChaptersCreated: 0,
       storyJSON: {
         StoryID: 0,
         StoryName: "",
         StoryIcon: "",
-        Chapters: [{}],
+        Chapters: [],
       },
     };
   },
+  computed: {
+    numberOfChapters: function () {
+      return this.storyJSON.Chapters.length;
+    },
+  },
   watch: {
+    numberOfChapters: function (val) {
+      console.log("numberOfChapters Updated: " + val);
+    },
     storyJSON: {
-      handler: function (newVal) {
-        switch (this.currentTab) {
-          case 0:
-            this.validateTab0();
-            break;
-          case 1:
-            // Have not made it yet
-            this.validateTab1();
-            break;
-          case 2:
-            // Have not made it yet
-            this.validateTab2();
-            break;
-        }
-        console.log(newVal);
+      handler: function () {
+        this.routeTabValidation();
       },
       deep: true,
     },
   },
   methods: {
+    routeTabValidation() {
+      switch (this.currentTab) {
+        case 0:
+          this.validateTab0();
+          break;
+        case 1:
+          this.validateTab1();
+          break;
+        case 2:
+          // Have not made it yet
+
+          break;
+      }
+    },
     validateTab0() {
       // In short, it checks to see if
-      console.log("Story Name: " + this.storyJSON.StoryName);
-
-      console.log("Story Icon: " + this.storyJSON.StoryIcon);
-
+      if (this.storyJSON.StoryName.length > 0) {
+        this.validateTab0Icon();
+      } else {
+        console.log("5");
+        this.tabNextButton.tab0 = false;
+      }
+      console.log("Reached end of function!");
+    },
+    validateTab0Icon() {
       this.$nextTick(() => {
         // If the Story Name has stuff in it
-        if (this.storyJSON.StoryName.length > 0) {
-          if (this.storyJSON.StoryIcon.length == 0) {
-            console.log("1");
-            this.tabNextButton.tab0 = true;
-          } else {
-            console.log("NextTick Hit.");
-            // Text in box: check if the Story Icon shows something
-            var iconElement = document.querySelector(
-              ".v-btn.v-btn--disabled.nohover .v-icon.mdi"
-            );
-            console.log(iconElement);
-            if (iconElement) {
-              var iconContent = getComputedStyle(iconElement, ":before")
-                .content;
-              if (iconContent.toString() != "none") {
-                console.log(iconContent.toString());
-                console.log("2");
+        if (this.storyJSON.StoryIcon.length == 0) {
+          console.log("1");
+          this.tabNextButton.tab0 = true;
+        } else {
+          console.log("NextTick Hit.");
+          // Text in box: check if the Story Icon shows something
+          var iconElement = document.querySelector(
+            ".v-btn.v-btn--disabled.nohover .v-icon.mdi"
+          );
+          console.log(iconElement);
+          if (iconElement) {
+            var iconContent = getComputedStyle(iconElement, ":before").content;
+            if (iconContent.toString() != "none") {
+              console.log(iconContent.toString());
+              console.log("2");
 
-                this.tabNextButton.tab0 = true;
-              } else {
-                console.log(iconContent.toString());
-                console.log("3");
-                this.tabNextButton.tab0 = false;
-              }
+              this.tabNextButton.tab0 = true;
             } else {
-              console.log("4");
+              console.log(iconContent.toString());
+              console.log("3");
               this.tabNextButton.tab0 = false;
             }
+          } else {
+            console.log("4");
+            this.tabNextButton.tab0 = false;
           }
-        } else {
-          console.log("5");
-          this.tabNextButton.tab0 = false;
         }
-        console.log("Reached end of function!");
+      });
+    },
+    validateTab1() {
+      // Validates storyJSON for tab1's inputs to see if the appropriate data exists in the JSON
+
+      // Default the return value to true, if it hits any cases below turn it false.
+      var returnValue = true;
+
+      // If a chapter exists and is not null
+      if (this.numberOfChapters != 0) {
+        // For each section in each chapter
+        this.storyJSON.Chapters.forEach((chapter) => {
+          chapter.ChapterSections.forEach((section) => {
+            // If any of the sections contains data, check the SectionType and validate
+            if (Object.keys(section.SectionData).length !== 0) {
+              switch (section.SectionType) {
+                case "Intro":
+                  if (
+                    section.SectionData.title.length == 0 ||
+                    section.SectionData.subText.length == 0
+                  ) {
+                    returnValue = false;
+                  }
+                  break;
+                case "TextSection":
+                  console.log(
+                    "Checking TextSection: " + JSON.stringify(section, null, 2)
+                  );
+                  for (var i = 0; i < section.SectionData.length; i++) {
+                    if (!section.SectionData[i].text) {
+                      returnValue = false;
+                    }
+                  }
+                  break;
+                case "ChoiceSection":
+                  console.log(
+                    "Checking ChoiceSection: " +
+                      JSON.stringify(section, null, 2)
+                  );
+                  if (
+                    section.SectionData.questionText.length == 0 ||
+                    section.SectionData.choices.choice1.length == 0 ||
+                    section.SectionData.choices.choice2.length == 0 ||
+                    section.SectionData.choicesMetadata.gameOverText.length ==
+                      0 ||
+                    section.SectionData.choicesMetadata.successText.length == 0
+                  ) {
+                    returnValue = false;
+                  }
+                  break;
+                case "Ending":
+                  if (
+                    section.SectionData.title.length == 0 ||
+                    section.SectionData.subText.length == 0
+                  ) {
+                    returnValue = false;
+                  }
+                  break;
+              }
+            } else {
+              returnValue = false;
+            }
+          });
+        });
+        this.tabNextButton.tab1 = returnValue;
+        if (returnValue == true) {
+          this.validateTab1Icon();
+        }
+      }
+    },
+    validateTab1Icon() {
+      console.log("ValidateTab1Icon() Hit!");
+      this.$nextTick(() => {
+        // For each icon name in
+
+        // Text in box: check if the Story Icon shows something
+        var iconElements = document.querySelectorAll(
+          ".v-btn.v-btn--disabled.nohover .v-icon.mdi"
+        );
+        iconElements.forEach((iconElement) => {
+          //console.log("Icon Elements: ForEach() - Icon Element: ");
+          //console.log(iconElement);
+          if (iconElement) {
+            var iconContent = getComputedStyle(iconElement, ":before").content;
+            if (iconContent.toString() != "none") {
+              //     console.log(iconContent.toString());
+              //     console.log("2");
+
+              this.tabNextButton.tab1 = true;
+            } else {
+              //    console.log(iconContent.toString());
+              //    console.log("3");
+              this.tabNextButton.tab1 = false;
+            }
+          } else {
+            //    console.log("4");
+            this.tabNextButton.tab1 = false;
+          }
+        });
       });
     },
     nextTab() {
       switch (this.currentTab) {
         case 0:
-          // If there's an icon selected, the prefix has "mdi-" which is 4 characters
-          if (
-            !this.storyJSON.StoryIcon.includes("mdi-") &&
-            this.storyJSON.StoryIcon.length <= 4
-          ) {
-            this.storyJSON.StoryIcon = "mdi-book-open-variant";
+          // If there's no icon text, default the icon to this
+          if (this.storyJSON.StoryIcon.length == 0) {
+            this.storyJSON.StoryIcon = "book-open-blank-variant";
           }
           break;
         case 1:
@@ -309,7 +434,6 @@ export default {
 
       this.resetStoryJSON();
     },
-
     updateChapterSections(value) {
       console.log("updateChapterSections: " + JSON.stringify(value));
       console.log(value);
@@ -317,26 +441,49 @@ export default {
       this.storyJSON.Chapters[
         this.currentChapterData.ChapterID
       ] = this.currentChapterData;
-      console.log(JSON.stringify(this.storyJSON));
+      console.log(JSON.stringify(this.storyJSON, null, 2));
+      this.routeTabValidation();
     },
     setChapterSectionData(id, data) {
       console.log(id, data);
     },
     addChapter() {
       // Modify the storyJSON, add this chapter in the index it was created in.
-      this.numberOfChapters++;
+      this.storyJSON.Chapters.push({
+        ChapterID: this.numberOfChaptersCreated,
+        ChapterIcon: "",
+        ChapterName: "Chapter " + this.numberOfChapters,
+        ChapterSections: [],
+      });
       console.log("AddChapter() hit.");
+      this.numberOfChaptersCreated++;
+      //console.log(JSON.stringify(this.storyJSON, null, 2));
     },
-    removeChapter() {
-      console.log("RemoveChapter() hit.");
+    removeChapter(chapterID) {
+      this.currentChapterData = {};
+      console.log("Before Remove: " + JSON.stringify(this.storyJSON, null, 2));
+      console.log("RemoveChapter() incoming ID = : " + chapterID);
+
+      // Splice the one that has that ID
+
+      const arrayOfChapterIDsInStoryOrder = this.storyJSON.Chapters.map(
+        ({ ChapterID }) => ChapterID
+      );
+
+      console.log(JSON.stringify(arrayOfChapterIDsInStoryOrder, null, 2));
+      const chapterIDInIndex = arrayOfChapterIDsInStoryOrder.indexOf(chapterID);
+      console.log("ChapterIdInIndex: " + chapterIDInIndex);
+      this.storyJSON.Chapters.splice(chapterIDInIndex, 1);
+      console.log(JSON.stringify(arrayOfChapterIDsInStoryOrder, null, 2));
+
+      console.log("After Remove: " + JSON.stringify(this.storyJSON, null, 2));
     },
   },
   mounted() {
-    console.log(
-      "This state's json stuff" +
-        JSON.stringify(this.$store.state.StoryJSONArray, null, 2)
-    );
-    console.log("StoryID = " + this.storyID);
+    // console.log(
+    //   "This state's json stuff" +
+    //     JSON.stringify(this.$store.state.StoryJSONArray, null, 2)
+    // );
   },
 };
 </script>

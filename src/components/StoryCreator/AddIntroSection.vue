@@ -7,6 +7,7 @@
             <v-icon class="ma-2"> mdi-rocket-launch </v-icon>
             <h2 class="my-4">Intro</h2>
             <v-btn
+              tabindex="-1"
               class="my-auto ml-auto"
               icon
               depressed
@@ -17,12 +18,14 @@
           </v-row>
           <v-divider class="mx-2"></v-divider>
           <v-text-field
+            :rules="[rules.required, rules.counter]"
             v-model="title"
             class="pa-5"
             label="Intro Title"
             hide-details="auto"
           />
           <v-text-field
+            :rules="[rules.required, rules.counter]"
             v-model="subText"
             class="pa-5"
             label="Intro Subtitle"
@@ -44,6 +47,10 @@ export default {
     return {
       title: "",
       subText: "",
+      rules: {
+        required: (value) => !!value || "Cannot be empty",
+        counter: (value) => value.length <= 50 || "Maximum of 50 characters",
+      },
     };
   },
   watch: {

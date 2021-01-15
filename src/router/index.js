@@ -3,13 +3,13 @@ import VueRouter from 'vue-router'
 import Start from '../views/Start.vue'
 import EndGame from '../views/EndGame.vue'
 
-import Success from '../views/InChapter/Success.vue'
-import GameOver from '../views/InChapter/GameOver.vue'
-import Ending from '../components/Content/Ending.vue'
-import PrivacyPolicy from '../views/PrivacyPolicy.vue'
-import StoryCreator from '../views/StoryCreator.vue'
+// import Success from '../views/InChapter/Success.vue'
+// import GameOver from '../views/InChapter/GameOver.vue'
+// import Ending from '../components/Content/Ending.vue'
+// import PrivacyPolicy from '../views/PrivacyPolicy.vue'
+// import StoryCreator from '../views/StoryCreator.vue'
 
-import ChapterSequencer from '../components/ContentContainers/ChapterSequencer.vue'
+//import ChapterSequencer from '../components/ContentContainers/ChapterSequencer.vue'
 
 import store from '../store/index.js'
 var storeVar = store;
@@ -37,7 +37,7 @@ const routes = [
   },
   {
     path: `/chapter:${storeVar.state.CurrentChapter}`,
-    name: ChapterSequencer,
+    name: 'ChapterSequencer',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -45,7 +45,7 @@ const routes = [
   },
   {
     path: '/ending',
-    name: Ending,
+    name: 'Ending',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -53,7 +53,7 @@ const routes = [
   },
   {
     path: '/success',
-    name: Success,
+    name: 'Success',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -61,7 +61,7 @@ const routes = [
   },
   {
     path: '/gameover',
-    name: GameOver,
+    name: 'GameOver',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -77,7 +77,7 @@ const routes = [
   },
   {
     path: '/privacypolicy',
-    name: PrivacyPolicy,
+    name: 'PrivacyPolicy',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -85,7 +85,7 @@ const routes = [
   },
   {
     path: '/storyCreator',
-    name: StoryCreator,
+    name: 'StoryCreator',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

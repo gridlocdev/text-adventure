@@ -7,6 +7,7 @@
             <v-icon class="ma-2"> mdi-marker-check </v-icon>
             <h2 class="my-4">Ending</h2>
             <v-btn
+              tabindex="-1"
               class="my-auto ml-auto"
               icon
               depressed

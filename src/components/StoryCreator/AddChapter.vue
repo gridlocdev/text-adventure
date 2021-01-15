@@ -2,18 +2,8 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-btn
-          v-if="!chapterActivated"
-          @click="activateChapter()"
-          class="pa-2"
-          elevation="5"
-          block
-          ><v-icon>mdi-plus</v-icon>
-          <span class="ms-2"><strong> Add Chapter</strong></span></v-btn
-        >
         <v-sheet
-          v-if="chapterActivated"
-          class="chapterSheet pa-2"
+          class="chapterSheet pa-2 mt-10"
           elevation="10"
           outlined
           rounded
@@ -21,7 +11,13 @@
           <v-row class="mx-2 d-flex">
             <v-icon dense class="ma-2"> mdi-folder-plus </v-icon>
             <h2 class="my-4">{{ chapterName }}</h2>
-            <v-btn class="my-auto ml-auto" icon depressed @click="removeChapter()">
+            <v-btn
+              tabindex="-1"
+              class="my-auto ml-auto"
+              icon
+              depressed
+              @click="removeChapter()"
+            >
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </v-row>
@@ -37,10 +33,10 @@
             </v-col>
             <v-col class="my-auto" cols="1" align="center" justify="center">
               <v-btn class="nohover" icon depressed disabled>
-                <v-icon v-if="!chapterIconTextIsIcon()">mdi-delta</v-icon>
-                <v-icon v-if="chapterIconTextIsIcon()">{{
-                  chapterIcon
-                }}</v-icon>
+                <v-icon v-if="chapterIcon.length == 0">mdi-delta</v-icon>
+                <v-icon v-if="chapterIcon.length != 0">
+                  mdi-{{ chapterIcon }} }}</v-icon
+                >
               </v-btn>
             </v-col>
             <v-divider vertical class="my-3"></v-divider>
@@ -89,15 +85,18 @@ export default {
     AddEndingSection,
   },
   props: {
+    chapterID: Number,
     chapterNumber: Number,
+  },
+  computed: {
+    chapterName: function () {
+      return "Chapter" + " " + this.chapterNumber;
+    },
   },
   data() {
     return {
-      chapterActivated: false,
       currentSectionID: 0,
       currentSectionData: {},
-      chapterID: this.chapterNumber - 1,
-      chapterName: "Chapter" + " " + this.chapterNumber,
       chapterIcon: "",
       chapterTimeline: [
         {
@@ -140,7 +139,15 @@ export default {
     };
   },
   watch: {
-    currentSectionData() {
+    currentSectionData: function () {
+      this.updateChapterData();
+    },
+    chapterIcon: function () {
+      this.updateChapterData();
+    },
+  },
+  methods: {
+    updateChapterData() {
       // In this method, take that data and ID, and emit an event.
       this.chapterTimeline[
         this.currentSectionID
@@ -156,15 +163,6 @@ export default {
         ChapterSections: chapterSections,
       });
     },
-  },
-  methods: {
-    chapterIconTextIsIcon() {
-      if (this.chapterIcon.includes("mdi-")) {
-        return true;
-      } else {
-        return false;
-      }
-    },
     updateCurrentSectionID(value) {
       this.currentSectionID = value;
     },
@@ -172,21 +170,20 @@ export default {
       console.log("value: " + JSON.stringify(value));
       this.currentSectionData = JSON.parse(value);
     },
-    activateChapter() {
-      console.log("ActivateChapter() hit.");
-      this.$emit("addChapter");
-      this.chapterActivated = true;
-    },
     removeChapter() {
-      this.$emit("removeChapter", this);
+      this.$emit("removeChapter", this.chapterID);
     },
     reorderChapterItems() {
       console.log("ReorderChapterItems() hit.");
     },
   },
   mounted() {
-    // console.log("mounted() chapterID: " + this.chapterID);
-    this.chapterActivated = false;
+    console.log("Mounted()");
+    //this.updateChapterData();
+    const chapterSections = this.chapterTimeline.map(
+        ({ SectionType, SectionData }) => ({ SectionType, SectionData })
+      );
+    console.log(JSON.stringify(chapterSections, null, 2))
   },
 };
 </script>
