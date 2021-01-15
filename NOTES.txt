@@ -3,7 +3,9 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
-- Replace the storyCreator tabs with v-stepper
+
+- Clean the code I wrote for the story validator so that it works for the other ones too.
+: Create a version of this function for tab 1 that loops through all of the textboxes in storyJSON, and all of the icons in storyJSON. the watcher I created on storyJSON should execute as long as it's fed the appropriate stuff.
 
 - Add form validation for StoryCreator 
 : Make sure that all fields aren't empty before you submit

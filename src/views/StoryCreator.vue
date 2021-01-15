@@ -2,10 +2,8 @@
   <v-container>
     <v-tabs fixed-tabs mandatory v-model="currentTab">
       <v-tab> 1. Name Your Story </v-tab>
-      <v-tab :disabled="!tab0Enabled"> 2. Add Chapters </v-tab>
-      <v-tab :disabled="!tabAdvanceButtonsEnabled.tab1">
-        3. Confirm and Save
-      </v-tab>
+      <v-tab :disabled="!tabNextButton.tab0"> 2. Add Chapters </v-tab>
+      <v-tab :disabled="!tabNextButton.tab1"> 3. Confirm and Save </v-tab>
     </v-tabs>
     <v-row v-show="currentTab == 0" no-gutters>
       <v-col>
@@ -31,17 +29,17 @@
               prefix="mdi-"
               v-model="storyJSON.StoryIcon"
               class="pa-5"
-              label="Story Icon (e.g. 'mdi-book-open-blank-variant')"
+              label="Story Icon (e.g. 'mdi-cat, mdi-book, mdi-delta')"
               outlined
               hide-details="auto"
             />
           </v-col>
           <v-col class="my-auto" cols="1" align="center" justify="center">
             <v-btn class="nohover" icon depressed disabled>
-              <v-icon v-if="!storyIconTextIsIcon"
+              <v-icon v-if="storyJSON.StoryIcon.length == 0"
                 >mdi-book-open-blank-variant</v-icon
               >
-              <v-icon v-if="storyIconTextIsIcon"
+              <v-icon v-if="storyJSON.StoryIcon.length != 0"
                 >mdi-{{ storyJSON.StoryIcon }}</v-icon
               >
             </v-btn>
@@ -64,7 +62,7 @@
         </v-row>
         <v-divider class="my-5"></v-divider>
         <v-row class="my-5 mx-10">
-          <v-col v-show="!tab0Enabled" align="center" justify="center">
+          <v-col v-show="!tabNextButton.tab0" align="center" justify="center">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <span v-bind="attrs" v-on="on">
@@ -76,7 +74,7 @@
               <span>Fill out the remaining details above to continue!</span>
             </v-tooltip>
           </v-col>
-          <v-col v-show="tab0Enabled" align="center" justify="center">
+          <v-col v-show="tabNextButton.tab0" align="center" justify="center">
             <v-btn large @click="nextTab()" elevation="5">
               <span><strong> Next </strong></span></v-btn
             >
@@ -96,12 +94,8 @@
         ></add-chapter>
         <v-divider class="my-5"></v-divider>
         <v-row class="my-5 mx-10">
-          <!-- :disabled="!tabAdvanceButtonsEnabled.tab1" -->
-          <v-col
-            v-show="!tabAdvanceButtonsEnabled.tab1"
-            align="center"
-            justify="center"
-          >
+          <!-- :disabled="!tabNextButton.tab1" -->
+          <v-col v-show="!tabNextButton.tab1" align="center" justify="center">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <span v-bind="attrs" v-on="on">
@@ -113,11 +107,7 @@
               <span>Add a story before you click Create!</span>
             </v-tooltip>
           </v-col>
-          <v-col
-            v-show="!tabAdvanceButtonsEnabled.tab1"
-            align="center"
-            justify="center"
-          >
+          <v-col v-show="!tabNextButton.tab1" align="center" justify="center">
             <v-btn large @click="nextTab()" elevation="5">
               <span><strong> Next </strong></span></v-btn
             >
@@ -139,11 +129,7 @@
         </v-row>
         <v-divider class="my-5"></v-divider>
         <v-row class="my-5 mx-10">
-          <v-col
-            v-show="!tabAdvanceButtonsEnabled.tab1"
-            align="center"
-            justify="center"
-          >
+          <v-col v-show="!tabNextButton.tab1" align="center" justify="center">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <span v-bind="attrs" v-on="on">
@@ -157,11 +143,7 @@
               <span>Add a story before you click Create!</span>
             </v-tooltip>
           </v-col>
-          <v-col
-            v-show="tabAdvanceButtonsEnabled.tab1"
-            align="center"
-            justify="center"
-          >
+          <v-col v-show="tabNextButton.tab1" align="center" justify="center">
             <v-btn large @click="createStory()" elevation="5">
               <span><strong> Add Story to Browser Cache </strong></span></v-btn
             >
@@ -185,12 +167,11 @@ export default {
   },
   data() {
     return {
-      tabAdvanceButtonsEnabled: {
+      tabNextButton: {
         tab0: false,
         tab1: false,
         tab2: false,
       },
-      storyValid: false,
       storyID: 0,
       currentChapterID: 0,
       currentChapterData: {},
@@ -202,192 +183,74 @@ export default {
         StoryIcon: "",
         Chapters: [{}],
       },
-      storyJSON2: {
-        Chapters: [
-          {
-            ChapterName: "Chapter 1",
-            ChapterIcon: "delta",
-            ChapterSections: [
-              {
-                SectionType: "Intro",
-                SectionData: {
-                  title: "Chapter 1",
-                  subText: "The Unruly King",
-                },
-              },
-              {
-                SectionType: "TextSection",
-                SectionData: [
-                  {
-                    text: "You wake up.",
-                  },
-                  {
-                    text: "The servant takes you to the castle.",
-                  },
-                  {
-                    text: "King says hi, but you need sword.",
-                  },
-                ],
-              },
-              {
-                SectionType: "ChoiceSection",
-                SectionData: {
-                  text: "What should you do?",
-                  choices: {
-                    choice1: "Option 1",
-                    choice2: "Option 2",
-                  },
-                  choicesMetadata: {
-                    correctChoice: "1",
-                    gameOverText: "You cut his hand. GAMEOVER",
-                    successText: "He hands you the sword, good job!",
-                  },
-                },
-              },
-              {
-                SectionType: "TextSection",
-                SectionData: [
-                  {
-                    text: "EEEEEEEEEEEEEEI am text one.",
-                  },
-                  {
-                    text: "I am text two.",
-                  },
-                  {
-                    text: "Huzzah!",
-                  },
-                ],
-              },
-              {
-                SectionType: "ChoiceSection",
-                SectionData: {
-                  text: "What should you do?",
-                  choices: {
-                    choice1: "Option 1",
-                    choice2: "Option 2",
-                  },
-                  choicesMetadata: {
-                    correctChoice: "1",
-                    gameOverText: "GAMEOVER: 2",
-                    successText: "SUCCESS: 2",
-                  },
-                },
-              },
-              {
-                SectionType: "Ending",
-                SectionData: {
-                  title: "Chapter 1 Complete!",
-                  subText: "You've successfully started your journey!",
-                },
-              },
-            ],
-          },
-          {
-            ChapterName: "Chapter 2",
-            ChapterIcon: "delta",
-            ChapterSections: [
-              {
-                SectionType: "Intro",
-                SectionData: {
-                  title: "Chapter 2",
-                  subText: "The Other Guy",
-                },
-              },
-              {
-                SectionType: "TextSection",
-                SectionData: [
-                  {
-                    text: "A guy's there.",
-                  },
-                  {
-                    text: "This other guy is pretty cool.",
-                  },
-                  {
-                    text: "What's his name again? Who knows.",
-                  },
-                ],
-              },
-              {
-                SectionType: "ChoiceSection",
-                SectionData: {
-                  text: "Should you ask his name?",
-                  choices: {
-                    choice1: "Heck yeah",
-                    choice2: "Nah, im good",
-                  },
-                  choicesMetadata: {
-                    correctChoice: "1",
-                    gameOverText: "He roundhouse kicks u into the atmosphere.",
-                    successText:
-                      "My name is... Chuck norris. Here's 10 million dollars.",
-                  },
-                },
-              },
-              {
-                SectionType: "TextSection",
-                SectionData: [
-                  {
-                    text:
-                      "Now equipped with 10 million dollars, you set your sights on the moon.",
-                  },
-                  {
-                    text:
-                      "You call NASA, but they aren't too interested in your offer.",
-                  },
-                  {
-                    text:
-                      "10 million is a lot, but you might not be able to go to the moon with that.",
-                  },
-                ],
-              },
-              {
-                SectionType: "ChoiceSection",
-                SectionData: {
-                  text: "You need more money, what should you do?",
-                  choices: {
-                    choice1: "Become a hotdog stand guy",
-                    choice2: "Go begging in old school runescape",
-                  },
-                  choicesMetadata: {
-                    correctChoice: "2",
-                    gameOverText:
-                      "You end up liking hot dogs so much that u explode",
-                    successText:
-                      "You find a runescape player that's sick nasty and gives you 400 billion GP",
-                  },
-                },
-              },
-              {
-                SectionType: "Ending",
-                SectionData: {
-                  title: "Chapter 2 Complete!",
-                  subText: "You're rich! Muahahahahaaaaa",
-                },
-              },
-            ],
-          },
-        ],
-      },
     };
   },
-  computed: {
-    storyIconTextIsIcon: function () {
-      if (this.storyJSON.StoryIcon.includes("mdi-")) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    tab0Enabled: function () {
-      // Logic to check the textboxes.
-      if (this.storyJSON.StoryName.length > 0) {
-        return true;
-      } else {
-        return false;
-      }
+  watch: {
+    storyJSON: {
+      handler: function (newVal) {
+        switch (this.currentTab) {
+          case 0:
+            this.validateTab0();
+            break;
+          case 1:
+            // Have not made it yet
+            this.validateTab1();
+            break;
+          case 2:
+            // Have not made it yet
+            this.validateTab2();
+            break;
+        }
+        console.log(newVal);
+      },
+      deep: true,
     },
   },
   methods: {
+    validateTab0() {
+      // In short, it checks to see if
+      console.log("Story Name: " + this.storyJSON.StoryName);
+
+      console.log("Story Icon: " + this.storyJSON.StoryIcon);
+
+      this.$nextTick(() => {
+        // If the Story Name has stuff in it
+        if (this.storyJSON.StoryName.length > 0) {
+          if (this.storyJSON.StoryIcon.length == 0) {
+            console.log("1");
+            this.tabNextButton.tab0 = true;
+          } else {
+            console.log("NextTick Hit.");
+            // Text in box: check if the Story Icon shows something
+            var iconElement = document.querySelector(
+              ".v-btn.v-btn--disabled.nohover .v-icon.mdi"
+            );
+            console.log(iconElement);
+            if (iconElement) {
+              var iconContent = getComputedStyle(iconElement, ":before")
+                .content;
+              if (iconContent.toString() != "none") {
+                console.log(iconContent.toString());
+                console.log("2");
+
+                this.tabNextButton.tab0 = true;
+              } else {
+                console.log(iconContent.toString());
+                console.log("3");
+                this.tabNextButton.tab0 = false;
+              }
+            } else {
+              console.log("4");
+              this.tabNextButton.tab0 = false;
+            }
+          }
+        } else {
+          console.log("5");
+          this.tabNextButton.tab0 = false;
+        }
+        console.log("Reached end of function!");
+      });
+    },
     nextTab() {
       switch (this.currentTab) {
         case 0:
@@ -445,8 +308,6 @@ export default {
       );
 
       this.resetStoryJSON();
-
-      //this.storyValid = false;
     },
 
     updateChapterSections(value) {
@@ -475,14 +336,20 @@ export default {
       "This state's json stuff" +
         JSON.stringify(this.$store.state.StoryJSONArray, null, 2)
     );
-    this.storyValid = true;
     console.log("StoryID = " + this.storyID);
   },
 };
 </script>
 
 <style scoped>
+/* .v-btn.v-btn--disabled .v-btn__content i::before {
+  content: "";
+} */
 .v-btn.v-btn--disabled.nohover .v-icon {
+  color: black !important;
+  opacity: 1;
+}
+.v-btn.v-btn--disabled.nohover.theme--dark .v-icon {
   color: white !important;
   opacity: 1;
 }
