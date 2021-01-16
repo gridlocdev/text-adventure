@@ -6,7 +6,7 @@
           <v-row class="mx-2 d-flex">
             <v-icon class="ma-2"> mdi-marker-check </v-icon>
             <h2 class="my-4">Ending</h2>
-            <v-btn
+            <!-- <v-btn
               tabindex="-1"
               class="my-auto ml-auto"
               icon
@@ -14,7 +14,7 @@
               @click="removeSection()"
             >
               <v-icon>mdi-close</v-icon>
-            </v-btn>
+            </v-btn> -->
           </v-row>
           <v-divider class="mx-2"></v-divider>
           <v-text-field

@@ -115,7 +115,7 @@
           elevation="5"
           block
           ><v-icon>mdi-plus</v-icon>
-          <span class="mx-2"><strong> Add Chapter</strong></span></v-btn
+          <span class="mx-2"><strong> Add Chapter {{ this.numberOfChapters + 1}}</strong></span></v-btn
         >
         <v-divider></v-divider>
         <v-row class="my-5 mx-10">
@@ -152,33 +152,13 @@
                 <h1>Export your Story</h1>
               </v-col>
             </v-row>
-            <export-file :storyJSON="JSON.stringify(storyJSON)"></export-file>
+            <export-file @createStory="createStory" :storyJSON="JSON.stringify(storyJSON)"></export-file>
           </v-col>
         </v-row>
-        <v-divider></v-divider>
-        <v-row class="my-5 mx-10">
-          <!-- <v-col v-show="!tabNextButton.tab2" align="center" justify="center">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <span v-bind="attrs" v-on="on">
-                  <v-btn large @click="createStory()" elevation="5">
-                    <span
-                      ><strong> Add Story to Browser Cache </strong></span
-                    ></v-btn
-                  >
-                </span>
-              </template>
-              <span>Make sure you save or copy to a file so you can access your story later!</span>
-            </v-tooltip>
-          </v-col> -->
-          <v-col align="center" justify="center">
-            <v-btn large @click="createStory()" elevation="5">
-              <span><strong> Add Story to Browser Cache </strong></span></v-btn
-            >
-          </v-col>
-        </v-row>
+        
       </v-container>
     </v-row>
+
   </v-container>
 </template>
 
@@ -426,6 +406,7 @@ export default {
       }
     },
     createStory() {
+      this.dialog = true;
       console.log(
         "$1 Story Added to StoryJSONArray: " + JSON.stringify(this.storyJSON)
       );
@@ -438,6 +419,7 @@ export default {
       );
 
       this.resetStoryJSON();
+      this.saveButtonDisabled = true;
     },
     updateChapterSections(value) {
       console.log("updateChapterSections: " + JSON.stringify(value));

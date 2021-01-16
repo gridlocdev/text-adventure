@@ -4,28 +4,16 @@ Next Steps:
 
 MVP:
 
-- Add a confirmation message when you finish saving your story, and navigate back to the home page.
-
 - On the Start screen, use the v-hover component to make it do cool stuff
 : When you hover on the active one, do nothing.
 : When you hover an inactive story, make a "select" overlay
 : If you hover the "Add Story", make an overlay with two buttons. "Create", and "Import"
 
-- Add functionality for the Close buttons (Or hide the non chapter ones for now)
+- Story manager : Edit which of your stories are stored in localStorage
 
-- Add routing for StoryCreator tabs
+- About : A short description of the application and why I built it
 
-- Add Saving to the chapter components
-: : Add a label next to the component name (Intro) that lists -unsaved or -saved in a muted red or green.
-: : On mouse out (@onmouseout), save. 
-: : Also save when the user clicks the unsaved label. 
-
-- Use the draggables library to allow dragging of the chapter components.
-: : Add a "mdi-drag" icon to the top center of each section.
-: : When you begin to drag something, use the CSS property { cursor: move } 
-: : https://sortablejs.github.io/Vue.Draggable/#/ <- Vue Draggable library
-- Finish my story, and add it into the ChapterSequencer.
-- In the TextSection, add an indicator for how many sections are left. (Small dots at the bottom of the screen, that each fill up once you proceed.)
+Post MVP Release:
 
 Optional: (If people ask for it) - Add a Back arrow to the TextSequencer component to go to last text
 
@@ -36,12 +24,15 @@ Optional: (If people ask for it) - Add a Back arrow to the TextSequencer compone
 
 Pages to have post-release: 
 
-- Story manager : Edit which of your stories are stored in localStorage
-
-- About : A short description of the application and why I built it
 
 - Make it mobile responsive
 
+- Use the draggables library to allow dragging of the chapter components.
+: : Add a "mdi-drag" icon to the top center of each section.
+: : When you begin to drag something, use the CSS property { cursor: move } 
+: : https://sortablejs.github.io/Vue.Draggable/#/ <- Vue Draggable library
+- Finish my story, and add it into the ChapterSequencer.
+- In the TextSection, add an indicator for how many sections are left. (Small dots at the bottom of the screen, that each fill up once you proceed.)
 
 ChapterIconList: ['mdi-crown-outline', 'mdi-bridge', 'mdi-sword-cross', 'mdi-wizard-hat', 'mdi-image-filter-hdr'],
 

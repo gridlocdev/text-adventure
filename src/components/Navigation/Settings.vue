@@ -161,7 +161,6 @@ export default {
       this.SettingsItems_Toggles[0].toggle = toggle;
     },
     setTextSpeedButtonGroupActiveItem(textSpeed) {
-      console.log(typeof textSpeed);
       switch (textSpeed) {
         case 50:
           this.SettingsItems_ChoiceBtns[0].activeBtnPosition = "left";
@@ -173,10 +172,8 @@ export default {
           this.SettingsItems_ChoiceBtns[0].activeBtnPosition = "right";
           break;
         default:
-          console.log("Hit default. Not sure how you got here.");
           break;
       }
-      console.log(textSpeed);
     },
     setTextSpeed(textSpeed) {
       this.$store.dispatch("setTextSpeed", textSpeed);
