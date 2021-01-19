@@ -70,6 +70,11 @@ export default {
         icon: "lock",
         routerLink: "/storyCreator",
       },
+      {
+        title: "Import Story",
+        icon: "lock",
+        routerLink: "/importStory",
+      },
     ],
 
     right: null,

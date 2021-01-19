@@ -15,7 +15,7 @@
       </v-row>
       <v-row class="ma-xs-8 ma-sm-6 ma-md-2" align="center" justify="center">
         <v-btn
-          @click="$router.push('chapter' + `${store.state.CurrentChapter}`)"
+          @click="$router.push('chapter' + `${$store.state.CurrentChapter}`)"
           elevation="2"
           x-large
           color="primary"

@@ -2,7 +2,8 @@
   <v-container>
     <v-row align="center" justify="center">
       <v-file-input
-        v-on:change="importFile"
+        @change="changeFile"
+        @abort="removeFile"
         accept="application/json"
         label="Insert Story (.JSON file extension)"
         show-size
@@ -20,17 +21,6 @@
         </v-sheet>
       </v-col>
     </v-row>
-    <div class="text-center">
-      <v-snackbar v-model="snackbar" :timeout="snackbarTimeout">
-        {{ snackbarText }}
-
-        <template v-slot:action="{ attrs }">
-          <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
-            Close
-          </v-btn>
-        </template>
-      </v-snackbar>
-    </div>
   </v-container>
 </template>
 
@@ -41,196 +31,182 @@ export default {
     return {
       storyJSON: {},
       jsonFileSelected: false,
-      snackbar: false,
-      snackbarText: `SnackbarText`,
-      snackbarTimeout: 3000,
-      storyJSON2: {
-        Chapters: [
-          {
-            ChapterName: "Chapter 1",
-            ChapterSections: [
-              {
-                SectionType: "Intro",
-                SectionData: {
-                  title: "Chapter 1",
-                  subText: "The Unruly King",
-                },
-              },
-              {
-                SectionType: "TextSection",
-                SectionData: [
-                  {
-                    text: "You wake up.",
-                  },
-                  {
-                    text: "The servant takes you to the castle.",
-                  },
-                  {
-                    text: "King says hi, but you need sword.",
-                  },
-                ],
-              },
-              {
-                SectionType: "ChoiceSection",
-                SectionData: {
-                  text: "What should you do?",
-                  choices: {
-                    choice1: "Option 1",
-                    choice2: "Option 2",
-                  },
-                  choicesMetadata: {
-                    correctChoice: "1",
-                    gameOverText: "You cut his hand. GAMEOVER",
-                    successText: "He hands you the sword, good job!",
-                  },
-                },
-              },
-              {
-                SectionType: "TextSection",
-                SectionData: [
-                  {
-                    text: "EEEEEEEEEEEEEEI am text one.",
-                  },
-                  {
-                    text: "I am text two.",
-                  },
-                  {
-                    text: "Huzzah!",
-                  },
-                ],
-              },
-              {
-                SectionType: "ChoiceSection",
-                SectionData: {
-                  text: "What should you do?",
-                  choices: {
-                    choice1: "Option 1",
-                    choice2: "Option 2",
-                  },
-                  choicesMetadata: {
-                    correctChoice: "1",
-                    gameOverText: "GAMEOVER: 2",
-                    successText: "SUCCESS: 2",
-                  },
-                },
-              },
-              {
-                SectionType: "Ending",
-                SectionData: {
-                  title: "Chapter 1 Complete!",
-                  subText: "You've successfully started your journey!",
-                },
-              },
-            ],
-          },
-          {
-            ChapterName: "Chapter 2",
-            ChapterSections: [
-              {
-                SectionType: "Intro",
-                SectionData: {
-                  title: "Chapter 2",
-                  subText: "The Other Guy",
-                },
-              },
-              {
-                SectionType: "TextSection",
-                SectionData: [
-                  {
-                    text: "A guy's there.",
-                  },
-                  {
-                    text: "This other guy is pretty cool.",
-                  },
-                  {
-                    text: "What's his name again? Who knows.",
-                  },
-                ],
-              },
-              {
-                SectionType: "ChoiceSection",
-                SectionData: {
-                  text: "Should you ask his name?",
-                  choices: {
-                    choice1: "Heck yeah",
-                    choice2: "Nah, im good",
-                  },
-                  choicesMetadata: {
-                    correctChoice: "1",
-                    gameOverText: "He roundhouse kicks u into the atmosphere.",
-                    successText:
-                      "My name is... Chuck norris. Here's 10 million dollars.",
-                  },
-                },
-              },
-              {
-                SectionType: "TextSection",
-                SectionData: [
-                  {
-                    text:
-                      "Now equipped with 10 million dollars, you set your sights on the moon.",
-                  },
-                  {
-                    text:
-                      "You call NASA, but they aren't too interested in your offer.",
-                  },
-                  {
-                    text:
-                      "10 million is a lot, but you might not be able to go to the moon with that.",
-                  },
-                ],
-              },
-              {
-                SectionType: "ChoiceSection",
-                SectionData: {
-                  text: "You need more money, what should you do?",
-                  choices: {
-                    choice1: "Become a hotdog stand guy",
-                    choice2: "Go begging in old school runescape",
-                  },
-                  choicesMetadata: {
-                    correctChoice: "2",
-                    gameOverText:
-                      "You end up liking hot dogs so much that u explode",
-                    successText:
-                      "You find a runescape player that's sick nasty and gives you 400 billion GP",
-                  },
-                },
-              },
-              {
-                SectionType: "Ending",
-                SectionData: {
-                  title: "Chapter 2 Complete!",
-                  subText: "You're rich! Muahahahahaaaaa",
-                },
-              },
-            ],
-          },
-        ],
-      },
     };
   },
   methods: {
-    importFile: function (file) {
+    validateImportedJSON() {
+      // if valid story
+      // Validates storyJSON for tab1's inputs to see if the appropriate data exists in the JSON
+
+      // Default the return value to true, if it hits any cases below turn it false.
+      var returnValue = true;
+
+      console.log(JSON.stringify(this.storyJSON, null, 2));
+
+      // If a chapter exists and is not null, and storyName and Icon exists
+      if (
+        this.storyJSON.Chapters.length != 0 ||
+        this.storyJSON.StoryName.length != 0 ||
+        this.storyJSON.StoryIcon.length != 0
+      ) {
+        // For each section in each chapter
+        this.storyJSON.Chapters.forEach((chapter) => {
+          if (chapter.ChapterSections.length != 0) {
+            chapter.ChapterSections.forEach((section) => {
+              // If any of the sections contains data, check the SectionType and validate
+              if (Object.keys(section.SectionData).length !== 0) {
+                switch (section.SectionType) {
+                  case "Intro":
+                    if (
+                      section.SectionData.title.length == 0 ||
+                      section.SectionData.subText.length == 0 ||
+                      !section.SectionData.title ||
+                      !section.SectionData.subText
+                    ) {
+                      returnValue = false;
+                    }
+                    break;
+                  case "TextSection":
+                    console.log(
+                      "Checking TextSection: " +
+                        JSON.stringify(section, null, 2)
+                    );
+                    for (var i = 0; i < section.SectionData.length; i++) {
+                      if (!section.SectionData[i].text) {
+                        returnValue = false;
+                      }
+                    }
+                    break;
+                  case "ChoiceSection":
+                    console.log(
+                      "Checking ChoiceSection: " +
+                        JSON.stringify(section, null, 2)
+                    );
+                    if (
+                      section.SectionData.questionText.length == 0 ||
+                      section.SectionData.choices.choice1.length == 0 ||
+                      section.SectionData.choices.choice2.length == 0 ||
+                      section.SectionData.choicesMetadata.gameOverText.length ==
+                        0 ||
+                      section.SectionData.choicesMetadata.successText.length ==
+                        0 ||
+                      !section.SectionData.questionText ||
+                      !section.SectionData.choices.choice1 ||
+                      !section.SectionData.choices.choice2 ||
+                      !section.SectionData.choicesMetadata.gameOverText ||
+                      !section.SectionData.choicesMetadata.successText
+                    ) {
+                      returnValue = false;
+                    }
+                    break;
+                  case "Ending":
+                    if (
+                      section.SectionData.title.length == 0 ||
+                      section.SectionData.subText.length == 0 ||
+                      !section.SectionData.title ||
+                      !section.SectionData.subText
+                    ) {
+                      returnValue = false;
+                    }
+                    break;
+                }
+              } else {
+                returnValue = false;
+              }
+            });
+          } else {
+            returnValue = false;
+          }
+        });
+        if (returnValue == true) {
+          var storyExistsAlready = false;
+
+          for (var i = 0; i < this.$store.state.StoryJSONArray.length; i++) {
+            if (
+              this.$store.state.StoryJSONArray[i].StoryName ==
+              this.storyJSON.StoryName
+            ) {
+              storyExistsAlready = true;
+              break;
+            }
+          }
+
+          if (storyExistsAlready == true) {
+            this.$emit("fileValidationDuplicate");
+          } else {
+            this.createStory();
+            this.$emit("fileValidationSuccess");
+          }
+        } else {
+          this.$emit("fileValidationError");
+        }
+      } else {
+        this.$emit("fileValidationError");
+      }
+      // else if not valid, show other dialog
+    },
+    createStory: function () {
+      console.log(
+        "$1 Story Added to StoryJSONArray: " + JSON.stringify(this.storyJSON)
+      );
+      this.$store.dispatch(
+        "addStoryToStoryJSONArray",
+        JSON.stringify(this.storyJSON)
+      );
+    },
+    setNewStoryID() {
+      // Loop through the current story array and find the max value of ID
+
+      if (this.$store.state.StoryJSONArray.length > 0) {
+        const maxVal = Math.max.apply(
+          Math,
+          this.$store.state.StoryJSONArray.map(function (output) {
+            return output.StoryID;
+          })
+        );
+        this.storyJSON.StoryID = maxVal + 1;
+      } else {
+        console.log("LENGTH: " + this.$store.state.StoryJSONArray.length);
+        this.storyJSON.StoryID = 0;
+      }
+    },
+    removeFile: function () {
+      this.storyJSON == {};
+      this.$emit("fileRemoved");
+    },
+    changeFile: function (file) {
       try {
-        const fileName = file.name;
-        this.readFile(file);
-        this.snackbarText = `${fileName} imported successfully!`;
-        this.snackbar = true;
-        console.log(fileName);
+        if (file) {
+          const fileName = file.name;
+          this.readFile(file);
+          console.log(fileName);
+        } else {
+          console.log("File either not found or removed.");
+          this.jsonFileSelected = false;
+          this.removeFile();
+        }
       } catch (err) {
         console.log("An error has occurred.");
       }
     },
     readFile: function (file) {
-      const reader = new FileReader();
-      this.jsonFileSelected = true;
-      reader.readAsText(file);
-      reader.onload = (evt) => {
-        const fileText = JSON.parse(evt.target.result);
-        this.storyJSON = JSON.parse(fileText);
-        console.log(fileText);
-      };
+      try {
+        const reader = new FileReader();
+        this.jsonFileSelected = true;
+        reader.readAsText(file);
+        reader.onload = (evt) => {
+          const fileText = JSON.parse(evt.target.result);
+          this.storyJSON = JSON.parse(fileText);
+
+          this.setNewStoryID();
+          console.log(fileText);
+          this.$nextTick(() => {
+            this.$emit("fileImported", fileText);
+          });
+        };
+      } catch (err) {
+        console.log("Error occurred while importing file: " + err);
+      }
     },
   },
 };

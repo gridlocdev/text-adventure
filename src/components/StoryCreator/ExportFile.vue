@@ -114,11 +114,10 @@ export default {
   },
   data() {
     return {
-      storyJSONExport: this.storyJSON,
       snackbar: false,
       snackbarText: `Copied Story to Clipboard!`,
       snackbarTimeout: 2000,
-      dialog: true,
+      dialog: false,
       addStoryButtonDisabled: false,
     };
   },
@@ -126,7 +125,7 @@ export default {
     copyToClipboard: async function () {
       this.snackbar = true;
 
-      const textToCopy = JSON.stringify(this.storyJSONExport);
+      const textToCopy = JSON.stringify(this.storyJSON);
 
       try {
         // 1) Copy text
@@ -138,7 +137,7 @@ export default {
       }
     },
     saveFile: function () {
-      const data = JSON.stringify(this.storyJSONExport);
+      const data = JSON.stringify(this.storyJSON);
       const blob = new Blob([data], { type: "text/plain" });
       const e = document.createEvent("MouseEvents"),
         a = document.createElement("a");

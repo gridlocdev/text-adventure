@@ -115,7 +115,9 @@
           elevation="5"
           block
           ><v-icon>mdi-plus</v-icon>
-          <span class="mx-2"><strong> Add Chapter {{ this.numberOfChapters + 1}}</strong></span></v-btn
+          <span class="mx-2"
+            ><strong> Add Chapter {{ this.numberOfChapters + 1 }}</strong></span
+          ></v-btn
         >
         <v-divider></v-divider>
         <v-row class="my-5 mx-10">
@@ -152,13 +154,14 @@
                 <h1>Export your Story</h1>
               </v-col>
             </v-row>
-            <export-file @createStory="createStory" :storyJSON="JSON.stringify(storyJSON)"></export-file>
+            <export-file
+              @createStory="createStory"
+              :storyJSON="JSON.stringify(storyJSON)"
+            ></export-file>
           </v-col>
         </v-row>
-        
       </v-container>
     </v-row>
-
   </v-container>
 </template>
 
@@ -182,13 +185,179 @@ export default {
       },
       storyID: 0,
       currentChapterData: {},
-      currentTab: 0,
+      currentTab: 2,
       numberOfChaptersCreated: 0,
       storyJSON: {
         StoryID: 0,
         StoryName: "",
         StoryIcon: "",
         Chapters: [],
+      },
+      storyJSON2: {
+        Chapters: [
+          {
+            ChapterName: "Chapter 1",
+            ChapterIcon: "delta",
+            ChapterSections: [
+              {
+                SectionType: "Intro",
+                SectionData: {
+                  title: "Chapter 1",
+                  subText: "The Unruly King",
+                },
+              },
+              {
+                SectionType: "TextSection",
+                SectionData: [
+                  {
+                    text: "You wake up.",
+                  },
+                  {
+                    text: "The servant takes you to the castle.",
+                  },
+                  {
+                    text: "King says hi, but you need sword.",
+                  },
+                ],
+              },
+              {
+                SectionType: "ChoiceSection",
+                SectionData: {
+                  text: "What should you do?",
+                  choices: {
+                    choice1: "Option 1",
+                    choice2: "Option 2",
+                  },
+                  choicesMetadata: {
+                    correctChoice: "1",
+                    gameOverText: "You cut his hand. GAMEOVER",
+                    successText: "He hands you the sword, good job!",
+                  },
+                },
+              },
+              {
+                SectionType: "TextSection",
+                SectionData: [
+                  {
+                    text: "EEEEEEEEEEEEEEI am text one.",
+                  },
+                  {
+                    text: "I am text two.",
+                  },
+                  {
+                    text: "Huzzah!",
+                  },
+                ],
+              },
+              {
+                SectionType: "ChoiceSection",
+                SectionData: {
+                  text: "What should you do?",
+                  choices: {
+                    choice1: "Option 1",
+                    choice2: "Option 2",
+                  },
+                  choicesMetadata: {
+                    correctChoice: "1",
+                    gameOverText: "GAMEOVER: 2",
+                    successText: "SUCCESS: 2",
+                  },
+                },
+              },
+              {
+                SectionType: "Ending",
+                SectionData: {
+                  title: "Chapter 1 Complete!",
+                  subText: "You've successfully started your journey!",
+                },
+              },
+            ],
+          },
+          {
+            ChapterName: "Chapter 2",
+            ChapterIcon: "delta",
+            ChapterSections: [
+              {
+                SectionType: "Intro",
+                SectionData: {
+                  title: "Chapter 2",
+                  subText: "The Other Guy",
+                },
+              },
+              {
+                SectionType: "TextSection",
+                SectionData: [
+                  {
+                    text: "A guy's there.",
+                  },
+                  {
+                    text: "This other guy is pretty cool.",
+                  },
+                  {
+                    text: "What's his name again? Who knows.",
+                  },
+                ],
+              },
+              {
+                SectionType: "ChoiceSection",
+                SectionData: {
+                  text: "Should you ask his name?",
+                  choices: {
+                    choice1: "Heck yeah",
+                    choice2: "Nah, im good",
+                  },
+                  choicesMetadata: {
+                    correctChoice: "1",
+                    gameOverText: "He roundhouse kicks u into the atmosphere.",
+                    successText:
+                      "My name is... Chuck norris. Here's 10 million dollars.",
+                  },
+                },
+              },
+              {
+                SectionType: "TextSection",
+                SectionData: [
+                  {
+                    text:
+                      "Now equipped with 10 million dollars, you set your sights on the moon.",
+                  },
+                  {
+                    text:
+                      "You call NASA, but they aren't too interested in your offer.",
+                  },
+                  {
+                    text:
+                      "10 million is a lot, but you might not be able to go to the moon with that.",
+                  },
+                ],
+              },
+              {
+                SectionType: "ChoiceSection",
+                SectionData: {
+                  text: "You need more money, what should you do?",
+                  choices: {
+                    choice1: "Become a hotdog stand guy",
+                    choice2: "Go begging in old school runescape",
+                  },
+                  choicesMetadata: {
+                    correctChoice: "2",
+                    gameOverText:
+                      "You end up liking hot dogs so much that u explode",
+                    successText:
+                      "You find a runescape player that's sick nasty and gives you 400 billion GP",
+                  },
+                },
+              },
+              {
+                SectionType: "Ending",
+                SectionData: {
+                  title: "Chapter 2 Complete!",
+                  subText: "You're rich! Muahahahahaaaaa",
+                },
+              },
+            ],
+          },
+        ],
       },
     };
   },
@@ -271,61 +440,78 @@ export default {
       // Default the return value to true, if it hits any cases below turn it false.
       var returnValue = true;
 
+      console.log(JSON.stringify(this.storyJSON, null, 2));
+
       // If a chapter exists and is not null
       if (this.numberOfChapters != 0) {
         // For each section in each chapter
         this.storyJSON.Chapters.forEach((chapter) => {
-          chapter.ChapterSections.forEach((section) => {
-            // If any of the sections contains data, check the SectionType and validate
-            if (Object.keys(section.SectionData).length !== 0) {
-              switch (section.SectionType) {
-                case "Intro":
-                  if (
-                    section.SectionData.title.length == 0 ||
-                    section.SectionData.subText.length == 0
-                  ) {
-                    returnValue = false;
-                  }
-                  break;
-                case "TextSection":
-                  console.log(
-                    "Checking TextSection: " + JSON.stringify(section, null, 2)
-                  );
-                  for (var i = 0; i < section.SectionData.length; i++) {
-                    if (!section.SectionData[i].text) {
+          if (chapter.ChapterSections.length != 0) {
+            chapter.ChapterSections.forEach((section) => {
+              // If any of the sections contains data, check the SectionType and validate
+              if (Object.keys(section.SectionData).length !== 0) {
+                switch (section.SectionType) {
+                  case "Intro":
+                    if (
+                      section.SectionData.title.length == 0 ||
+                      section.SectionData.subText.length == 0 ||
+                      !section.SectionData.title ||
+                      !section.SectionData.subText
+                    ) {
                       returnValue = false;
                     }
-                  }
-                  break;
-                case "ChoiceSection":
-                  console.log(
-                    "Checking ChoiceSection: " +
-                      JSON.stringify(section, null, 2)
-                  );
-                  if (
-                    section.SectionData.questionText.length == 0 ||
-                    section.SectionData.choices.choice1.length == 0 ||
-                    section.SectionData.choices.choice2.length == 0 ||
-                    section.SectionData.choicesMetadata.gameOverText.length ==
-                      0 ||
-                    section.SectionData.choicesMetadata.successText.length == 0
-                  ) {
-                    returnValue = false;
-                  }
-                  break;
-                case "Ending":
-                  if (
-                    section.SectionData.title.length == 0 ||
-                    section.SectionData.subText.length == 0
-                  ) {
-                    returnValue = false;
-                  }
-                  break;
+                    break;
+                  case "TextSection":
+                    console.log(
+                      "Checking TextSection: " +
+                        JSON.stringify(section, null, 2)
+                    );
+                    for (var i = 0; i < section.SectionData.length; i++) {
+                      if (!section.SectionData[i].text) {
+                        returnValue = false;
+                      }
+                    }
+                    break;
+                  case "ChoiceSection":
+                    console.log(
+                      "Checking ChoiceSection: " +
+                        JSON.stringify(section, null, 2)
+                    );
+                    if (
+                      section.SectionData.questionText.length == 0 ||
+                      section.SectionData.choices.choice1.length == 0 ||
+                      section.SectionData.choices.choice2.length == 0 ||
+                      section.SectionData.choicesMetadata.gameOverText.length ==
+                        0 ||
+                      section.SectionData.choicesMetadata.successText.length ==
+                        0 ||
+                      !section.SectionData.questionText ||
+                      !section.SectionData.choices.choice1 ||
+                      !section.SectionData.choices.choice2 ||
+                      !section.SectionData.choicesMetadata.gameOverText ||
+                      !section.SectionData.choicesMetadata.successText
+                    ) {
+                      returnValue = false;
+                    }
+                    break;
+                  case "Ending":
+                    if (
+                      section.SectionData.title.length == 0 ||
+                      section.SectionData.subText.length == 0 ||
+                      !section.SectionData.title ||
+                      !section.SectionData.subText
+                    ) {
+                      returnValue = false;
+                    }
+                    break;
+                }
+              } else {
+                returnValue = false;
               }
-            } else {
-              returnValue = false;
-            }
-          });
+            });
+          } else {
+            returnValue = false;
+          }
         });
         this.tabNextButton.tab1 = returnValue;
         if (returnValue == true) {
@@ -343,22 +529,22 @@ export default {
           ".v-btn.v-btn--disabled.nohover .v-icon.mdi"
         );
         iconElements.forEach((iconElement) => {
-          //console.log("Icon Elements: ForEach() - Icon Element: ");
-          //console.log(iconElement);
+          // console.log("Icon Elements: ForEach() - Icon Element: ");
+          // console.log(iconElement);
           if (iconElement) {
             var iconContent = getComputedStyle(iconElement, ":before").content;
             if (iconContent.toString() != "none") {
-              //     console.log(iconContent.toString());
-              //     console.log("2");
+              // console.log(iconContent.toString());
+              // console.log("2");
 
               this.tabNextButton.tab1 = true;
             } else {
-              //    console.log(iconContent.toString());
-              //    console.log("3");
+              // console.log(iconContent.toString());
+              // console.log("3");
               this.tabNextButton.tab1 = false;
             }
           } else {
-            //    console.log("4");
+            // console.log("4");
             this.tabNextButton.tab1 = false;
           }
         });
