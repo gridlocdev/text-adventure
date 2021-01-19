@@ -9,7 +9,7 @@
     </v-app-bar>
     <v-row class="my-5" v-show="currentTab == 0" no-gutters>
       <v-col>
-        <v-row>
+        <v-row class="ma-5">
           <v-col align="center" justify="center">
             <h1>Story Details</h1>
           </v-col>
@@ -21,6 +21,16 @@
               v-model="storyJSON.StoryName"
               class="pa-5"
               label="New Story Name"
+              hide-details="auto"
+            />
+          </v-col>
+        </v-row>
+        <v-row align="center" justify="center">
+          <v-col cols="8">
+            <v-text-field
+              v-model="storyJSON.StoryDescription"
+              class="pa-5"
+              label="Description (Optional)"
               hide-details="auto"
             />
           </v-col>
@@ -185,10 +195,11 @@ export default {
       },
       storyID: 0,
       currentChapterData: {},
-      currentTab: 2,
+      currentTab: 0,
       numberOfChaptersCreated: 0,
       storyJSON: {
         StoryID: 0,
+        StoryDescription: "",
         StoryName: "",
         StoryIcon: "",
         Chapters: [],

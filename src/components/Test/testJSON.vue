@@ -231,6 +231,7 @@ export default {
       },
       storyJSON: {
         StoryName: "The Hero's Journey",
+        StoryDescription: "The Hero goes on a quest to slay the dragon!",
         StoryIcon: "crown-outline",
         Chapters: [
           {
