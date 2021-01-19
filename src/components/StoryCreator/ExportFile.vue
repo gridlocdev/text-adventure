@@ -93,11 +93,11 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn align="left" color="primary" text @click="dialog = false">
+            <v-btn align="left" color="primary" text @click="closeDialog()">
               Close
             </v-btn>
-            <v-btn color="primary" text @click="routerPushToHome()">
-              Return to Home
+            <v-btn color="primary" text @click="routerPushToStoryLibrary()">
+              Story Library
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -122,6 +122,10 @@ export default {
     };
   },
   methods: {
+    closeDialog() {
+      this.$emit("returnToStartingTab");
+      this.dialog = false;
+    },
     copyToClipboard: async function () {
       this.snackbar = true;
 
@@ -168,8 +172,8 @@ export default {
       this.addStoryButtonDisabled = true;
       this.$emit("createStory");
     },
-    routerPushToHome: function () {
-      this.$router.push({ name: "Start" });
+    routerPushToStoryLibrary: function () {
+      this.$router.push({ name: "StoryLibrary" });
     },
   },
 };

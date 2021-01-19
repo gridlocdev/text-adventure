@@ -4,18 +4,12 @@ Next Steps:
 
 MVP:
 
-- Story Library : Edit which of your stories are stored in localStorage
-: on this page, navigation Buttons for Import Story and Create New 
-
-
-- After creating your story, disable all of the StoryCreator tabs again and reset the state to how it was on first load.
+- Add the default icon value for each Chapter
 
 - On the Start screen, use the v-hover component to make it do cool stuff
 : When you hover on the active one, do nothing.
 : When you hover an inactive story, make a "select" overlay
 : If you hover the "Add Story", make an overlay with two buttons. "Create", and "Import"
-
-
 
 
 - Edit the Vuetify color theme to look like how it does when I use Dark Reader

@@ -13,7 +13,7 @@
 
       <Choice
         v-if="this.sequenceIndexComponentType == 'ChoiceSection'"
-        :text="this.ChoiceSection.text"
+        :questionText="this.ChoiceSection.questionText"
         :choice1="this.ChoiceSection.choices.choice1"
         :choice2="this.ChoiceSection.choices.choice2"
         :correctChoice="this.ChoiceSection.choicesMetadata.correctChoice"
@@ -92,6 +92,7 @@ export default {
         textArray: [],
       },
       ChoiceSection: {
+        questionText: "",
         choices: {
           choice1: "",
           choice2: "",
@@ -170,7 +171,7 @@ export default {
       // Sets data for the ChoiceSections
       if (choiceSectionData) {
         this.setSequencerChoiceSectionData(
-          choiceSectionData.text,
+          choiceSectionData.questionText,
           choiceSectionData.choices.choice1,
           choiceSectionData.choices.choice2,
           choiceSectionData.choicesMetadata.correctChoice,
@@ -200,7 +201,7 @@ export default {
       this.TextSection.textArray = textArray;
     },
     setSequencerChoiceSectionData(
-      text,
+      questionText,
       choice1,
       choice2,
       correctChoice,
@@ -208,7 +209,7 @@ export default {
       successText
     ) {
       // Sets the Sequencer's data for the ChoiceSections
-      this.ChoiceSection.text = text;
+      this.ChoiceSection.questionText = questionText;
       this.ChoiceSection.choices.choice1 = choice1;
       this.ChoiceSection.choices.choice2 = choice2;
       this.ChoiceSection.choicesMetadata.correctChoice = correctChoice;
@@ -225,7 +226,7 @@ export default {
       const chapterSections = JSON.parse(this.jsonPayload);
 
       this.chapterJSON = chapterSections;
-
+      console.log(this.chapterJSON);
       // Loop through the JSON to create our Timeline (To show and hide elements)
       var timeline = [];
 
@@ -333,6 +334,7 @@ export default {
     },
   },
   mounted() {
+    console.log("MOUNTED() HIT.");
     // When mounted, display the first set of data.
     this.sequenceIndex = this.$store.state.SequencerIndex;
     this.chapterTimeline = JSON.parse(localStorage.getItem("ChapterTimeline"));

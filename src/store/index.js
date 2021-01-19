@@ -112,7 +112,7 @@ export default new Vuex.Store({
     },
     setCurrentStoryJSON(state, json) {
       state.CurrentStoryJSON = json;
-      localStorage.setItem('CurrentStoryJSON', json);
+      localStorage.setItem('CurrentStoryJSON', JSON.stringify(json));
       console.log("(State) CurrentStoryJSON: " + json);
     },
     addStoryToStoryJSONArray(state, jsonString) {

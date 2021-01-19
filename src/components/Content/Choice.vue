@@ -5,7 +5,7 @@
         <v-row class="ma-10" align="center" justify="center">
           <v-card class="pa-10" elevation="5">
             <h1 class="animate__animated animate__fadeIn">
-              <span> {{ text }}</span>
+              <span> {{ questionText }}</span>
             </h1>
           </v-card>
         </v-row>
@@ -47,7 +47,7 @@
 <script>
 export default {
   props: {
-    text: String,
+    questionText: String,
     choice1: String,
     choice2: String,
     correctChoice: String,

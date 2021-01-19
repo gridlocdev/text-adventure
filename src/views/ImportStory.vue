@@ -80,8 +80,8 @@
             >
               Close
             </v-btn>
-            <v-btn color="primary" text @click="routerPushToHome()">
-              Return to Home
+            <v-btn color="primary" text @click="routerPushToStoryLibrary()">
+              Story Library
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -138,7 +138,7 @@
             >
               Close
             </v-btn>
-            <v-btn color="primary" text @click="routerPushToHome()">
+            <v-btn color="primary" text @click="routerPushToStoryLibrary()">
               Return to Home
             </v-btn>
           </v-card-actions>
@@ -208,8 +208,8 @@ export default {
       this.modals.successDialog = true;
       this.$refs.importFile.createStory();
     },
-    routerPushToHome: function () {
-      this.$router.push({ name: "Start" });
+    routerPushToStoryLibrary: function () {
+      this.$router.push({ name: "StoryLibrary" });
     },
   },
 };

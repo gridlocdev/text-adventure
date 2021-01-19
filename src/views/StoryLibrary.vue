@@ -89,6 +89,7 @@ export default {
       );
       console.log(JSON.stringify(newStory, null, 2));
       this.$store.dispatch("setCurrentStoryJSON", JSON.stringify(newStory));
+      this.$router.push("chapter" + this.$store.state.CurrentChapter);
     },
   },
 };
