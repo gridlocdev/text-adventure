@@ -1,5 +1,8 @@
 <template>
-  <v-container>
+  <v-container
+    class="animate__animated animate__fadeIn"
+    style="animation-duration: 0.25s"
+  >
     <v-row class="ma-5">
       <v-col align="center" justify="center">
         <v-row class="pb-5">
@@ -120,9 +123,9 @@
           <v-row no-gutters>
             <v-col align="center" justify="center">
               <v-card-text>
-                Your story <strong>{{ duplicateStoryName }}</strong> already exists in your
-                browser's local cache, so it wouldn't really make sense to put
-                it there twice.
+                Your story <strong>{{ duplicateStoryName }}</strong> already
+                exists in your browser's local cache, so it wouldn't really make
+                sense to put it there twice.
               </v-card-text>
             </v-col>
           </v-row>

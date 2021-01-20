@@ -4,12 +4,12 @@ Next Steps:
 
 MVP:
 
-- Add some load in animations for the newly added pages (StoryCreator, Import, and Story Library)
 
 - Edit the Vuetify color theme to look like how it does when I use Dark Reader
 
-
 - About : A short description of the application and why I built it
+
+- Set up a default story
 
 Post MVP Release:
 

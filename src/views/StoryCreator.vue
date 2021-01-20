@@ -7,7 +7,12 @@
         <v-tab :disabled="!tabNextButton.tab1"> 3. Confirm and Save </v-tab>
       </v-tabs>
     </v-app-bar>
-    <v-row class="my-5" v-show="currentTab == 0" no-gutters>
+    <v-row
+      class="my-5 animate__animated animate__fadeIn"
+      style="animation-duration: 0.25s"
+      v-show="currentTab == 0"
+      no-gutters
+    >
       <v-col>
         <v-row class="ma-5">
           <v-col align="center" justify="center">

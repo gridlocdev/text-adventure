@@ -1,5 +1,8 @@
 <template>
-  <v-container>
+  <v-container
+    class="animate__animated animate__fadeIn"
+    style="animation-duration: 0.25s"
+  >
     <v-row class="mb-5">
       <v-col align="center" justify="center">
         <h1>Story Library</h1>
