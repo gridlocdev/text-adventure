@@ -4,13 +4,6 @@ Next Steps:
 
 MVP:
 
-- Add the "mdi-" textbox prefix to the Chapter Icon selector like it is in Story Details
-
-- On the Start screen, use the v-hover component to make it do cool stuff
-: When you hover on the active one, do nothing.
-: When you hover an inactive story, make a "select" overlay
-: If you hover the "Add Story", make an overlay with two buttons. "Create", and "Import"
-
 - Have the "Reset Story Progress" button in Settings not remove everything from the user's StoryLibrary 
 
 - Edit the Vuetify color theme to look like how it does when I use Dark Reader

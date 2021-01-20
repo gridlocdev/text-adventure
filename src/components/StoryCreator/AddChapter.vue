@@ -24,9 +24,10 @@
           <v-row no-gutters class="mx-2 d-flex">
             <v-col align="center" justify="center" cols="6">
               <v-text-field
+                prefix="mdi-"
                 v-model="chapterIcon"
                 class="pa-5"
-                label="Chapter Icon Name (e.g. 'mdi-delta')"
+                label="Chapter Icon (e.g. 'mdi-delta')"
                 outlined
                 hide-details="auto"
               />
@@ -181,9 +182,9 @@ export default {
     console.log("Mounted()");
     //this.updateChapterData();
     const chapterSections = this.chapterTimeline.map(
-        ({ SectionType, SectionData }) => ({ SectionType, SectionData })
-      );
-    console.log(JSON.stringify(chapterSections, null, 2))
+      ({ SectionType, SectionData }) => ({ SectionType, SectionData })
+    );
+    console.log(JSON.stringify(chapterSections, null, 2));
   },
 };
 </script>
