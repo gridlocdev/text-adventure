@@ -120,8 +120,9 @@
           <v-row no-gutters>
             <v-col align="center" justify="center">
               <v-card-text>
-                Your story already exists in your browser's local cache, so it
-                wouldn't really make sense to put it there twice.
+                Your story <strong>{{ duplicateStoryName }}</strong> already exists in your
+                browser's local cache, so it wouldn't really make sense to put
+                it there twice.
               </v-card-text>
             </v-col>
           </v-row>
@@ -139,7 +140,7 @@
               Close
             </v-btn>
             <v-btn color="primary" text @click="routerPushToStoryLibrary()">
-              Return to Home
+              Story Library
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -172,6 +173,7 @@ export default {
       modals: {
         successDialog: false,
         duplicateDialog: false,
+        duplicateStoryName: "",
         errorSnackbar: {
           enabled: false,
           text:
@@ -181,7 +183,8 @@ export default {
     };
   },
   methods: {
-    fileValidationDuplicate() {
+    fileValidationDuplicate(storyName) {
+      this.duplicateStoryName = storyName;
       this.addStoryButtonDisabled = true;
       this.modals.duplicateDialog = true;
     },

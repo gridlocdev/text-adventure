@@ -15,8 +15,23 @@
             class="pa-5 mx-auto"
             :elevation="hover ? 10 : 2"
             :class="{ 'on-hover': hover }"
+            @mouseenter="storyHover = true"
+            @mouseleave="hoverMouseLeave()"
           >
-            <v-list-item three-line>
+            <v-btn
+              tabindex="-1"
+              z-index="1000"
+              :top="true"
+              :right="true"
+              :absolute="true"
+              class="ml-auto"
+              icon
+              depressed
+              @click="removingStory = true"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            <v-list-item three-line style="pointer-events: none">
               <v-list-item-content>
                 <div class="overline mb-4">STORY</div>
                 <v-list-item-title class="headline mb-1">
@@ -27,7 +42,7 @@
                 }}</v-list-item-subtitle>
               </v-list-item-content>
 
-              <v-avatar rounded color="primary darken-1" size="75">
+              <v-avatar rounded color="ml-5 mt-7 primary darken-2" size="75">
                 <v-icon color="white" x-large>
                   mdi-{{ story.StoryIcon }}
                 </v-icon>
@@ -52,6 +67,32 @@
                 </v-col>
               </v-row>
             </v-card-actions>
+            <v-fade-transition>
+              <v-overlay
+                v-if="hover == true && removingStory == true"
+                absolute
+                color="error"
+              >
+                <v-btn
+                  v-if="!removeStoryFinalConfirmation"
+                  @click="removeStoryFinalConfirmation = true"
+                  :ripple="false"
+                  fab
+                  large
+                >
+                  <v-icon> mdi-delete-forever</v-icon>
+                </v-btn>
+                <v-btn
+                  class="animate__animated animate__fadeInDown"
+                  style="animation-duration: 0.5s !important"
+                  v-if="removeStoryFinalConfirmation"
+                  @click="removeStory()"
+                  large
+                >
+                  Are you sure?
+                </v-btn>
+              </v-overlay>
+            </v-fade-transition>
           </v-card>
         </v-hover>
       </v-col>
@@ -63,6 +104,7 @@
           Import Story
         </v-btn>
       </v-col>
+
       <v-col align="center" justify="center">
         <v-btn @click="$router.push('storyCreator')" x-large elevation="5">
           Create New
@@ -76,9 +118,26 @@
 export default {
   name: "StoryLibrary",
   data() {
-    return {};
+    return {
+      removingStory: false,
+      removeStoryFinalConfirmation: false,
+      storyHover: false,
+    };
   },
   methods: {
+    hoverMouseLeave() {
+      if (this.removeStoryFinalConfirmation == true) {
+        // Wait for transition fadeout to end
+        setTimeout(() => {
+          this.removeStoryFinalConfirmation = false;
+        }, 10);
+      }
+      this.removingStory = false;
+      this.storyHover = false;
+    },
+    removeStory() {
+      console.log("RemoveStory() hit.");
+    },
     playStory(StoryID) {
       const newStory = this.$store.state.StoryJSONArray.find(
         (arrayStory) => arrayStory.StoryID === StoryID

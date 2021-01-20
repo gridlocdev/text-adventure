@@ -73,13 +73,9 @@
           </v-row>
         </div>
         <div>
-          <ResetStoryProgress v-on:closeSettingsModal="settingsModal = false" />
-
-          <!-- <v-row>
-            <v-col class="text-center">
-              <v-btn rounded> Reset Story Progress </v-btn>
-            </v-col>
-          </v-row> -->
+          <reset-story-progress
+            v-on:closeSettingsModal="settingsModal = false"
+          />
         </div>
 
         <v-card-actions>

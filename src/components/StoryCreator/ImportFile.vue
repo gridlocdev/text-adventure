@@ -132,7 +132,7 @@ export default {
           }
 
           if (storyExistsAlready == true) {
-            this.$emit("fileValidationDuplicate");
+            this.$emit("fileValidationDuplicate", this.storyJSON.StoryName);
           } else {
             this.createStory();
             this.$emit("fileValidationSuccess");

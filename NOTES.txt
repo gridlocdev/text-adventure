@@ -4,11 +4,10 @@ Next Steps:
 
 MVP:
 
-- Have the "Reset Story Progress" button in Settings not remove everything from the user's StoryLibrary 
+- Add some load in animations for the newly added pages (StoryCreator, Import, and Story Library)
 
 - Edit the Vuetify color theme to look like how it does when I use Dark Reader
 
-- Add some load in animations for the newly added pages (StoryCreator, Import, and Story Library)
 
 - About : A short description of the application and why I built it
 
