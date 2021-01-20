@@ -18,9 +18,7 @@
               fab
               tile
             >
-              <v-icon>
-                mdi-{{ item.name }}
-              </v-icon>
+              <v-icon> mdi-{{ item.name }} </v-icon>
             </v-btn>
           </v-col>
         </v-row>
@@ -111,18 +109,23 @@ export default {
     importIconListFromState() {
       // For the chapter state, populate the icons and also set which ones to light up by default.
 
+      const storyJSON = JSON.parse(this.$store.state.CurrentStoryJSON);
+
+      console.log(storyJSON);
+
       // Set the Ending Component's data to include the icon names, and whether they should light up yet
-      for (var i = 0; i < this.$store.state.NumberOfChapters; i++) {
+      for (var i = 0; i < storyJSON.Chapters.length; i++) {
         if (i < this.$store.state.CurrentChapter - 1) {
           // If the chapter has been played, Sets the color to "Primary" for that button.
+
           this.chapterIconMasterList.push({
-            name: this.$store.state.CurrentStoryJSON.Chapters[i].ChapterIcon,
+            name: storyJSON.Chapters[i].ChapterIcon,
             color: "primary",
           });
         } else {
           // If the chapter has not been played, sets no color for that button.
           this.chapterIconMasterList.push({
-            name: this.$store.state.CurrentStoryJSON.Chapters[i].ChapterIcon,
+            name: storyJSON.Chapters[i].ChapterIcon,
             color: "",
           });
         }

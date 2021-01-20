@@ -405,6 +405,15 @@ export default {
           }
           break;
         case 1:
+          console.log("Editing icons STARTED");
+          console.log(JSON.stringify(this.storyJSON, null, 2));
+          for (var i = 0; i < this.storyJSON.Chapters.length; i++) {
+            if (this.storyJSON.Chapters[i].ChapterIcon.length == 0) {
+              this.storyJSON.Chapters[i].ChapterIcon = "delta";
+            }
+          }
+          console.log("Editing icons DONE");
+          console.log(JSON.stringify(this.storyJSON, null, 2));
           break;
         case 2:
           break;

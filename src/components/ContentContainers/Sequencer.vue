@@ -226,7 +226,6 @@ export default {
       const chapterSections = JSON.parse(this.jsonPayload);
 
       this.chapterJSON = chapterSections;
-      console.log(this.chapterJSON);
       // Loop through the JSON to create our Timeline (To show and hide elements)
       var timeline = [];
 
@@ -285,7 +284,7 @@ export default {
         case "ChoiceSection":
           // Sets data for the ChoiceSections
           this.setSequencerChoiceSectionData(
-            currentSectionData.text,
+            currentSectionData.questionText,
             currentSectionData.choices.choice1,
             currentSectionData.choices.choice2,
             currentSectionData.choicesMetadata.correctChoice,
@@ -334,7 +333,6 @@ export default {
     },
   },
   mounted() {
-    console.log("MOUNTED() HIT.");
     // When mounted, display the first set of data.
     this.sequenceIndex = this.$store.state.SequencerIndex;
     this.chapterTimeline = JSON.parse(localStorage.getItem("ChapterTimeline"));
@@ -351,10 +349,6 @@ export default {
     );
     console.log("SequenceIndex: " + this.sequenceIndex);
   },
-  // activated() {
-  //   console.log("Sequencer Activated()");
-  //   this.$store.dispatch("setGameInProgress", true);
-  // },
 };
 </script>
 
