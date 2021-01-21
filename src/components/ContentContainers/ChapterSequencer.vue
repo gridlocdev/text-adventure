@@ -27,8 +27,12 @@ export default {
   },
   computed: {
     chapterJSON: function () {
-      return this.storyJSON.Chapters[this.$store.state.CurrentChapter - 1]
-        .ChapterSections;
+      if (this.$store.state.CurrentChapter != -1) {
+        return this.storyJSON.Chapters[this.$store.state.CurrentChapter - 1]
+          .ChapterSections;
+      } else {
+        return {};
+      }
     },
     ...mapState(["CurrentChapter"]),
   },
@@ -42,6 +46,7 @@ export default {
         this.$router.push("/chapter" + this.$store.state.CurrentChapter);
         console.log(`Updating Current Chapter from ${oldValue} to ${newValue}`);
       } else {
+        this.$store.dispatch("setCurrentChapter", -1);
         console.log("Game In Progress: " + this.$store.state.GameInProgress);
         console.log("CurrentChapter: " + this.$store.state.CurrentChapter);
       }
@@ -53,6 +58,9 @@ export default {
       this.$router.push("/endgame");
       console.log("Hit end of game! Congratulations!");
     },
+  },
+  created() {
+    this.$store.dispatch("setNumberOfChapters", this.storyJSON.Chapters.length);
   },
 };
 </script>

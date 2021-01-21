@@ -62,9 +62,10 @@ export default {
     clickRestartChapter() {
       this.$store.dispatch("resetIntroFade");
       this.$store.dispatch("resetChapter");
+      this.$store.dispatch("setSequencerIndex", 0)
       console.log("clickRestartChapter clicked.");
 
-      this.$router.push("./");
+      this.$router.push({ path: `/chapter:${this.$store.state.CurrentChapter}` });
     },
   },
   activated() {

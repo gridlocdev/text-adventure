@@ -4,8 +4,6 @@ Next Steps:
 
 MVP:
 
-- Fix the "Restart Chapter" button. Make it reset the current chapter's data back to the start, then navigate to the page that it's already at.
-
 - Edit the icons on the sidebar to be meaningful ones
 
 - Documentation: 

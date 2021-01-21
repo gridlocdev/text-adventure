@@ -336,11 +336,13 @@ export default {
     // When mounted, display the first set of data.
     this.sequenceIndex = this.$store.state.SequencerIndex;
     this.chapterTimeline = JSON.parse(localStorage.getItem("ChapterTimeline"));
-    this.createChapterTimeline();
-    this.setInitialComponentDataFromJsonImportProp();
-    this.sequenceIndexComponentType = this.chapterTimeline[
-      this.sequenceIndex
-    ][1];
+    if (this.$store.state.CurrentChapter != -1) {
+      this.createChapterTimeline();
+      this.setInitialComponentDataFromJsonImportProp();
+      this.sequenceIndexComponentType = this.chapterTimeline[
+        this.sequenceIndex
+      ][1];
+    }
 
     this.$store.dispatch("setGameInProgress", true);
 
