@@ -122,15 +122,16 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  // If the user is navigating to a URL that starts with "Chapter", redirect them to where they left off.
-  if (to.path.includes('chapter') && to.path !== `/chapter:${storeVar.state.CurrentChapter}`) {
+router.afterEach((to, from) => {
+  // If the user is done navigating to a URL that starts with "Chapter", redirect them to where they left off.
+  console.log(`${storeVar.state.CurrentChapter}`)
+  console.log(from.path);
+  console.log(to.path);
+  if (to.path.includes('chapter') &&
+    (to.path !== `/chapter:${storeVar.state.CurrentChapter}`)) {
     console.log("Router BeforeEach hit! Route: " + to.path)
     console.log("Router compare: " + `/chapter:${storeVar.state.CurrentChapter}`)
-    next({ path: `/chapter:${storeVar.state.CurrentChapter}` });
-  }
-  else {
-    next();
+    router.push({ path: `/chapter:${storeVar.state.CurrentChapter}` });
   }
 });
 export default router

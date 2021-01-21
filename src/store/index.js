@@ -24,60 +24,60 @@ export default new Vuex.Store({
     initializeStore(state) {
       if (localStorage.getItem('PageIndex')) {
         state.PageIndex = localStorage.getItem('PageIndex');
-        console.log("Loaded from LocalStorage: PageIndex - " + state.PageIndex)
+        //console.log("Loaded from LocalStorage: PageIndex - " + state.PageIndex)
       }
       if (localStorage.getItem('DarkMode')) {
         state.DarkMode = localStorage.getItem('DarkMode') == 'true';
 
-        console.log("Loaded from LocalStorage: DarkMode - " + state.DarkMode)
+        //console.log("Loaded from LocalStorage: DarkMode - " + state.DarkMode)
       }
       if (localStorage.getItem('TextSpeed')) {
         state.TextSpeed = parseInt(localStorage.getItem('TextSpeed'));
-        console.log("Loaded from LocalStorage: TextSpeed - " + state.TextSpeed)
+        //console.log("Loaded from LocalStorage: TextSpeed - " + state.TextSpeed)
       }
       if (localStorage.getItem('StoryName')) {
         state.StoryName = localStorage.getItem('StoryName');
-        console.log("Loaded from LocalStorage: StoryName - " + state.StoryName)
+        //console.log("Loaded from LocalStorage: StoryName - " + state.StoryName)
       }
       if (localStorage.getItem('CurrentStoryJSON')) {
         state.CurrentStoryJSON = JSON.parse(localStorage.getItem('CurrentStoryJSON'));
-        console.log("Loaded from LocalStorage: CurrentStoryJSON - " + state.CurrentStoryJSON)
+        //console.log("Loaded from LocalStorage: CurrentStoryJSON - " + state.CurrentStoryJSON)
       }
       if (localStorage.getItem('StoryJSONArray')) {
         state.StoryJSONArray = JSON.parse(localStorage.getItem('StoryJSONArray'));
-        console.log("Loaded from LocalStorage: StoryJSONArray - " + JSON.stringify(state.StoryJSONArray, null, 2))
+        //console.log("Loaded from LocalStorage: StoryJSONArray - " + JSON.stringify(state.StoryJSONArray, null, 2))
       }
       if (localStorage.getItem('SuccessText')) {
         state.SuccessText = localStorage.getItem('SuccessText');
-        console.log("Loaded from LocalStorage: SuccessText - " + state.SuccessText)
+        //console.log("Loaded from LocalStorage: SuccessText - " + state.SuccessText)
       }
       if (localStorage.getItem('GameOverText')) {
         state.GameOverText = localStorage.getItem('GameOverText');
-        console.log("Loaded from LocalStorage: GameOverText - " + state.GameOverText)
+        //console.log("Loaded from LocalStorage: GameOverText - " + state.GameOverText)
       }
       if (localStorage.getItem('CurrentChapter')) {
         state.CurrentChapter = parseInt(localStorage.getItem('CurrentChapter'));
-        console.log("Loaded from LocalStorage: CurrentChapter - " + state.CurrentChapter)
+        //console.log("Loaded from LocalStorage: CurrentChapter - " + state.CurrentChapter)
       }
       if (localStorage.getItem('NumberOfChapters')) {
         state.NumberOfChapters = parseInt(localStorage.getItem('NumberOfChapters'));
-        console.log("Loaded from LocalStorage: NumberOfChapters - " + state.NumberOfChapters)
+        //console.log("Loaded from LocalStorage: NumberOfChapters - " + state.NumberOfChapters)
       }
       if (localStorage.getItem('SequencerIndex')) {
         state.SequencerIndex = parseInt(localStorage.getItem('SequencerIndex'));
-        console.log("Loaded from LocalStorage: SequencerIndex - " + state.SequencerIndex)
+        //console.log("Loaded from LocalStorage: SequencerIndex - " + state.SequencerIndex)
       }
       if (localStorage.getItem('ResetChapter')) {
         state.ResetChapter = localStorage.getItem('ResetChapter') == 'true';
-        console.log("Loaded from LocalStorage: ResetChapter - " + state.ResetChapter)
+        //console.log("Loaded from LocalStorage: ResetChapter - " + state.ResetChapter)
       }
       if (localStorage.getItem('ResetIntroFade')) {
         state.ResetIntroFade = localStorage.getItem('ResetIntroFade') == 'true';
-        console.log("Loaded from LocalStorage: ResetIntroFade - " + state.ResetIntroFade)
+        //console.log("Loaded from LocalStorage: ResetIntroFade - " + state.ResetIntroFade)
       }
       if (localStorage.getItem('StoryInProgress')) {
         state.StoryInProgress = localStorage.getItem('StoryInProgress') == 'true';
-        console.log("Loaded from LocalStorage: StoryInProgress - " + state.StoryInProgress)
+        //console.log("Loaded from LocalStorage: StoryInProgress - " + state.StoryInProgress)
       }
     },
     setGameInProgress(state, bool) {

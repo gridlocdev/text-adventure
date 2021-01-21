@@ -5,7 +5,6 @@ Next Steps:
 MVP:
 
 - Fix the "Restart Chapter" button. Make it reset the current chapter's data back to the start, then navigate to the page that it's already at.
-- Resolve the router bug, where if a user refreshes the page in chapter it will default back to the first value
 
 - Edit the icons on the sidebar to be meaningful ones
 
