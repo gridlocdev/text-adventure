@@ -63,23 +63,23 @@ export default {
       { title: "Home", icon: "arm-flex", routerLink: "/" },
       {
         title: "About",
-        icon: "lock",
+        icon: "information",
         routerLink: "/about",
       },
       {
+        title: "Story Library",
+        icon: "book-open-variant",
+        routerLink: "/storyLibrary",
+      },
+      {
         title: "Story Creator",
-        icon: "lock",
+        icon: "pencil",
         routerLink: "/storyCreator",
       },
       {
         title: "Import Story",
-        icon: "lock",
+        icon: "plus",
         routerLink: "/importStory",
-      },
-      {
-        title: "Story Library",
-        icon: "lock",
-        routerLink: "/storyLibrary",
       },
     ],
 

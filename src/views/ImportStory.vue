@@ -123,9 +123,10 @@
           <v-row no-gutters>
             <v-col align="center" justify="center">
               <v-card-text>
-                Your story <strong>{{ duplicateStoryName }}</strong> already
-                exists in your browser's local cache, so it wouldn't really make
-                sense to put it there twice.
+                Your story
+                <strong>{{ modals.duplicateStoryName }}</strong> already exists
+                in your browser's local cache, so it wouldn't really make sense
+                to put it there twice.
               </v-card-text>
             </v-col>
           </v-row>
@@ -187,7 +188,7 @@ export default {
   },
   methods: {
     fileValidationDuplicate(storyName) {
-      this.duplicateStoryName = storyName;
+      this.modals.duplicateStoryName = storyName;
       this.addStoryButtonDisabled = true;
       this.modals.duplicateDialog = true;
     },

@@ -6,6 +6,10 @@ MVP:
 
 - Edit the icons on the sidebar to be meaningful ones
 
+- Final round of bug testing
+
+- Clear all the console.logs
+
 - Documentation: 
 : In each component, at the top, list what the component does in a comment.
 : In each method, describe in short what that method does.
