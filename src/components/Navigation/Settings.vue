@@ -192,4 +192,8 @@ export default {
 .myClass:focus::before {
   opacity: 0 !important;
 }
+
+.v-card.v-sheet.theme--light {
+  background-color: #F4F4F4 !important;
+}
 </style>

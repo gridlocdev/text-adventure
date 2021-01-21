@@ -1,6 +1,9 @@
 <template>
-  <v-app id="inspire">
-    <HeaderBar />
+  <v-app
+    id="inspire"
+    :style="{ background: $vuetify.theme.themes[theme].background }"
+  >
+    <header-bar />
     <v-main>
       <v-container fluid fill-height>
         <keep-alive>
@@ -20,6 +23,11 @@ export default {
   components: {
     HeaderBar,
   },
+  computed: {
+    theme() {
+      return this.$vuetify.theme.dark ? "dark" : "light";
+    },
+  },
   store: store,
   beforeCreate() {
     this.$store.commit("initializeStore");
@@ -32,5 +40,9 @@ export default {
 <style>
 html {
   overflow: auto !important;
+}
+
+.v-btn.theme--light.v-btn--has-bg:not(.primary):not(.success):not(.error) {
+  background-color: #ffffff;
 }
 </style>

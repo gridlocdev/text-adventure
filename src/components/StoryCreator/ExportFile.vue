@@ -191,4 +191,15 @@ pre {
 .v-application code {
   background-color: transparent !important;
 }
+.v-application.theme--light code {
+  font-weight: bold !important;
+}
+
+.v-btn.v-btn--outlined.theme--light {
+  background-color: #1976d2 !important;
+  color: white;
+  border: none;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+}
 </style>

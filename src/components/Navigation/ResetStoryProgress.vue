@@ -18,6 +18,7 @@
               class="ma-2 myClass"
               v-bind="attrs"
               v-on="on"
+              elevation="5"
             >
               Reset Story
             </v-btn>
