@@ -4,10 +4,12 @@ Next Steps:
 
 MVP:
 
-
 - Edit the Vuetify color theme to look like how it does when I use Dark Reader
 
-- About : A short description of the application and why I built it
+- Documentation: 
+: In each component, at the top, list what the component does in a comment.
+: In each method, describe in short what that method does.
+: In those methods
 
 - Set up a default story
 
@@ -18,8 +20,6 @@ Post MVP Release:
 - Add a list of buttons to allow users to navigate the TextSection back and forth
 : v-pagination - https://vuetifyjs.com/en/components/paginations/#usage
 
-- Documentation: 
-: In each component, at the top, list what the component does in a comment.
 
 - Make it mobile responsive
 

@@ -50,7 +50,8 @@
 
 <script>
 import Settings from "./Settings.vue";
-import store from "../../store/index";
+// This import is if I would like a link to the current story, indexed by chapternumber routerLink = 'chapter' + store.state.CurrentChapter
+//import store from "../../store/index";
 
 export default {
   components: {
@@ -61,9 +62,9 @@ export default {
     NavigationItems: [
       { title: "Home", icon: "arm-flex", routerLink: "/" },
       {
-        title: "The Hero's Journey",
+        title: "About",
         icon: "lock",
-        routerLink: "chapter" + store.state.CurrentChapter,
+        routerLink: "/about",
       },
       {
         title: "Story Creator",
