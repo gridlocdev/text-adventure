@@ -4,12 +4,8 @@ Next Steps:
 
 MVP:
 
-- Clear all the console.logs
-
-- Add the functionality for removeStory() on the StoryLibrary page
-
 - Final round of bug testing
-
+: Fix the bug that happens when you finish creating a story and submit the form to create another one.
 
 - Documentation: 
 : In each component, at the top, list what the component does in a comment.

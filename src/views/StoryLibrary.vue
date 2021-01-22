@@ -89,7 +89,7 @@
                   class="animate__animated animate__fadeInDown"
                   style="animation-duration: 0.5s !important"
                   v-if="removeStoryFinalConfirmation"
-                  @click="removeStory()"
+                  @click="removeStory(story.StoryID)"
                   large
                 >
                   Are you sure?
@@ -138,8 +138,25 @@ export default {
       this.removingStory = false;
       this.storyHover = false;
     },
-    removeStory() {
+    removeStory(StoryID) {
+      // I want to take one of the items out of the Story array.
       console.log("RemoveStory() hit.");
+
+      // Set a variable to store the value of the existing StoryJSON array.
+      var currentStoryJSONArray = this.$store.state.StoryJSONArray;
+      // Find the index of the item in that array to use in array.splice
+      const selectedStory = currentStoryJSONArray.find(
+        (arrayStory) => arrayStory.StoryID === StoryID
+      );
+      const index = currentStoryJSONArray.indexOf(selectedStory);
+
+      // Use splice to remove it
+      currentStoryJSONArray.splice(index, 1);
+      const newArray = currentStoryJSONArray
+
+      // Push the results to the state store
+      this.$store.dispatch("setStoryJSONArray", newArray);
+      console.log(this.$store.state.StoryJSONArray);
     },
     playStory(StoryID) {
       const newStory = this.$store.state.StoryJSONArray.find(
