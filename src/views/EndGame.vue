@@ -15,9 +15,14 @@
             </h1>
           </v-col>
         </v-row>
-        <v-row v-if="textIndex == this.EndingTextArray.length - 1" class="ma-5" align="center" justify="center">
+        <v-row
+          v-if="textIndex == this.EndingTextArray.length - 1"
+          class="ma-5"
+          align="center"
+          justify="center"
+        >
           <v-btn
-            @click="$router.push({ name: 'Start' })"
+            @click="resetAndNavigateToHome()"
             elevation="2"
             large
             color="primary"
@@ -47,8 +52,21 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    resetAndNavigateToHome() {
+      console.log("resetAndNavigateToHome() Hit.")
+      this.$store.dispatch("resetStoryProgress");
+
+      this.dialog = false;
+
+      this.$emit("closeSettingsModal");
+      this.$router.push({ name: "Start" });
+      this.$router.go();
+    },
+  },
   mounted() {
+    this.textIndex = 0;
+    this.$store.dispatch("setGameInProgress", false);
     // On load, show the first textIndex entry and just leave the next to render
     setTimeout(() => {
       var fadeContainer = document.getElementById("fadeContainer");

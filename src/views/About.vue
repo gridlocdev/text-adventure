@@ -27,7 +27,7 @@
                   </li>
                   <li class="py-1">
                     Story files created by this application are generated as a
-                    hierarchically structured .JSON (JavaScript Object Notation)
+                    structured .JSON (JavaScript Object Notation)
                     file, which contains sections that are organized in a way
                     for this application's code to read it.
                   </li>
@@ -47,8 +47,8 @@
                     My story file isn't importing!
                     <ul>
                       <li class="py-1">
-                        Try comparing what your story (.JSON file) looks like to
-                        an existing story file or running it through an online
+                        Try comparing what the story (.JSON file) looks like to
+                        another story file or running it through an online
                         JSON linter.
                       </li>
                     </ul>
@@ -58,7 +58,7 @@
                     <ul>
                       <li class="py-1">
                         I've tested things to the best of my ability, but if
-                        there are any remaining bugs that I haven't squashed try
+                        there are any remaining bugs that I haven't squashed, try
                         refreshing the page via F5 or by clicking your browser's
                         Refresh icon at the top of the browser window.
                       </li>
@@ -81,7 +81,7 @@
                   </li>
                   <li class="py-1">
                     I like writing software for fun, and thought it would be a
-                    great experience to take an idea and turn it into something
+                    great experience to take an idea like this and turn it into something
                     usable and valuable to other people.
                   </li>
                 </ul>

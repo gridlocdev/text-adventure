@@ -80,6 +80,18 @@ export default new Vuex.Store({
         //console.log("Loaded from LocalStorage: StoryInProgress - " + state.StoryInProgress)
       }
     },
+    resetStoryProgress() {
+      // Sets variables we should keep, like the user's preferences
+      const darkMode = localStorage.getItem("DarkMode") == "true";
+      const textSpeed = parseInt(localStorage.getItem("TextSpeed"));
+      const storyJSONArray = localStorage.getItem("StoryJSONArray");
+
+      // Resets LocalStorage, then navigates to the home URL.
+      localStorage.clear();
+      localStorage.setItem("DarkMode", darkMode);
+      localStorage.setItem("TextSpeed", textSpeed);
+      localStorage.setItem("StoryJSONArray", storyJSONArray);
+    },
     setGameInProgress(state, bool) {
       state.GameInProgress = bool;
       localStorage.setItem('GameInProgress', true);
@@ -159,6 +171,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    resetStoryProgress(context) {
+      context.commit('resetStoryProgress')
+    },
     setGameInProgress(context, bool) {
       context.commit('setGameInProgress', bool)
     },

@@ -4,7 +4,7 @@ Next Steps:
 
 MVP:
 
-- Final round of bug testing
+- Make the success and gameover messages text-areas in StoryCreator
 
 - Documentation: 
 : In each component, at the top, list what the component does in a comment.

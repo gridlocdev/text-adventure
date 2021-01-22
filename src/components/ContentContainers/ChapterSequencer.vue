@@ -40,12 +40,14 @@ export default {
     CurrentChapter(newValue) {
       if (
         newValue <= this.$store.state.NumberOfChapters &&
+        newValue >= 0 &&
         this.$store.state.GameInProgress == true
       ) {
         this.$store.dispatch("setSequencerIndex", 0);
         this.$router.push("/chapter" + this.$store.state.CurrentChapter);
       } else {
         this.$store.dispatch("setCurrentChapter", -1);
+        this.endGame();
       }
     },
   },
@@ -55,8 +57,17 @@ export default {
       this.$router.push("/endgame");
     },
   },
-  created() {
+  mounted() {
+    console.log("Mounted().");
+    console.log(this.$store.state.GameInProgress);
     this.$store.dispatch("setNumberOfChapters", this.storyJSON.Chapters.length);
+    if (
+      this.$store.state.GameInProgress == false &&
+      this.$store.state.CurrentChapter == -1
+    ) {
+      this.$store.dispatch("setCurrentChapter", 1);
+      this.$storee.dispatch("setSequencerIndex", 0);
+    }
   },
 };
 </script>
