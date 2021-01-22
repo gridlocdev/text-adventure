@@ -171,7 +171,7 @@
 import ImportFile from "../components/StoryCreator/ImportFile.vue";
 export default {
   components: { ImportFile },
-  data: function () {
+  data() {
     return {
       addStoryButtonDisabled: true,
       modals: {

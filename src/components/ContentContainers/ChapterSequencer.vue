@@ -7,7 +7,6 @@
 </template>
 
 <script>
-//v-on:reloadChapterData="reloadChapterData()"
 import Sequencer from "./Sequencer.vue";
 
 import { mapState } from "vuex";
@@ -17,16 +16,14 @@ export default {
   components: {
     Sequencer,
   },
-  data: function () {
+  data() {
     return {
-      // chapterJSON: this.storyJSON.Chapters[this.$store.state.CurrentChapter - 1]
-      //   .ChapterSections,
-      // Just the chapter's json
       storyJSON: JSON.parse(this.$store.state.CurrentStoryJSON),
     };
   },
   computed: {
     chapterJSON: function () {
+      // Computed property to select the current chapter's JSON from the full story JSON
       if (this.$store.state.CurrentChapter != -1) {
         return this.storyJSON.Chapters[this.$store.state.CurrentChapter - 1]
           .ChapterSections;
@@ -38,6 +35,8 @@ export default {
   },
   watch: {
     CurrentChapter(newValue) {
+      // When the chapter changes, update the app state
+      // Also, handles when the chapter advances to where the game should end.
       if (
         newValue <= this.$store.state.NumberOfChapters &&
         newValue >= 0 &&
@@ -58,15 +57,14 @@ export default {
     },
   },
   mounted() {
-    console.log("Mounted().");
-    console.log(this.$store.state.GameInProgress);
     this.$store.dispatch("setNumberOfChapters", this.storyJSON.Chapters.length);
+    // If a game was just ended, reset the state's progress values.
     if (
       this.$store.state.GameInProgress == false &&
       this.$store.state.CurrentChapter == -1
     ) {
       this.$store.dispatch("setCurrentChapter", 1);
-      this.$storee.dispatch("setSequencerIndex", 0);
+      this.$store.dispatch("setSequencerIndex", 0);
     }
   },
 };

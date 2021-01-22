@@ -58,6 +58,7 @@ export default {
   },
   methods: {
     resetLocalCache() {
+      // Resets story progress, and navigates back to home.
       this.$store.dispatch("resetStoryProgress");
 
       this.dialog = false;

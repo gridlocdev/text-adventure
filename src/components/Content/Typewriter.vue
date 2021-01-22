@@ -36,7 +36,7 @@ export default {
       default: true,
     },
   },
-  data: function () {
+  data() {
     return {
       currentText: "",
       charIndex: 0,
@@ -51,6 +51,7 @@ export default {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
     type: async function () {
+      // Begin typing the characters from this component's text
       // Set the flag for typing, so other components can use this info.
       this.typing = true;
       // Type() takes the text passed into this.fullText, and
@@ -92,6 +93,7 @@ export default {
       }
     },
     emitMoveToNextTextChunk() {
+      // Emits an event to the parent view, to tell it to go to the next text section.
       this.$emit("nextTextChunk");
     },
   },

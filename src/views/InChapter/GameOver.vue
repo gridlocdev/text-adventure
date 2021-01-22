@@ -47,10 +47,15 @@ export default {
   components: {
     Typewriter,
   },
-  data: function () {
+  data() {
     return {
       text: String,
     };
+  },
+  watch: {
+    text: function () {
+      this.updateGameOverText();
+    },
   },
   methods: {
     updateGameOverText() {
@@ -62,22 +67,18 @@ export default {
     clickRestartChapter() {
       this.$store.dispatch("resetIntroFade");
       this.$store.dispatch("resetChapter");
-      this.$store.dispatch("setSequencerIndex", 0)
+      this.$store.dispatch("setSequencerIndex", 0);
 
-      this.$router.push({ path: `/chapter:${this.$store.state.CurrentChapter}` });
+      this.$router.push({
+        path: `/chapter:${this.$store.state.CurrentChapter}`,
+      });
     },
   },
   activated() {
     this.updateGameOverText();
   },
-  created: function () {
+  created() {
     this.updateGameOverText();
-  },
-  watch: {
-    text: function () {
-      // When the SettingsModal is opened, call SetPageIndex()
-      this.updateGameOverText();
-    },
   },
 };
 </script>

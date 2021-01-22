@@ -39,7 +39,7 @@
 <script>
 export default {
   name: "EndGame",
-  data: function () {
+  data() {
     return {
       textIndex: 0,
       EndingTextArray: [
@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     resetAndNavigateToHome() {
+      // Resets story progress, and hits the home route with a clean state.
       console.log("resetAndNavigateToHome() Hit.")
       this.$store.dispatch("resetStoryProgress");
 

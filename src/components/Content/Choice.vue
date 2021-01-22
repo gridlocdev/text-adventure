@@ -69,6 +69,7 @@ export default {
       }
     },
     fadeOutAndNavigate(routerLink) {
+      // After clicking an answer, fade the component out and route to either GameOver or Success
       setTimeout(() => {
         var fadeOutContainer = document.getElementById("fadeOutContainer");
         if (document.body.contains(fadeOutContainer)) {

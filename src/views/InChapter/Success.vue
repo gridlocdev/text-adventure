@@ -44,11 +44,16 @@ export default {
   components: {
     Typewriter,
   },
-  data: function () {
+  data() {
     return {
       text: String,
       store: store,
     };
+  },
+  watch: {
+    text: function () {
+      this.updateSuccessText();
+    },
   },
   methods: {
     clickContinue() {
@@ -63,17 +68,11 @@ export default {
       this.text = this.$store.state.SuccessText;
     },
   },
-  created: function () {
-    this.updateSuccessText();
-  },
   activated() {
     this.updateSuccessText();
   },
-  watch: {
-    text: function () {
-      // When the SettingsModal is opened, call SetPageIndex()
-      this.updateSuccessText();
-    },
+  created() {
+    this.updateSuccessText();
   },
 };
 </script>

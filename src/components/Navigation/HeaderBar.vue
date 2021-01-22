@@ -87,6 +87,7 @@ export default {
   }),
   methods: {
     navigateTo(routerLink, title = null) {
+      // Handles the navigation for clicking things in the popup sidebar.
       if (routerLink == this.$route.path) {
         this.drawer = !this.drawer;
       } else {

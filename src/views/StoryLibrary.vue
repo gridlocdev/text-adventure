@@ -129,6 +129,7 @@ export default {
   },
   methods: {
     hoverMouseLeave() {
+      // On mouse leave, remove the delete button hover overlay for story items.
       if (this.removeStoryFinalConfirmation == true) {
         // Wait for transition fadeout to end
         setTimeout(() => {

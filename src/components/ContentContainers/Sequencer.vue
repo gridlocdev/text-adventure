@@ -73,7 +73,7 @@ export default {
     // It's JSON, but Vue doesn't want me to pass JSON through props.
     jsonPayload: String,
   },
-  data: function () {
+  data() {
     return {
       sequenceIndex: localStorage.getItem("SequencerIndex"),
       sequenceIndexComponentType: "",
@@ -107,12 +107,12 @@ export default {
   },
   methods: {
     incrementSequence() {
+      // Moves to the next section in the chapter.
       this.$store.dispatch(
         "setSequencerIndex",
         this.$store.state.SequencerIndex + 1
       );
       this.sequenceIndex = this.$store.state.SequencerIndex;
-      // this.sequenceIndex++;
     },
     setInitialComponentDataFromJsonImportProp() {
       // Sets the starting data for the Sequencer's components' content
@@ -242,9 +242,7 @@ export default {
       localStorage.setItem("ChapterTimeline", JSON.stringify(timeline));
     },
     advanceChapterTimeline() {
-      // In this method:
-      // Take the timeline's 2nd index (section name), and pull the appropriate data from the JSON.
-      this.chapterJSON;
+      // Loads the metadata for the next section to load.
 
       var sectionType = this.chapterTimeline[this.sequenceIndex][1];
       var currentSectionData = this.chapterJSON[this.sequenceIndex].SectionData;
@@ -286,6 +284,7 @@ export default {
       }
     },
     endChapter() {
+      // Handles what should happen once a chapter has been completed
       if (
         this.$store.state.CurrentChapter < this.$store.state.NumberOfChapters
       ) {

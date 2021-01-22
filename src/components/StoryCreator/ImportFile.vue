@@ -35,8 +35,7 @@ export default {
   },
   methods: {
     validateImportedJSON() {
-      // if valid story
-      // Validates storyJSON for tab1's inputs to see if the appropriate data exists in the JSON
+      // Validates the JSON that a user submits when importing a file.
 
       // Default the return value to true, if it hits any cases below turn it false.
       var returnValue = true;
@@ -142,8 +141,9 @@ export default {
       );
     },
     setNewStoryID() {
-      // Loop through the current story array and find the max value of ID
+      // Sets a new story ID based on the maximum story ID value that exists in the user's library + 1. 
 
+      // Loop through the current story array and find the max value of ID
       if (this.$store.state.StoryJSONArray.length > 0) {
         const maxVal = Math.max.apply(
           Math,
@@ -161,6 +161,7 @@ export default {
       this.$emit("fileRemoved");
     },
     changeFile: function (file) {
+      // When the user interacts with the file open dialog box, catch the appropriate event.
       try {
         if (file) {
           this.readFile(file);
@@ -173,6 +174,7 @@ export default {
       }
     },
     readFile: function (file) {
+      // Import the file's contents as JSON.
       try {
         const reader = new FileReader();
         this.jsonFileSelected = true;

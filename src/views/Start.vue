@@ -31,6 +31,7 @@
 export default {
   name: "Start",
   mounted() {
+    // Updates the Navigation bar's text header
     this.$store.dispatch("setPageIndex", this.$options.name);
   },
 };

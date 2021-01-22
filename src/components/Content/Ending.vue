@@ -43,7 +43,7 @@ export default {
     title: String,
     subText: String,
   },
-  data: function () {
+  data() {
     return {
       chapterIconMasterList: [
         // {
@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     startFadeInOutAnimation() {
-      // Function to handle fading in/out Ending text on a timer.
+      // Fade in to show the text, wait a bit, then fade out.
       // Wait the 5500ms for fadeIn, then fadeOut.
       var fadeContainer = document.getElementById("fadeContainer");
       // setEndingButtonGlow also has a set timeout, executing asynchronously.
@@ -100,14 +100,14 @@ export default {
       }, 4000);
     },
     setEndingButtonGlow() {
+      // After a set time, light up the most recent chapter's icon
       setTimeout(() => {
-        // After a set time, light up the most recent chapter's icon
         this.chapterIconMasterList[this.$store.state.CurrentChapter - 1].color =
           "primary";
       }, 1500);
     },
     importIconListFromState() {
-      // For the chapter state, populate the icons and also set which ones to light up by default.
+      // From the app state's list of icons, populate the icons and also set which ones to light up at the start.
 
       const storyJSON = JSON.parse(this.$store.state.CurrentStoryJSON);
 
@@ -131,19 +131,17 @@ export default {
     },
   },
   mounted() {
-    // Sets the list of icons on this component to an array stored in the Application store.
     this.importIconListFromState();
 
+    // If the component gets mounted but was inactive before mount
     if (this._inactive != true) {
       this.startFadeInOutAnimation();
     }
   },
   activated() {
-    // Updates the Page Index
+    // Updates the Navigation bar's text header
     this.$store.dispatch("setPageIndex", this.$options.name);
 
-    // Triggers the animation to fade page in and out
-    // Also triggers coloring the newly completed chapter button.
     this.startFadeInOutAnimation();
   },
 };

@@ -18,7 +18,7 @@ export default {
   props: {
     text: Array,
   },
-  data: function () {
+  data() {
     return {
       textIndex: 0,
       nextButtonVisible: false,

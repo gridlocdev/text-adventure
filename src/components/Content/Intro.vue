@@ -32,9 +32,8 @@ export default {
   },
   methods: {
     initFadeOut() {
-      // If the fadeOut hasn't been called yet
+      // Fade in to show the text, wait a bit, then fade out.
 
-      // Function to handle fading in/out Intro text on a timer.
       // Wait the 3000ms for fadeIn, then fadeOut.
       var fadeContainer = document.getElementById("fadeContainer");
       setTimeout(() => {
@@ -57,11 +56,13 @@ export default {
     },
   },
   mounted() {
+    // If the app state variable for resetting the intro fade is false
     if (!this.$store.state.ResetIntroFade) {
       this.initFadeOut();
     }
   },
   activated() {
+    // Updates the Navigation bar's text header
     this.$store.dispatch("setPageIndex", this.$options.name);
     if (this.$store.state.ResetIntroFade) {
       this.$store.state.ResetIntroFade = false;

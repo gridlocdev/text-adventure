@@ -130,6 +130,7 @@ export default {
 
   methods: {
     addNewText() {
+      // Add a new textbox to the TextSection, and have the window focus on it.
       this.currentTextIndex = this.textArray.length;
       this.textArray.push({ id: this.currentTextIndex, text: "" });
       this.$nextTick(() => {

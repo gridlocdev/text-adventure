@@ -227,6 +227,7 @@ export default {
   },
   methods: {
     routeTabValidation() {
+      // Validate the JSON based on what tab the user is on.
       switch (this.currentTab) {
         case 0:
           this.validateTab0();
@@ -249,6 +250,7 @@ export default {
       }
     },
     validateTab0Icon() {
+      // Validates the icon selector box, to see if it's valid or empty. If neither, returns false.
       this.$nextTick(() => {
         // If the Story Name has stuff in it
         if (this.storyJSON.StoryIcon.length == 0) {
@@ -347,6 +349,8 @@ export default {
       }
     },
     validateTab1Icon() {
+      // Validates the icon selector box, to see if it's valid or empty. If neither, returns false.
+
       this.$nextTick(() => {
         // For each icon name in
 
@@ -369,6 +373,7 @@ export default {
       });
     },
     nextTab() {
+      // Handles what happens with navigation via the Next buttons or header tabs.
       switch (this.currentTab) {
         case 0:
           // If there's no icon text, default the icon to this
@@ -389,6 +394,7 @@ export default {
       this.currentTab++;
     },
     resetStoryCreator() {
+      // Resets the component's data to what it was at the start.
       this.currentChapterData = {};
       this.currentTab = 0;
       this.numberOfChaptersCreated = 0;
@@ -457,6 +463,8 @@ export default {
       this.numberOfChaptersCreated++;
     },
     removeChapter(chapterID) {
+      // Removes a chapter with the specified ID
+
       this.currentChapterData = {};
       // Splice the one that has that ID
 
@@ -469,18 +477,11 @@ export default {
     },
   },
   mounted() {
-    // console.log(
-    //   "This state's json stuff" +
-    //     JSON.stringify(this.$store.state.StoryJSONArray, null, 2)
-    // );
   },
 };
 </script>
 
 <style scoped>
-/* .v-btn.v-btn--disabled .v-btn__content i::before {
-  content: "";
-} */
 .v-btn.v-btn--disabled.nohover .v-icon {
   color: black !important;
   opacity: 1;

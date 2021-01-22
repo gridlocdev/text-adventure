@@ -96,7 +96,7 @@ export default {
   components: {
     ResetStoryProgress,
   },
-  data: function () {
+  data() {
     return {
       settingsModal: false,
       SettingsItems_Toggles: [
@@ -120,13 +120,17 @@ export default {
 
   methods: {
     triggerMethodFromMethodName(methodName) {
+      // Is used to handle method names defined in the data
+      // In retrospect, this probably could have been done using watchers and a switch statement. 
       this[methodName]();
     },
     setPageIndex() {
-      // Set the application state PageIndex to "Settings"
+      // Updates the Navigation bar's text header
       this.$store.dispatch("setPageIndex", this.$options.name);
     },
     toggleDarkMode() {
+      // Toggles Vuetify's dark mode setting.
+
       // Set the ViewModel as the data we need
       var vm = this.SettingsItems_Toggles[0];
       vm.toggle = !vm.toggle;
@@ -146,6 +150,7 @@ export default {
       this.$store.dispatch("toggleDarkMode", vm.toggle);
     },
     setDarkModeSettingsIcon(toggle) {
+      // Switches the icon once the dark mode button is clicked.
       switch (toggle) {
         case true:
           this.SettingsItems_Toggles[0].icon = "weather-night";
@@ -157,6 +162,7 @@ export default {
       this.SettingsItems_Toggles[0].toggle = toggle;
     },
     setTextSpeedButtonGroupActiveItem(textSpeed) {
+      // Sets the speed that text types in the stories.
       switch (textSpeed) {
         case 50:
           this.SettingsItems_ChoiceBtns[0].activeBtnPosition = "left";
@@ -194,6 +200,6 @@ export default {
 }
 
 .v-card.v-sheet.theme--light {
-  background-color: #F4F4F4 !important;
+  background-color: #f4f4f4 !important;
 }
 </style>

@@ -149,7 +149,8 @@ export default {
   },
   methods: {
     updateChapterData() {
-      // In this method, take that data and ID, and emit an event.
+      // Passes chapter data to the parent component.
+
       this.chapterTimeline[
         this.currentSectionID
       ].SectionData = this.currentSectionData;
