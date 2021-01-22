@@ -169,7 +169,6 @@ export default {
     },
     createStory: function () {
       this.dialog = true;
-      this.addStoryButtonDisabled = true;
       this.$emit("createStory");
     },
     routerPushToStoryLibrary: function () {

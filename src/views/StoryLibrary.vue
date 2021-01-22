@@ -139,8 +139,7 @@ export default {
       this.storyHover = false;
     },
     removeStory(StoryID) {
-      // I want to take one of the items out of the Story array.
-      console.log("RemoveStory() hit.");
+      // This function takes an item out of the user's story library.
 
       // Set a variable to store the value of the existing StoryJSON array.
       var currentStoryJSONArray = this.$store.state.StoryJSONArray;
@@ -156,13 +155,16 @@ export default {
 
       // Push the results to the state store
       this.$store.dispatch("setStoryJSONArray", newArray);
-      console.log(this.$store.state.StoryJSONArray);
+
+      // Reset the state of the delete hover button so users don't accidentally delete an additional story
+      this.removingStory = false;
+      this.storyHover = false;
     },
     playStory(StoryID) {
-      const newStory = this.$store.state.StoryJSONArray.find(
+      const selectedStory = this.$store.state.StoryJSONArray.find(
         (arrayStory) => arrayStory.StoryID === StoryID
       );
-      this.$store.dispatch("setCurrentStoryJSON", JSON.stringify(newStory));
+      this.$store.dispatch("setCurrentStoryJSON", JSON.stringify(selectedStory));
       this.$router.push("chapter" + this.$store.state.CurrentChapter);
     },
   },

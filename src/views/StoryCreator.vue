@@ -389,11 +389,15 @@ export default {
       this.currentTab++;
     },
     resetStoryCreator() {
+      this.currentChapterData = {};
+      this.currentTab = 0;
+      this.numberOfChaptersCreated = 0;
       this.storyJSON = {
         StoryID: this.storyID,
+        StoryDescription: "",
         StoryName: "",
         StoryIcon: "",
-        Chapters: [{}],
+        Chapters: [],
       };
       this.tabNextButton = {
         tab0: false,
