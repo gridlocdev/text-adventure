@@ -4,11 +4,12 @@ Next Steps:
 
 MVP:
 
-- Edit the icons on the sidebar to be meaningful ones
+- Clear all the console.logs
+
+- Add the functionality for removeStory() on the StoryLibrary page
 
 - Final round of bug testing
 
-- Clear all the console.logs
 
 - Documentation: 
 : In each component, at the top, list what the component does in a comment.

@@ -41,8 +41,6 @@ export default {
       // Default the return value to true, if it hits any cases below turn it false.
       var returnValue = true;
 
-      console.log(JSON.stringify(this.storyJSON, null, 2));
-
       // If a chapter exists and is not null, and storyName and Icon exists
       if (
         this.storyJSON.Chapters.length != 0 ||
@@ -67,10 +65,6 @@ export default {
                     }
                     break;
                   case "TextSection":
-                    console.log(
-                      "Checking TextSection: " +
-                        JSON.stringify(section, null, 2)
-                    );
                     for (var i = 0; i < section.SectionData.length; i++) {
                       if (!section.SectionData[i].text) {
                         returnValue = false;
@@ -78,10 +72,6 @@ export default {
                     }
                     break;
                   case "ChoiceSection":
-                    console.log(
-                      "Checking ChoiceSection: " +
-                        JSON.stringify(section, null, 2)
-                    );
                     if (
                       section.SectionData.questionText.length == 0 ||
                       section.SectionData.choices.choice1.length == 0 ||
@@ -146,9 +136,6 @@ export default {
       // else if not valid, show other dialog
     },
     createStory: function () {
-      console.log(
-        "$1 Story Added to StoryJSONArray: " + JSON.stringify(this.storyJSON)
-      );
       this.$store.dispatch(
         "addStoryToStoryJSONArray",
         JSON.stringify(this.storyJSON)
@@ -166,7 +153,6 @@ export default {
         );
         this.storyJSON.StoryID = maxVal + 1;
       } else {
-        console.log("LENGTH: " + this.$store.state.StoryJSONArray.length);
         this.storyJSON.StoryID = 0;
       }
     },
@@ -177,11 +163,8 @@ export default {
     changeFile: function (file) {
       try {
         if (file) {
-          const fileName = file.name;
           this.readFile(file);
-          console.log(fileName);
         } else {
-          console.log("File either not found or removed.");
           this.jsonFileSelected = false;
           this.removeFile();
         }
@@ -199,9 +182,8 @@ export default {
           this.storyJSON = JSON.parse(fileText);
 
           this.setNewStoryID();
-          console.log(fileText);
           this.$nextTick(() => {
-            this.$emit("fileImported", fileText);
+            this.$emit("fileImported");
           });
         };
       } catch (err) {

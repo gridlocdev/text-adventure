@@ -46,9 +46,6 @@ export default {
           );
           // Wait for the 3000ms for fadeOut to end, and emit an event.
           setTimeout(() => {
-            console.log(
-              "Secont setTimeout hit. fadeOutStarted = " + this.fadeOutStarted
-            );
             this.$emit("incrementSequence");
             this.$store.dispatch(
               "setSequencerIndex",
@@ -59,17 +56,12 @@ export default {
       }, 3000);
     },
   },
-  errorCaptured(error) {
-    console.log("Error occured in Intro component: " + error);
-  },
   mounted() {
-    console.log("Mounted()");
     if (!this.$store.state.ResetIntroFade) {
       this.initFadeOut();
     }
   },
   activated() {
-    console.log("Activated()");
     this.$store.dispatch("setPageIndex", this.$options.name);
     if (this.$store.state.ResetIntroFade) {
       this.$store.state.ResetIntroFade = false;

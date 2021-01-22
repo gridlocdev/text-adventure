@@ -32,7 +32,6 @@ export default {
   name: "Start",
   mounted() {
     this.$store.dispatch("setPageIndex", this.$options.name);
-    console.log(this.$store.StoryJSONArray);
   },
 };
 </script>

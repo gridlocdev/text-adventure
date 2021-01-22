@@ -42,18 +42,14 @@ export default {
   name: "Sequencer",
   computed: mapState(["SequencerIndex", "ResetChapter"]),
   watch: {
-    SequencerIndex(newValue, oldValue) {
+    SequencerIndex(newValue) {
       // When the SequencerIndex is updated, show the correct component and update its data.
       if (newValue < this.chapterTimeline.length) {
-        console.log("SequencerIndex watcher: " + newValue);
         this.sequenceIndex = newValue;
         this.sequenceIndexComponentType = this.chapterTimeline[
           this.sequenceIndex
         ][1];
         this.advanceChapterTimeline();
-        console.log(`Updating sequenceIndex from ${oldValue} to ${newValue}`);
-      } else {
-        console.log("Hit end of chapter!");
       }
     },
     ResetChapter(newValue, oldValue) {
@@ -151,9 +147,6 @@ export default {
             }
             break;
           default:
-            console.log(
-              "Hit Exceptional state in Default in setInitialComponentDataFromJsonImportProp()"
-            );
             break;
         }
       }
@@ -247,9 +240,6 @@ export default {
       }
       this.chapterTimeline = timeline;
       localStorage.setItem("ChapterTimeline", JSON.stringify(timeline));
-      console.log(
-        "Chapter Timeline Created: " + JSON.stringify(this.chapterTimeline)
-      );
     },
     advanceChapterTimeline() {
       // In this method:
@@ -258,16 +248,9 @@ export default {
 
       var sectionType = this.chapterTimeline[this.sequenceIndex][1];
       var currentSectionData = this.chapterJSON[this.sequenceIndex].SectionData;
-      console.log("CurrentSectionData: " + currentSectionData);
       switch (sectionType) {
         case "Intro":
           // Sets data for Intro
-          console.log("AdvanceChapterTimeline - sectionType: " + sectionType);
-          console.log(
-            "AdvanceChapterTimeline - sectionType: " +
-              JSON.stringify(currentSectionData)
-          );
-
           this.setSequencerIntroData(
             currentSectionData.title,
             currentSectionData.subText
@@ -276,7 +259,6 @@ export default {
           break;
         case "TextSection":
           // Sets data for the TextSections
-          console.log("Text Section Data: " + currentSectionData);
           this.setSequencerTextSectionData(
             JSON.parse(JSON.stringify(currentSectionData))
           );
@@ -300,9 +282,6 @@ export default {
           );
           break;
         default:
-          console.log(
-            "Not sure how you got here, looks like something's broken."
-          );
           break;
       }
     },
@@ -321,15 +300,7 @@ export default {
         this.$store.state.GameInProgress == true
       ) {
         this.$emit("endGame");
-        // this.$store.dispatch("setGameInProgress", false);
-        // this.$store.dispatch(
-        //   "setCurrentChapter",
-        //   this.$store.state.CurrentChapter + 1
-        // );
-        console.log("Reached the end of the game!");
-      } else {
-        console.log("This is an exceptional state, not sure how you got here.");
-      }
+      } 
     },
   },
   mounted() {
@@ -345,11 +316,6 @@ export default {
     }
 
     this.$store.dispatch("setGameInProgress", true);
-
-    console.log(
-      "SequenceIndexComponentType: " + this.sequenceIndexComponentType
-    );
-    console.log("SequenceIndex: " + this.sequenceIndex);
   },
 };
 </script>

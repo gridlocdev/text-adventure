@@ -6,13 +6,13 @@
       <v-toolbar-title>{{ this.$store.state.StoryName }}</v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <Settings />
+      <settings />
     </v-app-bar>
     <v-navigation-drawer app temporary v-model="drawer">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title"> Menu </v-list-item-title>
-          <v-list-item-subtitle> Chapter Select </v-list-item-subtitle>
+          <v-list-item-subtitle> Navigation Menu </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 

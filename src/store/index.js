@@ -83,79 +83,79 @@ export default new Vuex.Store({
     setGameInProgress(state, bool) {
       state.GameInProgress = bool;
       localStorage.setItem('GameInProgress', true);
-      console.log("(State) GameInProgress: " + "true");
+      //console.log("(State) GameInProgress: " + "true");
     },
     resetIntroFade(state) {
       state.ResetIntroFade = true;
       localStorage.setItem('resetIntroFade', true);
-      console.log("(State) ResetIntroFade: " + "true");
+      //console.log("(State) ResetIntroFade: " + "true");
     },
     setStoryName(state, text) {
       state.StoryName = text;
       localStorage.setItem('StoryName', text);
-      console.log("(State) StoryName: " + text);
+      //console.log("(State) StoryName: " + text);
     },
     resetChapter(state) {
       state.ResetChapter = true;
       localStorage.setItem('ResetChapter', true);
-      console.log("(State) ResetChapter: " + "true");
+      //console.log("(State) ResetChapter: " + "true");
     },
     setSequencerIndex(state, number) {
       state.SequencerIndex = number;
       localStorage.setItem('SequencerIndex', number);
-      console.log("(State) SequencerIndex: " + number);
+      //console.log("(State) SequencerIndex: " + number);
     },
     setNumberOfChapters(state, number) {
       state.NumberOfChapters = number;
       localStorage.setItem('NumberOfChapters', number);
-      console.log("(State) NumberOfChapters: " + number);
+      //console.log("(State) NumberOfChapters: " + number);
     },
     setCurrentStoryJSON(state, json) {
       state.CurrentStoryJSON = json;
       localStorage.setItem('CurrentStoryJSON', JSON.stringify(json));
-      console.log("(State) CurrentStoryJSON: " + json);
+      //console.log("(State) CurrentStoryJSON: " + json);
     },
     addStoryToStoryJSONArray(state, jsonString) {
-      console.log("(state): pushing " + jsonString);
+      //console.log("(State): pushing " + jsonString);
       // var date = new Date();
       state.StoryJSONArray.push(JSON.parse(jsonString));
       localStorage.setItem('StoryJSONArray', JSON.stringify(state.StoryJSONArray));
-      console.log("(State) StoryJSONArray: " + JSON.stringify(state.StoryJSONArray, null, 2));
+      //console.log("(State) StoryJSONArray: " + JSON.stringify(state.StoryJSONArray, null, 2));
     },
     setStoryJSONArray(state, json) {
       state.StoryJSONArray = json;
       localStorage.setItem('StoryJSONArray', JSON.stringify(json));
-      console.log("(State) StoryJSONArray: " + json);
+      //console.log("(State) StoryJSONArray: " + json);
     },
     setCurrentChapter(state, number) {
       state.CurrentChapter = number;
       localStorage.setItem('CurrentChapter', number);
-      console.log("(State) CurrentChapter: " + number);
+      //console.log("(State) CurrentChapter: " + number);
     },
     setSuccessText(state, text) {
       state.SuccessText = text;
       localStorage.setItem('SuccessText', text);
-      console.log("(State) SuccessText: " + text);
+      //console.log("(State) SuccessText: " + text);
     },
     setGameOverText(state, text) {
       state.GameOverText = text;
       localStorage.setItem('GameOverText', text);
-      console.log("(State) GameOverText: " + text);
+      //console.log("(State) GameOverText: " + text);
     },
     setPageIndex(state, pageIndex) {
       state.PageIndex = pageIndex;
       localStorage.setItem('PageIndex', pageIndex);
-      console.log("(State) pageIndex: " + pageIndex);
+      //console.log("(State) pageIndex: " + pageIndex);
     },
     toggleDarkMode(state, darkModeToggle) {
       state.DarkMode = darkModeToggle;
       localStorage.setItem('DarkMode', darkModeToggle);
-      console.log("(State) darkModeToggle: " + darkModeToggle);
+      //console.log("(State) darkModeToggle: " + darkModeToggle);
     },
     setTextSpeed(state, textSpeed) {
       state.TextSpeed = textSpeed;
       localStorage.setItem('TextSpeed', textSpeed);
-      console.log("(State) textSpeed: " + textSpeed);
+      //console.log("(State) textSpeed: " + textSpeed);
     }
   },
   actions: {

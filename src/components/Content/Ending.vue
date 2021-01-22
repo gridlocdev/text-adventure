@@ -111,8 +111,6 @@ export default {
 
       const storyJSON = JSON.parse(this.$store.state.CurrentStoryJSON);
 
-      console.log(storyJSON);
-
       // Set the Ending Component's data to include the icon names, and whether they should light up yet
       for (var i = 0; i < storyJSON.Chapters.length; i++) {
         if (i < this.$store.state.CurrentChapter - 1) {
@@ -131,9 +129,6 @@ export default {
         }
       }
     },
-  },
-  errorCaptured(error) {
-    console.log("Error occured in Ending component: " + error);
   },
   mounted() {
     // Sets the list of icons on this component to an array stored in the Application store.

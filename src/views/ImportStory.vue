@@ -203,9 +203,8 @@ export default {
     validateImportedJSON() {
       this.$refs.importFile.validateImportedJSON();
     },
-    fileImported(fileText) {
+    fileImported() {
       this.addStoryButtonDisabled = false;
-      console.log(JSON.stringify(fileText, null, 2));
     },
     fileRemoved() {
       this.addStoryButtonDisabled = true;

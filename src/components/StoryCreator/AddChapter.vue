@@ -168,23 +168,11 @@ export default {
       this.currentSectionID = value;
     },
     updateComponentData(value) {
-      console.log("value: " + JSON.stringify(value));
       this.currentSectionData = JSON.parse(value);
     },
     removeChapter() {
       this.$emit("removeChapter", this.chapterID);
     },
-    reorderChapterItems() {
-      console.log("ReorderChapterItems() hit.");
-    },
-  },
-  mounted() {
-    console.log("Mounted()");
-    //this.updateChapterData();
-    const chapterSections = this.chapterTimeline.map(
-      ({ SectionType, SectionData }) => ({ SectionType, SectionData })
-    );
-    console.log(JSON.stringify(chapterSections, null, 2));
   },
 };
 </script>

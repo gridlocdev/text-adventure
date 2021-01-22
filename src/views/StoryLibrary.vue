@@ -145,7 +145,6 @@ export default {
       const newStory = this.$store.state.StoryJSONArray.find(
         (arrayStory) => arrayStory.StoryID === StoryID
       );
-      console.log(JSON.stringify(newStory, null, 2));
       this.$store.dispatch("setCurrentStoryJSON", JSON.stringify(newStory));
       this.$router.push("chapter" + this.$store.state.CurrentChapter);
     },

@@ -218,9 +218,6 @@ export default {
     },
   },
   watch: {
-    numberOfChapters: function (val) {
-      console.log("numberOfChapters Updated: " + val);
-    },
     storyJSON: {
       handler: function () {
         this.routeTabValidation();
@@ -248,38 +245,27 @@ export default {
       if (this.storyJSON.StoryName.length > 0) {
         this.validateTab0Icon();
       } else {
-        console.log("5");
         this.tabNextButton.tab0 = false;
       }
-      console.log("Reached end of function!");
     },
     validateTab0Icon() {
       this.$nextTick(() => {
         // If the Story Name has stuff in it
         if (this.storyJSON.StoryIcon.length == 0) {
-          console.log("1");
           this.tabNextButton.tab0 = true;
         } else {
-          console.log("NextTick Hit.");
           // Text in box: check if the Story Icon shows something
           var iconElement = document.querySelector(
             ".v-btn.v-btn--disabled.nohover .v-icon.mdi"
           );
-          console.log(iconElement);
           if (iconElement) {
             var iconContent = getComputedStyle(iconElement, ":before").content;
             if (iconContent.toString() != "none") {
-              console.log(iconContent.toString());
-              console.log("2");
-
               this.tabNextButton.tab0 = true;
             } else {
-              console.log(iconContent.toString());
-              console.log("3");
               this.tabNextButton.tab0 = false;
             }
           } else {
-            console.log("4");
             this.tabNextButton.tab0 = false;
           }
         }
@@ -290,8 +276,6 @@ export default {
 
       // Default the return value to true, if it hits any cases below turn it false.
       var returnValue = true;
-
-      console.log(JSON.stringify(this.storyJSON, null, 2));
 
       // If a chapter exists and is not null
       if (this.numberOfChapters != 0) {
@@ -313,10 +297,6 @@ export default {
                     }
                     break;
                   case "TextSection":
-                    console.log(
-                      "Checking TextSection: " +
-                        JSON.stringify(section, null, 2)
-                    );
                     for (var i = 0; i < section.SectionData.length; i++) {
                       if (!section.SectionData[i].text) {
                         returnValue = false;
@@ -324,10 +304,6 @@ export default {
                     }
                     break;
                   case "ChoiceSection":
-                    console.log(
-                      "Checking ChoiceSection: " +
-                        JSON.stringify(section, null, 2)
-                    );
                     if (
                       section.SectionData.questionText.length == 0 ||
                       section.SectionData.choices.choice1.length == 0 ||
@@ -371,7 +347,6 @@ export default {
       }
     },
     validateTab1Icon() {
-      console.log("ValidateTab1Icon() Hit!");
       this.$nextTick(() => {
         // For each icon name in
 
@@ -380,22 +355,14 @@ export default {
           ".v-btn.v-btn--disabled.nohover .v-icon.mdi"
         );
         iconElements.forEach((iconElement) => {
-          // console.log("Icon Elements: ForEach() - Icon Element: ");
-          // console.log(iconElement);
           if (iconElement) {
             var iconContent = getComputedStyle(iconElement, ":before").content;
             if (iconContent.toString() != "none") {
-              // console.log(iconContent.toString());
-              // console.log("2");
-
               this.tabNextButton.tab1 = true;
             } else {
-              // console.log(iconContent.toString());
-              // console.log("3");
               this.tabNextButton.tab1 = false;
             }
           } else {
-            // console.log("4");
             this.tabNextButton.tab1 = false;
           }
         });
@@ -410,15 +377,11 @@ export default {
           }
           break;
         case 1:
-          console.log("Editing icons STARTED");
-          console.log(JSON.stringify(this.storyJSON, null, 2));
           for (var i = 0; i < this.storyJSON.Chapters.length; i++) {
             if (this.storyJSON.Chapters[i].ChapterIcon.length == 0) {
               this.storyJSON.Chapters[i].ChapterIcon = "delta";
             }
           }
-          console.log("Editing icons DONE");
-          console.log(JSON.stringify(this.storyJSON, null, 2));
           break;
         case 2:
           break;
@@ -451,7 +414,6 @@ export default {
         this.storyJSON.StoryID = maxVal + 1;
         this.storyID = maxVal + 1;
       } else {
-        console.log("LENGTH: " + this.$store.state.StoryJSONArray.length);
         this.storyJSON.StoryID = 0;
         this.storyID = 0;
       }
@@ -461,9 +423,6 @@ export default {
     },
     createStory() {
       this.dialog = true;
-      console.log(
-        "$1 Story Added to StoryJSONArray: " + JSON.stringify(this.storyJSON)
-      );
 
       this.setNewStoryID();
 
@@ -476,17 +435,11 @@ export default {
       this.saveButtonDisabled = true;
     },
     updateChapterSections(value) {
-      console.log("updateChapterSections: " + JSON.stringify(value));
-      console.log(value);
       this.currentChapterData = value;
       this.storyJSON.Chapters[
         this.currentChapterData.ChapterID
       ] = this.currentChapterData;
-      console.log(JSON.stringify(this.storyJSON, null, 2));
       this.routeTabValidation();
-    },
-    setChapterSectionData(id, data) {
-      console.log(id, data);
     },
     addChapter() {
       // Modify the storyJSON, add this chapter in the index it was created in.
@@ -498,26 +451,17 @@ export default {
       });
       console.log("AddChapter() hit.");
       this.numberOfChaptersCreated++;
-      //console.log(JSON.stringify(this.storyJSON, null, 2));
     },
     removeChapter(chapterID) {
       this.currentChapterData = {};
-      console.log("Before Remove: " + JSON.stringify(this.storyJSON, null, 2));
-      console.log("RemoveChapter() incoming ID = : " + chapterID);
-
       // Splice the one that has that ID
 
       const arrayOfChapterIDsInStoryOrder = this.storyJSON.Chapters.map(
         ({ ChapterID }) => ChapterID
       );
 
-      console.log(JSON.stringify(arrayOfChapterIDsInStoryOrder, null, 2));
       const chapterIDInIndex = arrayOfChapterIDsInStoryOrder.indexOf(chapterID);
-      console.log("ChapterIdInIndex: " + chapterIDInIndex);
       this.storyJSON.Chapters.splice(chapterIDInIndex, 1);
-      console.log(JSON.stringify(arrayOfChapterIDsInStoryOrder, null, 2));
-
-      console.log("After Remove: " + JSON.stringify(this.storyJSON, null, 2));
     },
   },
   mounted() {

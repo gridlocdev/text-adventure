@@ -37,18 +37,15 @@ export default {
     ...mapState(["CurrentChapter"]),
   },
   watch: {
-    CurrentChapter(newValue, oldValue) {
+    CurrentChapter(newValue) {
       if (
         newValue <= this.$store.state.NumberOfChapters &&
         this.$store.state.GameInProgress == true
       ) {
         this.$store.dispatch("setSequencerIndex", 0);
         this.$router.push("/chapter" + this.$store.state.CurrentChapter);
-        console.log(`Updating Current Chapter from ${oldValue} to ${newValue}`);
       } else {
         this.$store.dispatch("setCurrentChapter", -1);
-        console.log("Game In Progress: " + this.$store.state.GameInProgress);
-        console.log("CurrentChapter: " + this.$store.state.CurrentChapter);
       }
     },
   },
@@ -56,7 +53,6 @@ export default {
     endGame() {
       this.$store.dispatch("setGameInProgress", false);
       this.$router.push("/endgame");
-      console.log("Hit end of game! Congratulations!");
     },
   },
   created() {

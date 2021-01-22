@@ -122,15 +122,10 @@ const router = new VueRouter({
   routes
 })
 
-router.afterEach((to, from) => {
+router.afterEach((to) => {
   // If the user is done navigating to a URL that starts with "Chapter", redirect them to where they left off.
-  console.log(`${storeVar.state.CurrentChapter}`)
-  console.log(from.path);
-  console.log(to.path);
   if (to.path.includes('chapter') &&
     (to.path !== `/chapter:${storeVar.state.CurrentChapter}`)) {
-    console.log("Router BeforeEach hit! Route: " + to.path)
-    console.log("Router compare: " + `/chapter:${storeVar.state.CurrentChapter}`)
     router.push({ path: `/chapter:${storeVar.state.CurrentChapter}` });
   }
 });
