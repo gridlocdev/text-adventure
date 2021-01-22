@@ -1,14 +1,31 @@
 <template>
   <v-container>
     <v-row>
-      <v-col align="center" justify="center">
-        <h1
-          id="fadeContainer"
-          class="animate__animated animate__fadeIn"
-          :key="textIndex"
-        >
-          {{ EndingTextArray[textIndex].text }}
-        </h1>
+      <v-col
+        id="fadeContainer"
+        class="animate__animated animate__fadeIn"
+        align="center"
+        justify="center"
+        :key="textIndex"
+      >
+        <v-row>
+          <v-col>
+            <h1>
+              {{ EndingTextArray[textIndex].text }}
+            </h1>
+          </v-col>
+        </v-row>
+        <v-row v-if="textIndex == this.EndingTextArray.length - 1" class="ma-5" align="center" justify="center">
+          <v-btn
+            @click="$router.push({ name: 'Start' })"
+            elevation="2"
+            large
+            color="primary"
+            class=""
+          >
+            Return to Home
+          </v-btn>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
