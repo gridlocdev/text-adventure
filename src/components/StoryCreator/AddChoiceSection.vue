@@ -46,7 +46,7 @@
                   class="my-5 answerButton"
                   fab
                   small
-                  elevation="4"
+                  elevation="10"
                   @click="setCorrectAnswer('1')"
                   depressed
                 >
@@ -79,7 +79,7 @@
                   class="my-5 answerButton"
                   fab
                   small
-                  elevation="4"
+                  elevation="10"
                   @click="setCorrectAnswer('2')"
                   depressed
                 >
@@ -94,29 +94,35 @@
           </v-row>
           <v-row>
             <v-icon class="pl-6" color="success"> mdi-check-bold </v-icon>
-            <v-text-field
-              v-model="choicesMetadata.successText"
+            <v-textarea
+              rows="1"
+              auto-grow
               class="pa-5"
-              label="Success Message"
+              counter
               hide-details="auto"
+              label="Success Message"
+              v-model="choicesMetadata.successText"
               :rules="[
                 rules.required,
                 rules.counters.successTextAndGameOverText,
               ]"
-            />
+            ></v-textarea>
           </v-row>
           <v-row>
             <v-icon class="pl-6" color="error">mdi-close-thick</v-icon>
-            <v-text-field
-              v-model="choicesMetadata.gameOverText"
+            <v-textarea
+              rows="1"
+              auto-grow
               class="pa-5"
-              label="Game Over Message"
+              counter
               hide-details="auto"
+              label="Game Over Message"
+              v-model="choicesMetadata.gameOverText"
               :rules="[
                 rules.required,
                 rules.counters.successTextAndGameOverText,
               ]"
-            />
+            ></v-textarea>
           </v-row>
         </v-sheet>
       </v-col>

@@ -6,15 +6,6 @@
           <v-row class="mx-2 d-flex">
             <v-icon class="ma-2"> mdi-text-box-multiple </v-icon>
             <h2 class="my-4">Text Section</h2>
-            <!-- <v-btn
-              tabindex="-1"
-              class="my-auto ml-auto"
-              icon
-              depressed
-              @click="removeSection()"
-            >
-              <v-icon>mdi-close</v-icon>
-            </v-btn> -->
           </v-row>
           <v-divider class="mx-2"></v-divider>
           <v-row
