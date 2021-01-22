@@ -37,6 +37,10 @@
 </template>
 
 <script>
+// Component Description:
+// This is a page component inside the story's chapters.
+// When the user selects the right answer, this page appears as a success message.
+
 import Typewriter from "../../components/Content/Typewriter.vue";
 import store from "../../store/index.js";
 

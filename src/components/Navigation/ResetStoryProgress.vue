@@ -50,6 +50,9 @@
 </template>
 
 <script>
+// Component Description:
+// This component is in Settings, and is used to reset the application's story state back to default.
+
 export default {
   data() {
     return {

@@ -17,9 +17,9 @@
               <div class="px-5">
                 <ul>
                   <li class="py-1">
-                    On this site, you can create, play, and export a playable text adventure game
-                    story and export it as a file that you can share with other
-                    people to play!
+                    On this site, you can create, play, and export a playable
+                    text adventure game story and export it as a file that you
+                    can share with other people to play!
                   </li>
                   <li class="py-1">
                     Each of these stories are divided into chapters, which each
@@ -27,9 +27,9 @@
                   </li>
                   <li class="py-1">
                     Story files created by this application are generated as a
-                    structured .JSON (JavaScript Object Notation)
-                    file, which contains sections that are organized in a way
-                    for this application's code to read it.
+                    structured .JSON (JavaScript Object Notation) file, which
+                    contains sections that are organized in a way for this
+                    application's code to read it.
                   </li>
                 </ul>
               </div>
@@ -48,8 +48,8 @@
                     <ul>
                       <li class="py-1">
                         Try comparing what the story (.JSON file) looks like to
-                        another story file or running it through an online
-                        JSON linter.
+                        another story file or running it through an online JSON
+                        linter.
                       </li>
                     </ul>
                   </li>
@@ -58,9 +58,9 @@
                     <ul>
                       <li class="py-1">
                         I've tested things to the best of my ability, but if
-                        there are any remaining bugs that I haven't squashed, try
-                        refreshing the page via F5 or by clicking your browser's
-                        Refresh icon at the top of the browser window.
+                        there are any remaining bugs that I haven't squashed,
+                        try refreshing the page via F5 or by clicking your
+                        browser's Refresh icon at the top of the browser window.
                       </li>
                     </ul>
                   </li>
@@ -81,8 +81,8 @@
                   </li>
                   <li class="py-1">
                     I like writing software for fun, and thought it would be a
-                    great experience to take an idea like this and turn it into something
-                    usable and valuable to other people.
+                    great experience to take an idea like this and turn it into
+                    something usable and valuable to other people.
                   </li>
                 </ul>
               </div>
@@ -95,6 +95,9 @@
 </template>
 
 <script>
+// Component Description:
+// This is the about page, where I answer some questions about things.
+
 export default {
   name: "About",
 };

@@ -73,6 +73,10 @@
 </template>
 
 <script>
+// Component Description:
+// This is a Chapter component inside the CreateStory page. 
+// This displays each individual set of Section forms inside that chapter. 
+
 import AddIntroSection from "./AddIntroSection.vue";
 import AddTextSection from "./AddTextSection.vue";
 import AddEndingSection from "./AddEndingSection.vue";

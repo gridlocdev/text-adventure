@@ -37,6 +37,9 @@
 </template>
 
 <script>
+// Component Description:
+// This is a Section component inside the story's chapters.
+// This displays a set of icons, and text that fades in and out.
 export default {
   name: "Ending",
   props: {

@@ -38,6 +38,10 @@
 </template>
 
 <script>
+// Component Description:
+// This is a Section component inside the CreateStory page.
+// This creates a section containing the Intro section data in the creation of a story chapter.
+ 
 export default {
   name: "AddIntro",
   props: {

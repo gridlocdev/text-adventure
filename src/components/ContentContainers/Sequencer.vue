@@ -31,6 +31,9 @@
 </template>
 
 <script>
+// Component Description:
+// This component handles showing only the section that is specified in the chapter timeline.
+ 
 import { mapState } from "vuex";
 
 import Intro from "../Content/Intro.vue";
@@ -299,7 +302,7 @@ export default {
         this.$store.state.GameInProgress == true
       ) {
         this.$emit("endGame");
-      } 
+      }
     },
   },
   mounted() {

@@ -168,6 +168,9 @@
 </template>
 
 <script>
+// Component Description:
+// This is a page where users can load a (JSON) story file into browser cache so they can play it.
+
 import ImportFile from "../components/StoryCreator/ImportFile.vue";
 export default {
   components: { ImportFile },

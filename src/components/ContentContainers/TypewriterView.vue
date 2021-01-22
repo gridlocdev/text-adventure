@@ -10,6 +10,10 @@
 </template>
 
 <script>
+// Component Description:
+// This is a Section component inside the story's chapters.
+// This handles displaying a set of text chunks, and displays them one by one.
+
 import Typewriter from "../Content/Typewriter";
 export default {
   components: {

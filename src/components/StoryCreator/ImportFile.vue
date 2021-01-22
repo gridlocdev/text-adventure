@@ -25,6 +25,10 @@
 </template>
 
 <script>
+// Component Description:
+// This is a component inside the Import Story page.
+// This is the file input handles the import and parsing of story files.
+
 export default {
   name: "ImportFile",
   data() {
@@ -141,7 +145,7 @@ export default {
       );
     },
     setNewStoryID() {
-      // Sets a new story ID based on the maximum story ID value that exists in the user's library + 1. 
+      // Sets a new story ID based on the maximum story ID value that exists in the user's library + 1.
 
       // Loop through the current story array and find the max value of ID
       if (this.$store.state.StoryJSONArray.length > 0) {

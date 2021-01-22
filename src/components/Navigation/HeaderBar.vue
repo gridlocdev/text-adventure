@@ -49,6 +49,9 @@
 </template>
 
 <script>
+// Component Description:
+// This component is the navigation bar at the top, and handles navigation events.
+
 import Settings from "./Settings.vue";
 // This import is if I would like a link to the current story, indexed by chapternumber routerLink = 'chapter' + store.state.CurrentChapter
 //import store from "../../store/index";

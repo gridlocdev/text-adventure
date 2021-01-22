@@ -118,6 +118,9 @@
 </template>
 
 <script>
+// Component Description:
+// This is a page where users can select and start playing their stories.
+
 export default {
   name: "StoryLibrary",
   data() {
@@ -152,7 +155,7 @@ export default {
 
       // Use splice to remove it
       currentStoryJSONArray.splice(index, 1);
-      const newArray = currentStoryJSONArray
+      const newArray = currentStoryJSONArray;
 
       // Push the results to the state store
       this.$store.dispatch("setStoryJSONArray", newArray);
@@ -165,7 +168,10 @@ export default {
       const selectedStory = this.$store.state.StoryJSONArray.find(
         (arrayStory) => arrayStory.StoryID === StoryID
       );
-      this.$store.dispatch("setCurrentStoryJSON", JSON.stringify(selectedStory));
+      this.$store.dispatch(
+        "setCurrentStoryJSON",
+        JSON.stringify(selectedStory)
+      );
       this.$router.push("chapter" + this.$store.state.CurrentChapter);
     },
   },

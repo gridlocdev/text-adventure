@@ -107,6 +107,10 @@
 </template>
 
 <script>
+// Component Description:
+// This is a page component inside the CreateStory page.
+// This allows users to save, load into cache, and copy the text of their newly created story. 
+
 export default {
   name: "ExportFile",
   props: {

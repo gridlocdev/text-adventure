@@ -182,7 +182,9 @@
 </template>
 
 <script>
-//import chapterSectionDraggables from "../components/Draggables/ChapterSectionDraggables.vue";
+// Component Description:
+// This is a page where users can create their own story files for download and play.
+
 import AddChapter from "../components/StoryCreator/AddChapter.vue";
 import ExportFile from "../components/StoryCreator/ExportFile.vue";
 
@@ -190,7 +192,6 @@ export default {
   components: {
     AddChapter,
     ExportFile,
-    //  chapterSectionDraggables,
   },
   data() {
     return {
@@ -476,8 +477,7 @@ export default {
       this.storyJSON.Chapters.splice(chapterIDInIndex, 1);
     },
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 

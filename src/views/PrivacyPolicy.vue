@@ -31,6 +31,9 @@
 </template>
 
 <script>
+// Component Description:
+// A page that lists the Privacy Policy for this application.
+
 export default {};
 </script>
 

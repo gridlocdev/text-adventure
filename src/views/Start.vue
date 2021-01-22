@@ -28,6 +28,9 @@
 </template>
 
 <script>
+// Component Description:
+// The home page of this application.
+
 export default {
   name: "Start",
   mounted() {

@@ -4,11 +4,6 @@ Next Steps:
 
 MVP:
 
-- Documentation: 
-: In each component, at the top, list what the component does in a comment.
-: In each method, describe in short what that method does.
-: In those methods
-
 - Set up a default story
 
 Post MVP Release:

@@ -37,6 +37,10 @@
 </template>
 
 <script>
+// Component Description:
+// This is a page component at the end of a story's chapters.
+// This displays a Thanks for Playing message, and allows the user to navigate back home.
+
 export default {
   name: "EndGame",
   data() {
@@ -55,7 +59,7 @@ export default {
   methods: {
     resetAndNavigateToHome() {
       // Resets story progress, and hits the home route with a clean state.
-      console.log("resetAndNavigateToHome() Hit.")
+      console.log("resetAndNavigateToHome() Hit.");
       this.$store.dispatch("resetStoryProgress");
 
       this.dialog = false;

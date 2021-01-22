@@ -27,6 +27,9 @@
 </template>
 
 <script>
+// Component Description:
+// A sub-component that is used to display text typing out on the screen.
+
 export default {
   name: "Typewriter",
   props: {
@@ -86,8 +89,8 @@ export default {
           this.nextButtonVisible = true;
         }
       } catch (ex) {
-        // There's an awful error message in this function that doesn't make sense. 
-        // It says that this.fullText is undefined, yet knows its value and executes the rest of the function. 
+        // There's an awful error message in this function that doesn't make sense.
+        // It says that this.fullText is undefined, yet knows its value and executes the rest of the function.
         // I'm tossing it up to Vue not handling this one appropriately, so here's an empty catch block.
         return;
       }

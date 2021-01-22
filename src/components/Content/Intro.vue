@@ -17,6 +17,9 @@
 </template>
 
 <script>
+// Component Description:
+// This is a Section component inside the story's chapters.
+// This displays text that fades in and out.
 export default {
   name: "Intro",
   props: {

@@ -45,6 +45,10 @@
 </template>
 
 <script>
+// Component Description:
+// This is a Section component inside the story's chapters.
+// This displays a textbox, and two choice options
+
 export default {
   props: {
     questionText: String,

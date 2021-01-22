@@ -89,6 +89,10 @@
 </template>
 
 <script>
+// Component Description:
+// This component is the Settings window in the top right of the navigation bar. 
+// You can modify Dark Mode, Text Speed, or reset your story progress.
+
 import ResetStoryProgress from "./ResetStoryProgress.vue";
 
 export default {
@@ -121,7 +125,7 @@ export default {
   methods: {
     triggerMethodFromMethodName(methodName) {
       // Is used to handle method names defined in the data
-      // In retrospect, this probably could have been done using watchers and a switch statement. 
+      // In retrospect, this probably could have been done using watchers and a switch statement.
       this[methodName]();
     },
     setPageIndex() {
