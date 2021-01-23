@@ -5,7 +5,7 @@
   >
     <v-row class="mb-5">
       <v-col align="center" justify="center">
-        <h1>About Page</h1>
+        <h1>About</h1>
       </v-col>
     </v-row>
     <v-row>
@@ -17,8 +17,8 @@
               <div class="px-5">
                 <ul>
                   <li class="py-1">
-                    On this site, you can create, play, and export a playable
-                    text adventure game story and export it as a file that you
+                    On this site, you can create, play, import, and export a playable
+                    text adventure game story that you
                     can share with other people to play!
                   </li>
                   <li class="py-1">
@@ -26,7 +26,7 @@
                     contain the content of your story.
                   </li>
                   <li class="py-1">
-                    Story files created by this application are generated as a
+                    The story files created by this application are generated as a
                     structured .JSON (JavaScript Object Notation) file, which
                     contains sections that are organized in a way for this
                     application's code to read it.

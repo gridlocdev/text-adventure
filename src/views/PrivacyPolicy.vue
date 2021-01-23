@@ -16,7 +16,7 @@
       >
         <h1>Privacy Policy</h1>
         <v-row class="ma-5">
-          No data ever leaves your browser. All progress is saved via cookies in
+          No data from this site ever leaves your browser. All progress is saved via cookies in
           your browser's local cache, which is used exclusively to persist your
           story progress through refreshes and when the browser is closed.
         </v-row>

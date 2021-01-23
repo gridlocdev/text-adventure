@@ -9,6 +9,20 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col align="center" justify="center">
+        <v-btn @click="$router.push('importStory')" x-large elevation="5">
+          Import Story
+        </v-btn>
+      </v-col>
+
+      <v-col align="center" justify="center">
+        <v-btn @click="$router.push('storyCreator')" x-large elevation="5">
+          Create New
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-divider class="my-10"></v-divider>
+    <v-row>
       <v-col
         v-for="story in this.$store.state.StoryJSONArray"
         :key="story.StoryID"
@@ -98,20 +112,6 @@
             </v-fade-transition>
           </v-card>
         </v-hover>
-      </v-col>
-    </v-row>
-    <v-divider class="my-10"></v-divider>
-    <v-row class="my-5">
-      <v-col align="center" justify="center">
-        <v-btn @click="$router.push('importStory')" x-large elevation="5">
-          Import Story
-        </v-btn>
-      </v-col>
-
-      <v-col align="center" justify="center">
-        <v-btn @click="$router.push('storyCreator')" x-large elevation="5">
-          Create New
-        </v-btn>
       </v-col>
     </v-row>
   </v-container>
