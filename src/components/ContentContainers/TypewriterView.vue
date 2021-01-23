@@ -1,11 +1,41 @@
 <template>
   <v-container>
-    <typewriter
-      :key="text[textIndex]"
-      v-bind:text="text[textIndex]"
-      v-on:finished-typing="makeVisible()"
-      @nextTextChunk="nextTextChunk()"
-    />
+    <v-row>
+      <typewriter
+        :key="text[textIndex]"
+        v-bind:text="text[textIndex]"
+        v-on:finished-typing="makeVisible()"
+        @nextTextChunk="nextTextChunk()"
+      />
+    </v-row>
+    <v-row
+      align="center"
+      justify="center"
+      :style="{
+        'pointer-events': 'none',
+        position: 'absolute',
+        bottom: '0',
+        left: '50%',
+        transform: 'translateX(-50%)',
+      }"
+      class="my-5"
+    >
+      <div v-for="number in numberOfTextChunks" :key="number">
+        <v-col v-if="number <= textIndex + 1">
+          <v-btn
+            class="animate__animated animate__fadeIn"
+            style="animation-duration: 0.5s"
+            fab
+            color="primary"
+            height="15"
+            width="15"
+          ></v-btn>
+        </v-col>
+        <v-col v-else>
+          <v-btn fab height="15" width="15"></v-btn>
+        </v-col>
+      </div>
+    </v-row>
   </v-container>
 </template>
 
@@ -27,6 +57,11 @@ export default {
       textIndex: 0,
       nextButtonVisible: false,
     };
+  },
+  computed: {
+    numberOfTextChunks: function () {
+      return this.text.length;
+    },
   },
   methods: {
     nextTextChunk() {

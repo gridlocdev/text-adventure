@@ -4,8 +4,6 @@ Next Steps:
 
 MVP:
 
-- In the TextSection, add an indicator for how many sections are left. (Small dots at the bottom of the screen, that each fill up once you proceed.)
-
 - Set up a default story
 
 
