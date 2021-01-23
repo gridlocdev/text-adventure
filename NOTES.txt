@@ -4,7 +4,10 @@ Next Steps:
 
 MVP:
 
+- In the TextSection, add an indicator for how many sections are left. (Small dots at the bottom of the screen, that each fill up once you proceed.)
+
 - Set up a default story
+
 
 Post MVP Release:
 
@@ -26,6 +29,5 @@ Post MVP Release:
 
 - Finish my story, and add it into the ChapterSequencer.
 
-- In the TextSection, add an indicator for how many sections are left. (Small dots at the bottom of the screen, that each fill up once you proceed.)
 
 ChapterIconList: ['mdi-crown-outline', 'mdi-bridge', 'mdi-sword-cross', 'mdi-wizard-hat', 'mdi-image-filter-hdr'],

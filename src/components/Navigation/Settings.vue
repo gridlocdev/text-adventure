@@ -63,11 +63,11 @@
                 color="accent-3"
                 group
               >
-                <v-btn @click="setTextSpeed(50)" value="left"> Slow </v-btn>
+                <v-btn @click="setTextSpeed(20)" value="left"> Slow </v-btn>
 
-                <v-btn @click="setTextSpeed(30)" value="center"> Normal </v-btn>
+                <v-btn @click="setTextSpeed(10)" value="center"> Normal </v-btn>
 
-                <v-btn @click="setTextSpeed(10)" value="right"> Fast </v-btn>
+                <v-btn @click="setTextSpeed(5)" value="right"> Fast </v-btn>
               </v-btn-toggle>
             </v-col>
           </v-row>

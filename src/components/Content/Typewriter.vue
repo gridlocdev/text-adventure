@@ -6,7 +6,7 @@
           <span class="text text-wrap"> {{ this.currentText }} </span>
         </span>
       </h2>
-      <h2 style="visibility: hidden">
+      <h2 class="hiddenFullText" style="visibility: hidden">
         {{ this.fullText }}
       </h2>
     </v-card>
@@ -17,7 +17,7 @@
       :bottom="true"
       :right="true"
       :absolute="true"
-      class="animate__animated animate__fadeIn pa-7 mr-5"
+      class="animate__animated animate__fadeIn px-12 py-10 ma-5"
       primary
       @click="emitMoveToNextTextChunk()"
     >
@@ -111,5 +111,9 @@ export default {
 <style scoped>
 .typedText > .text {
   border-right: 0.2rem solid #777;
+  line-height: 1.7;
+}
+.hiddenFullText {
+  line-height: 1.7;
 }
 </style>
