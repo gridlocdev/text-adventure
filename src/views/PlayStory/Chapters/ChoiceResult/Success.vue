@@ -41,8 +41,7 @@
 // This is a page component inside the story's chapters.
 // When the user selects the right answer, this page appears as a success message.
 
-import Typewriter from "../../components/Content/Typewriter.vue";
-import store from "../../store/index.js";
+import Typewriter from "../../Typewriter.vue";
 
 export default {
   components: {
@@ -51,7 +50,6 @@ export default {
   data() {
     return {
       text: String,
-      store: store,
     };
   },
   watch: {
@@ -66,7 +64,7 @@ export default {
         "setSequencerIndex",
         this.$store.state.SequencerIndex + 1
       );
-      this.$router.push("chapter" + store.state.CurrentChapter);
+      this.$router.push("chapter" + this.$store.state.CurrentChapter);
     },
     updateSuccessText() {
       this.text = this.$store.state.SuccessText;

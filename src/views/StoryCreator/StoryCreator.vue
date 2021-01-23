@@ -185,8 +185,8 @@
 // Component Description:
 // This is a page where users can create their own story files for download and play.
 
-import AddChapter from "../components/StoryCreator/AddChapter.vue";
-import ExportFile from "../components/StoryCreator/ExportFile.vue";
+import AddChapter from "./Chapters/AddChapter.vue";
+import ExportFile from "./Chapters/ExportFile.vue";
 
 export default {
   components: {

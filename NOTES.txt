@@ -14,8 +14,7 @@ Post MVP Release:
 - In StoryCreator/StoryEditor, the choice buttons should start as a default, and the user has to select one. 
 : This should prevent people from making every answer "Answer 1"
 
-- Add a list of buttons to allow users to navigate the TextSection back and forth
-: v-pagination - https://vuetifyjs.com/en/components/paginations/#usage
+- Add a back button to allow users to navigate the TextSection back and forth
 
 
 - Make it mobile responsive

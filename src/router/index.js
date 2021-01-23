@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Start from '../views/Start.vue'
-import EndGame from '../views/EndGame.vue'
 
 // import Success from '../views/InChapter/Success.vue'
 // import GameOver from '../views/InChapter/GameOver.vue'
@@ -41,7 +40,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/ContentContainers/ChapterSequencer.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/PlayStory/ChapterSequencer.vue')
   },
   {
     path: '/ending',
@@ -49,7 +48,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Content/Ending.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/PlayStory/Chapters/Sections/Ending.vue')
   },
   {
     path: '/success',
@@ -57,7 +56,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/InChapter/Success.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/PlayStory/Chapters/ChoiceResult/Success.vue')
   },
   {
     path: '/gameover',
@@ -65,15 +64,15 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/InChapter/GameOver.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/PlayStory/Chapters/ChoiceResult/GameOver.vue')
   },
   {
     path: '/endgame',
-    name: EndGame,
+    name: 'EndGame',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/EndGame.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/PlayStory/EndGame.vue')
   },
   {
     path: '/privacypolicy',
@@ -89,7 +88,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/StoryCreator.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/StoryCreator/StoryCreator.vue')
   },
   {
     path: '/importStory',
@@ -97,7 +96,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ImportStory.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ImportStory/ImportStory.vue')
   },
   {
     path: '/storyLibrary',

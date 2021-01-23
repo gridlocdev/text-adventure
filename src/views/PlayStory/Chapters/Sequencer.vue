@@ -36,10 +36,10 @@
  
 import { mapState } from "vuex";
 
-import Intro from "../Content/Intro.vue";
-import TypewriterView from "./TypewriterView.vue";
-import Choice from "../Content/Choice.vue";
-import Ending from "../Content/Ending.vue";
+import Intro from "./Sections/Intro.vue";
+import TypewriterView from "./Sections/TypewriterView.vue";
+import Choice from "./Sections/Choice.vue";
+import Ending from "./Sections/Ending.vue";
 
 export default {
   name: "Sequencer",

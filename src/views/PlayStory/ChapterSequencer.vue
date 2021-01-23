@@ -10,7 +10,7 @@
 // Component Description:
 // This component handles showing story data for a specific chapter.
 
-import Sequencer from "./Sequencer.vue";
+import Sequencer from "./Chapters/Sequencer.vue";
 
 import { mapState } from "vuex";
 

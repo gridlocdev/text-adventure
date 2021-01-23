@@ -77,10 +77,10 @@
 // This is a Chapter component inside the CreateStory page. 
 // This displays each individual set of Section forms inside that chapter. 
 
-import AddIntroSection from "./AddIntroSection.vue";
-import AddTextSection from "./AddTextSection.vue";
-import AddEndingSection from "./AddEndingSection.vue";
-import AddChoiceSection from "./AddChoiceSection.vue";
+import AddIntroSection from "./Sections/AddIntroSection.vue";
+import AddTextSection from "./Sections/AddTextSection.vue";
+import AddEndingSection from "./Sections/AddEndingSection.vue";
+import AddChoiceSection from "./Sections/AddChoiceSection.vue";
 export default {
   name: "AddChapter",
   components: {
