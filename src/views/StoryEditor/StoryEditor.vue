@@ -109,10 +109,10 @@
         <edit-chapter
           v-for="(chapter, index) in storyJSON.Chapters"
           :key="chapter.ChapterID"
-          :chapterSections="JSON.stringify(chapter.ChapterSections)"
           :chapterID="index"
           :chapterIcon="chapter.ChapterIcon"
           :chapterNumber="index + 1"
+          :chapterSections="JSON.stringify(chapter.ChapterSections)"
           v-on:removeChapter="removeChapter"
           @updateChapterSections="updateChapterSections"
         ></edit-chapter>
@@ -123,7 +123,7 @@
                 ChapterID: numberOfChaptersCreated,
                 ChapterIcon: '',
                 ChapterName: 'Chapter ' + numberOfChapters,
-                ChapterSections: [],
+                ChapterSections: emptyChapterSectionsObject,
               });
               numberOfChaptersCreated++;
             }
@@ -213,6 +213,60 @@ export default {
         StoryIcon: "",
         Chapters: [],
       },
+      emptyChapterSectionsObject: [
+        {
+          SectionType: "Intro",
+          SectionData: {
+            title: "",
+            subText: "",
+          },
+        },
+        {
+          SectionType: "TextSection",
+          SectionData: [{ text: "" }],
+        },
+        {
+          SectionType: "ChoiceSection",
+          SectionData: {
+            questionText: "",
+            choices: {
+              choice1: "",
+              choice2: "",
+            },
+            choicesMetadata: {
+              correctChoice: "1",
+              gameOverText: "",
+              successText: "",
+            },
+          },
+        },
+        {
+          SectionType: "TextSection",
+          SectionData: [{ text: "" }],
+        },
+        {
+          SectionType: "ChoiceSection",
+          SectionData: {
+            questionText: "",
+            choices: {
+              choice1: "",
+              choice2: "",
+            },
+            choicesMetadata: {
+              correctChoice: "1",
+              gameOverText: "",
+              successText: "",
+            },
+          },
+        },
+        {
+          SectionType: "Ending",
+          SectionData: {
+            title: "",
+            subText: "",
+          },
+        },
+      ],
     };
   },
   computed: {
@@ -405,10 +459,10 @@ export default {
     resetStoryCreator() {
       // Resets the component's data to what it was at the start.
       this.currentTab = 0;
-      
       this.storyJSON = this.$store.state.StoryJSONArray[
         this.$route.params.id.substring(1)
       ];
+      this.numberOfChaptersCreated = this.storyJSON.Chapters.length;
       this.tabNextButton = {
         tab0: true,
         tab1: true,

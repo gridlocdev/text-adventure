@@ -3,7 +3,7 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
-- Fix the bug in storyEditor where adding a new chapter results in an error message.
+- Fix the formatting when saving a file (Do JSON.stringify(JSON.parse(), null, 2))
 - Set up a default story
 
 - Add dark mode for scrollbar styling

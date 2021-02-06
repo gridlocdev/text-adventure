@@ -181,6 +181,10 @@ export default {
       this.$emit("removeChapter", this.chapterID);
     },
   },
+  mounted() {
+    console.log(JSON.parse(this.chapterSections));
+    // console.log(JSON.stringify(JSON.parse(this.chapterSections), null, 2));
+  },
 };
 </script>
 
