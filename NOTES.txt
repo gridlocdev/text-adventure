@@ -3,7 +3,8 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
-
+- Change the modal dialog text after you save
+- Add a new method to the State Store to update a chapter json
 - Set up a default story
 
 

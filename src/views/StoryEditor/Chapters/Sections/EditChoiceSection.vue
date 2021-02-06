@@ -136,21 +136,23 @@
 // This creates a section containing the Choice Section data in the creation of a story chapter.
 
 export default {
-  name: "AddChoiceSection",
+  name: "EditChoiceSection",
   props: {
     sectionID: Number,
+    sectionData: String,
   },
   data() {
     return {
-      questionText: "",
+      questionText: JSON.parse(this.sectionData).questionText,
       choices: {
-        choice1: "",
-        choice2: "",
+        choice1: JSON.parse(this.sectionData).choices.choice1,
+        choice2: JSON.parse(this.sectionData).choices.choice2,
       },
       choicesMetadata: {
-        correctChoice: "1",
-        gameOverText: "",
-        successText: "",
+        correctChoice: JSON.parse(this.sectionData).choicesMetadata
+          .correctChoice,
+        gameOverText: JSON.parse(this.sectionData).choicesMetadata.gameOverText,
+        successText: JSON.parse(this.sectionData).choicesMetadata.successText,
       },
       choiceButtonAppearances: [
         {

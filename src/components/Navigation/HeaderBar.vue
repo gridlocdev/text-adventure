@@ -84,6 +84,11 @@ export default {
         icon: "plus",
         routerLink: "/importStory",
       },
+      {
+        title: "Edit Story",
+        icon: "pencil",
+        routerLink: "/storyEditor",
+      },
     ],
 
     right: null,
