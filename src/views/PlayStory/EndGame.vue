@@ -59,7 +59,6 @@ export default {
   methods: {
     resetAndNavigateToHome() {
       // Resets story progress, and hits the home route with a clean state.
-      console.log("resetAndNavigateToHome() Hit.");
       this.$store.dispatch("resetStoryProgress");
 
       this.dialog = false;

@@ -115,7 +115,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/storyEditor',
+    path: '/storyEditor:id',
     name: 'StoryEditor',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -134,6 +134,15 @@ router.afterEach((to) => {
   if (to.path.includes('chapter') &&
     (to.path !== `/chapter:${storeVar.state.CurrentChapter}`)) {
     router.push({ path: `/chapter:${storeVar.state.CurrentChapter}` });
+  }
+  else if (to.path.includes('storyEditor') &&
+    storeVar.state.StoryJSONArray.length != 0) {
+    if (to.params.id.substring(1) <= storeVar.state.StoryJSONArray.length) {
+      router.push({ path: `/storyEditor${to.params.id}` });
+    }
+    else {
+      router.push({ path: `/storyLibrary` })
+    }
   }
 });
 export default router

@@ -24,7 +24,7 @@
     <v-divider class="my-10"></v-divider>
     <v-row>
       <v-col
-        v-for="story in this.$store.state.StoryJSONArray"
+        v-for="(story, index) in this.$store.state.StoryJSONArray"
         :key="story.StoryID"
       >
         <v-hover v-slot="{ hover }">
@@ -69,9 +69,7 @@
             <v-spacer></v-spacer>
             <v-card-actions>
               <v-row>
-                <!-- <v-col align="center" justify="center">
-                <v-btn color="primary--text"> Edit Story </v-btn>
-              </v-col> -->
+                <v-col v-if="$vuetify.breakpoint.name != 'xs'"></v-col>
                 <v-col align="center" justify="center">
                   <v-btn
                     x-large
@@ -81,6 +79,20 @@
                   >
                     Play
                   </v-btn>
+                </v-col>
+                <v-col align="center">
+                  <v-row>
+                    <v-col>
+                      <v-btn
+                        x-large
+                        depressed
+                        @click="routerLinkToStoryEditor(index)"
+                      >
+                        <v-icon class="">mdi-pencil</v-icon>
+                        <span class="ml-3"> Edit Story </span>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
                 </v-col>
               </v-row>
             </v-card-actions>
@@ -131,6 +143,10 @@ export default {
     };
   },
   methods: {
+    routerLinkToStoryEditor(storyID) {
+      this.$router.push(`/storyEditor:${storyID}`);
+      this.$store.dispatch("setStoryName", "Story Editor");
+    },
     hoverMouseLeave() {
       // On mouse leave, remove the delete button hover overlay for story items.
       if (this.removeStoryFinalConfirmation == true) {

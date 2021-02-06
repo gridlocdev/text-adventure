@@ -202,9 +202,9 @@ export default {
         tab1: false,
         tab2: false,
       },
-      storyID: 0,
+      storyID: this.$route.params.id.substring(1),
       currentChapterData: {},
-      currentTab: 2,
+      currentTab: 0,
       numberOfChaptersCreated: 0,
       storyJSON: {
         StoryID: 0,
@@ -226,6 +226,12 @@ export default {
         this.routeTabValidation();
       },
       deep: true,
+    },
+    "$route.params.id": function (newVal) {
+      // If navigating away from the page, the params will be empty.
+      if (newVal) {
+        this.resetStoryCreator();
+      }
     },
   },
   methods: {
@@ -398,19 +404,14 @@ export default {
     },
     resetStoryCreator() {
       // Resets the component's data to what it was at the start.
-      this.currentChapterData = {};
       this.currentTab = 0;
-      this.numberOfChaptersCreated = 0;
-      this.storyJSON = {
-        StoryID: this.storyID,
-        StoryDescription: "",
-        StoryName: "",
-        StoryIcon: "",
-        Chapters: [],
-      };
+      
+      this.storyJSON = this.$store.state.StoryJSONArray[
+        this.$route.params.id.substring(1)
+      ];
       this.tabNextButton = {
-        tab0: false,
-        tab1: false,
+        tab0: true,
+        tab1: true,
         tab2: false,
       };
     },
@@ -439,10 +440,10 @@ export default {
 
       // Add new method to update StoryJSONArray
 
-      this.$store.dispatch(
-        "addStoryToStoryJSONArray",
-        JSON.stringify(this.storyJSON)
-      );
+      this.$store.dispatch("updateStoryInStoryJSONArray", {
+        storyJSON: JSON.stringify(this.storyJSON),
+        storyID: this.storyID,
+      });
 
       this.resetStoryCreator();
       this.saveButtonDisabled = true;
@@ -479,7 +480,7 @@ export default {
     },
   },
   mounted() {
-    this.storyJSON = this.$store.state.StoryJSONArray[this.storyID];
+    this.resetStoryCreator();
   },
 };
 </script>

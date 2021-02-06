@@ -85,9 +85,9 @@ export default {
         routerLink: "/importStory",
       },
       {
-        title: "Edit Story",
+        title: "Story Editor",
         icon: "pencil",
-        routerLink: "/storyEditor",
+        routerLink: "/storyEditor:0",
       },
     ],
 

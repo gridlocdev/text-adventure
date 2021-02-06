@@ -134,6 +134,19 @@ export default new Vuex.Store({
       localStorage.setItem('StoryJSONArray', JSON.stringify(state.StoryJSONArray));
       //console.log("(State) StoryJSONArray: " + JSON.stringify(state.StoryJSONArray, null, 2));
     },
+    updateStoryInStoryJSONArray(state, storyObjectPayload) {
+      const updatedStoryJSON = JSON.parse(storyObjectPayload.storyJSON);
+      const incomingStoryID = storyObjectPayload.storyID;
+
+      for (var i = 0; i < state.StoryJSONArray.length; i++) {
+        if (state.StoryJSONArray[i].StoryID === incomingStoryID) {
+          console.log("Success!")
+          state.StoryJSONArray[i] = updatedStoryJSON;
+          break;
+        }
+      }
+      localStorage.setItem('StoryJSONArray', JSON.stringify(state.StoryJSONArray));
+    },
     setStoryJSONArray(state, json) {
       state.StoryJSONArray = json;
       localStorage.setItem('StoryJSONArray', JSON.stringify(json));
@@ -197,6 +210,9 @@ export default new Vuex.Store({
     },
     addStoryToStoryJSONArray(context, json) {
       context.commit('addStoryToStoryJSONArray', json);
+    },
+    updateStoryInStoryJSONArray(context, storyObjectPayload) {
+      context.commit('updateStoryInStoryJSONArray', storyObjectPayload)
     },
     setStoryJSONArray(context, json) {
       context.commit('setStoryJSONArray', json);

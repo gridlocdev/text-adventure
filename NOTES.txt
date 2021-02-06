@@ -3,10 +3,10 @@ Next Steps:
 {{ The sequencer is done, now all that's left is: }} 
 
 MVP:
-- Change the modal dialog text after you save
-- Add a new method to the State Store to update a chapter json
+- Fix the bug in storyEditor where adding a new chapter results in an error message.
 - Set up a default story
 
+- Add dark mode for scrollbar styling
 
 Post MVP Release:
 

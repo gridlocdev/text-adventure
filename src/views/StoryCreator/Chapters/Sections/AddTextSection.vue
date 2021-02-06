@@ -168,7 +168,6 @@ export default {
       // Reorder the IDs to be in a sequence again, unless removing the last in the list.
       if (id != this.textArray.length) {
         for (var i = 0; i < this.textArray.length; i++) {
-          console.log("iterating in array: i = " + i);
           this.textArray[i].id = i;
         }
       }

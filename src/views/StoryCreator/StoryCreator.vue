@@ -460,7 +460,6 @@ export default {
         ChapterName: "Chapter " + this.numberOfChapters,
         ChapterSections: [],
       });
-      console.log("AddChapter() hit.");
       this.numberOfChaptersCreated++;
     },
     removeChapter(chapterID) {
