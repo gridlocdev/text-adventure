@@ -184,7 +184,11 @@ export default {
         this.jsonFileSelected = true;
         reader.readAsText(file);
         reader.onload = (evt) => {
-          const fileText = JSON.parse(evt.target.result);
+          const fileText = JSON.stringify(
+            JSON.parse(evt.target.result),
+            null,
+            2
+          );
           this.storyJSON = JSON.parse(fileText);
 
           this.setNewStoryID();

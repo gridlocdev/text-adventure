@@ -109,7 +109,7 @@
 <script>
 // Component Description:
 // This is a page component inside the CreateStory page.
-// This allows users to save, load into cache, and copy the text of their newly created story. 
+// This allows users to save, load into cache, and copy the text of their newly created story.
 
 export default {
   name: "ExportFile",
@@ -146,7 +146,7 @@ export default {
     },
     saveFile: function () {
       // Opens the save file dialog, where users save their story JSON file.
-      const data = JSON.stringify(this.storyJSON);
+      const data = JSON.stringify(JSON.parse(this.storyJSON), null, 2);
       const blob = new Blob([data], { type: "text/plain" });
       const e = document.createEvent("MouseEvents"),
         a = document.createElement("a");
