@@ -1,0 +1,33 @@
+body.darkScrollbar::placeholder {
+  color: #b2aba1;
+}
+body.darkScrollbar::-webkit-scrollbar {
+  background-color: #202324;
+  color: #aba499;
+}
+body.darkScrollbar::-webkit-scrollbar-thumb {
+  background-color: #454a4d;
+}
+body.darkScrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #575e62;
+}
+body.darkScrollbar::-webkit-scrollbar-thumb:active {
+  background-color: #484e51;
+}
+body.darkScrollbar::-webkit-scrollbar-corner {
+  background-color: #181a1b;
+}
+body.darkScrollbar::selection {
+  background-color: #004daa !important;
+  color: #e8e6e3 !important;
+}
+body.darkScrollbar::-moz-selection {
+  background-color: #004daa !important;
+  color: #e8e6e3 !important;
+}
+body.darkScrollbar input:-webkit-autofill,
+body.darkScrollbar textarea:-webkit-autofill,
+body.darkScrollbar select:-webkit-autofill {
+  background-color: #555b00 !important;
+  color: #e8e6e3 !important;
+}

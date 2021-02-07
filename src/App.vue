@@ -25,6 +25,12 @@ export default {
   },
   computed: {
     theme() {
+      const bodyElement = document.getElementsByTagName("body")[0];
+      if (this.$vuetify.theme.dark == true) {
+        bodyElement.classList = "darkScrollbar";
+      } else {
+        bodyElement.classList = "";
+      }
       return this.$vuetify.theme.dark ? "dark" : "light";
     },
   },
@@ -38,6 +44,8 @@ export default {
 </script>
 
 <style>
+@import "./DarkScrollbar.css";
+
 html {
   overflow: auto !important;
 }
