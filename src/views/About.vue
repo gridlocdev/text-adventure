@@ -26,8 +26,8 @@
                     contain the content of your story.
                   </li>
                   <li class="py-1">
-                    The story files created by this application are generated as a
-                    structured .JSON (JavaScript Object Notation) file, which
+                    The story files created by this application are generated in a
+                    structured .JSON (JavaScript Object Notation) file format, which
                     contains sections that are organized in a way for this
                     application's code to read it.
                   </li>
@@ -57,10 +57,11 @@
                     The site crashed or isn't loading things properly!
                     <ul>
                       <li class="py-1">
-                        I've tested things to the best of my ability, but if
-                        there are any remaining bugs that I haven't squashed,
-                        try refreshing the page via F5 or by clicking your
+                        Try refreshing the page via F5 or by clicking your
                         browser's Refresh icon at the top of the browser window.
+                      </li>
+                      <li class="py-1">
+                        If all else doesn't work, make sure all of your story files are saved to your computer and clear your browser's cache for this site.
                       </li>
                     </ul>
                   </li>
@@ -82,7 +83,7 @@
                   <li class="py-1">
                     I like writing software for fun, and thought it would be a
                     great experience to take an idea like this and turn it into
-                    something usable and valuable to other people.
+                    something fun.
                   </li>
                 </ul>
               </div>
