@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/textadventure/',
+  publicPath: '/text-adventure/',
   outputDir: './docs',
   "transpileDependencies": [
     "vuetify"

@@ -1,4 +1,4 @@
-# textadventure
+# text-adventure
 
 ## Project setup
 ```
